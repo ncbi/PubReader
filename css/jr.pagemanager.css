@@ -1,0 +1,64 @@
+/* $Id: jr.pagemanager.css 13234 2012-11-19 15:26:39Z maloneyc $ */
+/*
+  This work is in the public domain and may be reproduced, published or
+  otherwise used without the permission of the National Library of Medicine (NLM).
+
+  We request only that the NLM is cited as the source of the work.
+
+  Although all reasonable efforts have been taken to ensure the accuracy and
+  reliability of the software and data, the NLM and the U.S. Government  do
+  not and cannot warrant the performance or results that may be obtained  by
+  using this software or data. The NLM and the U.S. Government disclaim all
+  warranties, express or implied, including warranties of performance,
+  merchantability or fitness for any particular purpose.
+*/
+
+html.jr #jr-content article {display: none}
+html.no-jr #jr-content article {display: none}
+
+html.no-jr #jr-content article[data-type=main] {display: block}
+html.jr #jr-content article[data-type=main] {
+    display: block;
+    height: 100%;
+    -webkit-column-width:    4in;
+    -moz-column-width:       4in;
+    column-width:            4in;
+    -webkit-column-gap:      60px;
+    -moz-column-gap:         60px;
+    column-gap:              60px;
+    -webkit-column-count:    auto;
+    -moz-column-count:       auto;
+    column-count:            auto;
+    -webkit-column-rule:     1px solid #ccc;
+    -moz-column-rule:        1px solid #ccc;
+    column-rule:             1px solid #ccc;
+}
+
+html.csstransforms #jr-content article[data-type=main] {
+    -webkit-transform: translateX(0);
+    -moz-transform: translateX(0);
+    -ms-transform: translateX(0);
+    -o-transform: translateX(0);
+    transform: translateX(0);
+}
+
+html.csstransforms3d #jr-content article[data-type=main] {
+    -webkit-transform: translate3d(0,0,0);
+    -moz-transform: translate3d(0,0,0);
+    -ms-transform: translate3d(0,0,0);
+    transform: translate3d(0,0,0);
+    -webkit-transform-style: flat;
+}
+
+html.csstransitions.animate #jr-content article[data-type=main] {
+    -webkit-transition:     -webkit-transform 1s;
+    -moz-transition:        -moz-transform 1s;
+    -o-transition:          -o-transform 1s;
+    -ms-transition:         -ms-transform 1s;
+    transition:             transform 1s;
+}
+
+htlm.csstransitions.animate.touch #jr-content,
+htlm.csstransitions.animate.touch #jr-content article[data-type=main] { 
+    -webkit-backface-visibility: hidden;
+}

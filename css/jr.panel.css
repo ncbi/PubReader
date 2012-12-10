@@ -1,0 +1,200 @@
+/* $Id: jr.panel.css 13234 2012-11-19 15:26:39Z maloneyc $ */
+/*
+  This work is in the public domain and may be reproduced, published or
+  otherwise used without the permission of the National Library of Medicine (NLM).
+
+  We request only that the NLM is cited as the source of the work.
+
+  Although all reasonable efforts have been taken to ensure the accuracy and
+  reliability of the software and data, the NLM and the U.S. Government  do
+  not and cannot warrant the performance or results that may be obtained  by
+  using this software or data. The NLM and the U.S. Government disclaim all
+  warranties, express or implied, including warranties of performance,
+  merchantability or fitness for any particular purpose.
+*/
+
+/*** Panels definitions ***/
+aside  {
+    background-color: #121a2e;
+    border: solid 2px #4f4f4f;
+    margin: 0px;
+    -webkit-padding-start: 0px;
+    -webkit-border-radius: 8pt;
+    -moz-border-radius: 8pt;
+    border-radius: 8pt;
+    -webkit-box-shadow: 2px 2px 10px #000;
+    -moz-box-shadow: 2px 2px 10px #000;
+    box-shadow: 2px 2px 10px #000;
+}
+
+aside:after {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    right: 12pt;
+    top: -16px;
+    height: 30px !important;
+    width: 30px;
+    border: solid 2px #4f4f4f;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    border-bottom: none;
+    border-right: none;
+    background-color: #121A2E !important;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+aside#jr-links-p:after {
+    left: 74pt;
+}
+
+aside#jr-alt-p:after {
+    left: 112pt;
+}
+
+aside#jr-cmap-p:after {
+    right: 36pt;    
+}
+
+aside#jr-typo-p:after {
+    right: 76pt;
+}
+
+
+
+@media screen and (max-width: 4in) {
+    aside#jr-links-p:after {
+        left: 46pt;
+    }
+    
+    aside#jr-alt-p:after {
+        left: 80pt;
+    }
+
+    aside#jr-cmap-p:after {
+        right: 10pt;
+    }
+    
+    aside#jr-typo-p:after {
+        right: 46pt;
+    }
+}
+
+aside .tb {
+    position: relative;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0 6pt;
+    -webkit-border-top-left-radius: 6pt;
+    -webkit-border-top-right-radius: 6pt;
+    -moz-border-top-left-radius: 6pt;
+    -moz-border-top-right-radius: 6pt;
+    border-top-left-radius: 6pt;
+    border-top-right-radius: 6pt;
+    width: 100%;
+    text-align: left;
+}
+
+aside .tb .jr-p-close {
+    z-index: 1;
+}
+
+aside .tb .title-text {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 0 62pt;
+    height: 100%;
+    text-align: center;
+    color: #FFF;
+    font-family: "Archivo Narrow", "Arial Narrow", Calibri, "Trebuchet MS", ArialMT, Arial, sans-serif;
+    font-size: 12pt;
+    width: 100%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+aside .cnt {
+    background: #FFFDF5;
+    margin: 6pt;
+    margin-top: 0;
+    -webkit-border-radius: 6pt;
+    -moz-border-radius: 6pt;
+    border-radius: 6pt;
+    position: relative;
+    overflow-y: auto;
+    max-height: 100%;
+}
+
+
+/* buttons */
+aside label,
+aside .btn {
+    height: 24pt;
+    line-height: 24pt;
+    margin: 0 6pt;
+    padding: 0 6pt;
+    display: inline-block;
+    xvertical-align: middle;
+    font-size: 12pt;
+    min-width: 24pt;
+}
+
+aside .btn path {
+    fill: #999;
+}
+
+
+/* list of links */
+aside .lol a { 
+    background-color: #ddd;
+    margin: 6pt;
+    text-decoration: none;
+    color: #666;
+    overflow:hidden;
+    text-overflow: ellipsis;
+    font-family: "HelveticaNeue-CondensedBold", "Arial Narrow", "ArialMT", "Arial", sans-serif;
+    font-size: 11pt;
+    border: 1px solid transparent;
+    -webkit-border-radius: 4pt;
+    -moz-border-radius: 4pt;
+    border-radius: 4pt;
+    height: 25pt;
+    line-height: 25pt;
+    white-space: nowrap;
+    font-weight: bold;
+    padding: 0 4pt;
+    text-align: left;
+    display: block;
+}
+
+aside .lol a.current {
+    font-size: 12pt;
+    background-color: #FEA;
+}
+
+aside .lol a.current,
+aside .lol a:hover {
+    color: #333;
+}
+
+aside .lol a:hover {
+    background-color: #ccc;
+}
+
+aside .lol a:active {
+    color: #000;
+    background-color: #fff;
+}
+
+

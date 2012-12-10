@@ -1,0 +1,117 @@
+<article data-type="help">
+  <style type="text/css">
+    article[data-type=help]{
+        line-height:0;
+        text-align:center;
+    }
+
+    article[data-type=help] header {
+        background-color: #3b6c9d;
+        color: #FFF;
+        font-size: 32pt;
+        line-height: 64pt;
+        position: relative;
+    }
+
+    article[data-type=help] > div {
+        background-color: #eee;
+        display: inline-block;
+        vertical-align: top;
+        max-width: 5in;
+        margin: 1em .5em 0;
+        padding: 8pt;
+    }
+
+    article[data-type=help] table {
+        color: #000;
+        font: 14pt/1.75 "Archivo Narrow", "Arial Narrow", Calibri, "Trebuchet MS", ArialMT, Arial, sans-serif;
+        margin: 0;
+        text-align: left;
+        table-layout:fixed;
+        max-width: 100%;
+
+    }
+
+    article[data-type=help] table td:first-child {
+        width: 60%;
+        vertical-align: top;
+    }
+
+    article[data-type=help] table ol{
+        list-style-position: inside;
+        padding: 0;
+        margin: 0;
+    }
+
+    #help-pmc-logo {
+        position: absolute;
+        left:6pt;
+        bottom:3pt;
+    }
+
+    #help-ncbi-logo {
+        position: absolute;
+        right:6pt;
+        bottom:9pt;
+    }
+
+    header div {
+        margin-left: 64px;
+        margin-right: 64px;
+    }
+
+    @media screen and (max-width: 7in) {
+        article[data-type=help] header {
+            font-size: 21pt;
+            line-height: 56pt;
+        }
+
+        article[data-type=help] table,
+        article[data-type=help] table tbody,
+        article[data-type=help] table tr,
+        article[data-type=help] table td,
+        article[data-type=help] table td:first-child {
+            display: inline-block;
+            width: auto;
+        }
+    }
+
+    @media screen and (max-width: 4in) {
+        article[data-type=help] header {
+            font-size: 16pt;
+            line-height: 32pt;
+        }
+    }
+
+  </style>
+  <header>
+    <img id="help-pmc-logo" data-src="{$path}img/help-pmc.png"/>
+    <div>Using PMC PubReader</div>
+    <img id="help-ncbi-logo" data-src="{$path}img/help-ncbi.png"/>
+  </header>
+  <div><table><tr><td><img data-src="{$path}img/help-artnav.png"/></td>
+      <td>The Article navigation button offers a fast way to directly navigate to different sections of the article.</td></tr>
+    </table>
+  </div>
+  <div><table><tr><td><img data-src="{$path}img/help-reading.png"/></td>
+      <td>Use the "Aa" button to access font/layout options. You may increase or decrease the font size, and select from auto-calculated, single, or two-column layouts.</td></tr>
+    </table>
+  </div>
+  <div><table><tr><td><img data-src="{$path}img/help-kbd.png"/></td>
+      <td>Arrow keys and page up/down keys turn pages via the keyboard. Home and end keys bring you to the start and end of an article.</td></tr>
+    </table>
+  </div>
+  <div><table><tr><td><img data-src="{$path}img/help-figtabs.png"/></td>
+      <td>Mousing over a figure strip icon (arrows) will provide a preview of the figure or table. Clicking on the icon will bring the item into a full-view page, complete with caption. On touch devices, simply click on the icon to view the full image or table.</td></tr>
+    </table>
+  </div>
+  <div><table><tr><td><img data-src="{$path}img/help-isnav.png"/></td>
+      <td>Swipe to turn pages on a touch device. Pages also have clickable regions on each side.
+        The icon on the bottom right of pages (arrow) toggles the bottom area between a figure bar and a progress bar.</td></tr>
+    </table>
+  </div>
+  <div><table><tr><td><img data-src="{$path}img/help-links.png"/></td>
+      <td><ol><li>Go to PMC homepage</li><li>Links to journal list, issue list, etc.</li><li>Other forms of the article.</li></ol></td></tr>
+    </table>
+  </div>
+</article>

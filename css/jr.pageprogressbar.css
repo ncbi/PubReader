@@ -1,0 +1,126 @@
+/* $Id: jr.pageprogressbar.css 13234 2012-11-19 15:26:39Z maloneyc $ */
+/*
+  This work is in the public domain and may be reproduced, published or
+  otherwise used without the permission of the National Library of Medicine (NLM).
+
+  We request only that the NLM is cited as the source of the work.
+
+  Although all reasonable efforts have been taken to ensure the accuracy and
+  reliability of the software and data, the NLM and the U.S. Government  do
+  not and cannot warrant the performance or results that may be obtained  by
+  using this software or data. The NLM and the U.S. Government disclaim all
+  warranties, express or implied, including warranties of performance,
+  merchantability or fitness for any particular purpose.
+*/
+
+.pr-text {
+  display: inline-block;
+  display: none;
+  font: 9pt/42pt Georgia, "Times New Roman", Times, serif;
+  font-style: italic;
+  white-space: nowrap;
+  color: #444;
+  position: absolute; 
+  left: 6pt;
+  width: 66pt;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pr-text .pr-np:before {
+  content: 'Page ';
+  color: #888;
+}
+
+/* slider root element */
+.pr-slider {
+  position: absolute;  
+  top: 47%;
+  left: 12pt;
+  right: 12pt;
+  height: 6pt;
+  cursor: pointer;
+  border: 1px solid #777;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+}
+
+.pr-navbutton {
+  position: absolute;
+  display: inline-block;
+  right: 0;
+  width: 26pt;
+  top: 0;
+  height: 26pt;
+  background: #088;
+}
+
+/* the input field */
+.pr-pn {
+    border: 1px inset #ddd;
+    background: #f8f8f8;
+    color: #444;
+    width: 28pt;
+    text-align: right;
+    padding: 1px 3px;
+    margin: 0 3px;
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    border-radius: 5px;
+}
+
+
+/* drag handle */
+.pr-handle {
+  height: 16pt;
+  width: 48pt;
+  top: -7pt;
+  position: absolute; 
+  display: block;
+  margin-top: 1px;
+  cursor: move;
+
+  border: 1px solid #777;
+  
+  -moz-box-shadow: 0 0 2px #777;
+  -webkit-box-shadow: 0 0 2px #777; 
+  box-shadow: 0 0 2px #777; 
+  
+  -moz-border-radius: 28px;
+  -webkit-border-radius: 28px;
+  border-radius: 28px;
+}
+
+.pr-handle, .pr-slider {
+  background-color:#959595;
+  background-image: linear-gradient(bottom, #eee 5%, #ddd 19%, #fff 81%, #eee 95%);
+  background-image: -o-linear-gradient(bottom, #eee 5%, #ddd 19%, #fff 81%, #eee 95%);
+  background-image: -moz-linear-gradient(bottom, #eee 5%, #ddd 19%, #fff 81%, #eee 95%);
+  background-image: -webkit-linear-gradient(bottom, #eee 5%, #ddd 19%, #fff 81%, #eee 95%);
+  background-image: -ms-linear-gradient(bottom, #eee 5%, #ddd 19%, #fff 81%, #eee 95%);
+}
+
+.pr-slider:active {
+  background-color:#777;
+  background-image: linear-gradient(top, #eee 5%, #ccc 19%, #fff 81%, #eee 95%);
+  background-image: -o-linear-gradient(top, #eee 5%, #ccc 19%, #fff 81%, #eee 95%);
+  background-image: -moz-linear-gradient(top, #eee 5%, #ccc 19%, #fff 81%, #eee 95%);
+  background-image: -webkit-linear-gradient(top, #eee 5%, #ccc 19%, #fff 81%, #eee 95%);
+  background-image: -ms-linear-gradient(top, #eee 5%, #ccc 19%, #fff 81%, #eee 95%);
+}
+
+.pr-handle:active {
+  background-color:#777;
+  background-image: linear-gradient(top, #eee 5%, #ccc 19%, #fff 81%, #eee 95%);
+  background-image: -o-linear-gradient(top, #eee 5%, #ccc 19%, #fff 81%, #eee 95%);
+  background-image: -moz-linear-gradient(top, #eee 5%, #ccc 19%, #fff 81%, #eee 95%);
+  background-image: -webkit-linear-gradient(top, #eee 5%, #ccc 19%, #fff 81%, #eee 95%);
+  background-image: -ms-linear-gradient(top, #eee 5%, #ccc 19%, #fff 81%, #eee 95%);
+
+  -moz-box-shadow: 0 0 10px #000;
+  -webkit-box-shadow: 0 0 10px #000; 
+  box-shadow: 0 0 10px #000; 
+}
+

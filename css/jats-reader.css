@@ -1,0 +1,610 @@
+/* $Id: jats-reader.css 13234 2012-11-19 15:26:39Z maloneyc $ */
+/* THIS FILE IS NOT USED; LEFT AS A SAMPLE OF PROTOTYPE */
+
+/*
+  This work is in the public domain and may be reproduced, published or
+  otherwise used without the permission of the National Library of Medicine (NLM).
+
+  We request only that the NLM is cited as the source of the work.
+
+  Although all reasonable efforts have been taken to ensure the accuracy and
+  reliability of the software and data, the NLM and the U.S. Government  do
+  not and cannot warrant the performance or results that may be obtained  by
+  using this software or data. The NLM and the U.S. Government disclaim all
+  warranties, express or implied, including warranties of performance,
+  merchantability or fitness for any particular purpose.
+*/
+
+
+x-* {border: 1px solid rgb(0,0,0)}
+
+html, body, #u-jats-reader {height: 100%;width:100%;overflow:hidden;position: relative;}
+
+/*** webkit  thin scrollbars ***/
+
+::-webkit-scrollbar-track-piece{
+    background-color: #666;
+    -webkit-border-radius:0;
+}
+::-webkit-scrollbar{
+    width:10px;
+    height:10px;
+}
+::-webkit-scrollbar-thumb{
+    height:50px;
+    background-color:#999;
+    -webkit-border-radius:4px;
+    outline:2px solid #666;
+    outline-offset:-2px;
+    border: 2px solid #666;
+}
+::-webkit-scrollbar-thumb:hover{
+    height:50px;
+    background-color:#9f9f9f;
+    -webkit-border-radius:4px;
+}
+
+/* =========== JATS reader Navigation panels =========== */
+
+aside,nav {
+    position: absolute;
+    font: 0.6875em/1.4 Georgia, "Times New Roman", serif;
+}
+
+nav ul {
+    margin:0;
+    padding:0;
+}
+
+/*** Branding panel ***/
+
+#u-branding {
+    position: absolute;
+    top: 2px;
+    left: 50px;
+    right: 0;
+    height: 25px;
+    padding: 1px 30px;
+    height: 25px;
+    line-height: 25px;
+    border-bottom: 1px solid silver;
+}
+
+#u-branding img {
+    width: 100px;
+    height: 25px;
+}
+
+/*** Reader's Left Toolbar ***/
+
+#u-ltbar {
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 50px;
+    background-color: #4d4d4d;
+    z-index: 2000;
+}
+
+#u-ltbar img {
+    width: 40px;
+    height: 40px;
+    background-color: #333;
+    vertical-align: middle;
+    margin: 5px;
+}
+
+.u-hbar li {
+    display:inline;
+}
+
+/*** Progress and navigation panel ***/
+
+#u-dash {
+    left: 50px;
+    right: 0;
+    bottom: 0;
+    height: 40px;
+    text-align: center;
+}
+
+
+#u-dash .u-hbar, #u-dash #u-prgrss {
+    height: 20px;
+    line-height: 20px;
+}
+
+#u-prgrss div{
+    display: inline-block;
+    position: relative;
+}
+
+#u-prgrss img {
+    width: 2px;
+    height: 2px;
+    background-color: #444;
+    vertical-align: middle;
+    margin: 0 10px;
+    display: inline-block;
+}
+
+#u-prgrss .active {
+    margin-top: 6px;
+    margin-left: 5px; /* must be 1/2 of (width + padding)*/
+    width: 8px;
+    height: 8px;
+    background-color: red;
+    padding: 1px;
+    -webkit-border-radius:3px;
+    -moz-border-radius:3px
+    border-radius:3px;
+    position: absolute
+}
+
+#u-hst, #u-pg, #u-notes {
+    width: 33.3%;
+    text-align: center;
+    display: inline-block;
+    color: #000;
+}
+
+#u-hst, #u-notes {
+    color: #777;
+}
+
+/*** Side Bars  ***/
+
+aside.left_panel {
+    left: 50px;
+    top: 0;
+    bottom: 0;
+    width: 400px;
+    z-index: 1000;
+    background-color: #4d4d4d;
+    -webkit-overflow-scrolling: touch;
+    -webkit-transform: translateX(-440px);
+    -moz-transform: translateX(-440px);
+    transform: translateX(-440px);
+    overflow-y: auto;
+}
+
+.boxes {
+    padding: 0;
+    margin: 0;
+}
+
+.boxes > li {
+    background-color: #f0f0f0;
+    margin: 4px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    border: 1px solid white;
+}
+
+.boxes {
+        font-family: "ArialMT", "Arial", sans-serif;
+        font-stretch:condensed;
+        color: #666;
+        list-style-type: none;
+        -webkit-text-size-adjust: none;
+}
+
+.boxes > li .head {
+    font-family: "HelveticaNeue-CondensedBold", "Arial Narrow", "ArialMT", "Arial", sans-serif;
+    font-size: 1.3636em;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    text-align:  center;
+    background-color: #fff;
+    height: 3em;
+    line-height: 3;
+    white-space: nowrap;
+    font-weight: bold;
+    color: #333;
+}
+
+.boxes > li .head .title {
+    display: inline-block;
+    margin: 0 2%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow:hidden;
+    width: 85%;
+    text-align: left;
+}
+
+.boxes > li .head .go {
+    border-width: 5px 0 5px 15px;
+    border-style: solid;
+    border-color: white rgb(39, 107, 218);
+    width: 0;
+    height: 0;
+    margin: 0 1%;
+    display: inline-block;
+}
+
+.boxes > li .head .close {
+    margin: 0 1%;
+    display: inline-block;
+}
+
+.boxes > li > ul {
+    list-style: none;
+    padding:0 1em;
+}
+
+.boxes > li > ul > li{
+    padding-left: 24px;
+}
+
+.boxes > li > ul > li.subs {
+    background:url(../img/figbar-subs-silver.png) no-repeat 0 0;
+}
+
+.boxes > li > ul > li.fbar {
+    background:url(../img/figbar-silver.png) no-repeat 0 0;
+}
+
+.boxes > li > ul > li.vbar {
+    background:url(../img/figbar-video-silver.png) no-repeat 0 0;
+}
+
+.boxes > li > ul > li > ul {
+    padding-left: 1em;
+    list-style: inside;
+}
+
+.boxes > li > ul > li > ul.inline > li {
+    display:inline;
+    margin: 0 0.5em 0 0;
+}
+ 
+.boxes > li > ul > li > ul.inline > li > img {
+    width: 50px;
+    height: 50px;
+}
+
+/*** end of Side Bars ***/
+
+/*** Typography Side Bar ***/
+#u-typography {
+    
+}
+
+.u-typography {
+    font-family: "HelveticaNeue-CondensedBold", "Arial Narrow", "ArialMT", "Arial", sans-serif;
+    font-size: 1.0909em;
+    text-transform: uppercase;
+    padding: 0;
+    white-space: nowrap;
+}
+
+.u-typography ul,
+.u-typography > div,
+.u-typography > div > div,
+.u-typography li {
+    line-height: 21px;
+}
+
+.u-typography > div {
+    margin: 20px 5px;
+}
+
+.u-typography ul {
+    margin: 0 5px;
+    padding-left: 0;
+    clear: left;
+    display: inline-block;
+    white-space: normal;
+    width: 280px;
+    vertical-align: top;
+}
+
+.u-typography li {
+    list-style: none;
+    border: 1px solid #bbb;
+    margin: 0 5px ;
+    padding: 5px 10px 8px 10px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    background-color: #dfdfdf;
+    text-shadow: 1px 1px 0px #dedede;
+    vertical-align: top;
+}
+
+.u-typography .typesize {
+    text-transform: none;   
+}
+
+.u-typography .typesface {
+    text-align: center;
+    font-size: 1.3333em;
+    text-transform: none;
+}
+.u-typography .typesface li {
+    margin: 3px 5px;
+}
+
+
+.u-typography ul.inline li {
+  display: inline-block;
+  color: #888;
+}
+
+.u-typography > div > div {
+    display: inline-block;
+    border: 0px; 
+    background: transparent; 
+    width: 85px; 
+    font-weight: bold; 
+    text-align: right;
+    color: #666;
+    text-shadow: 1px 1px 0px #fff;
+    vertical-align: top;
+    padding-top: 6px;
+
+}
+          
+/*** end of Typography Side Bar ***/
+
+/*** Content Navigator Bar ***/
+
+#u-figbar {}
+
+/*** end of Content Navigator Bar ***/
+
+
+
+/*** =========== helper classes =========== ***/
+
+ul.inline li {
+    display: inline;
+}
+
+.left {
+    float: left;
+}
+
+.hidden {
+    display: none;
+}
+
+/*** =========== content =========== ***/
+
+#u-content {
+    position:absolute;
+    overflow: hidden;
+    left: 80px;
+    top: 50px;
+    bottom: 55px;
+    right: 30px;
+}
+
+article {
+    height: 100%;
+    -webkit-column-width: 30em;
+    -webkit-column-gap: 60px;
+    -webkit-column-rule: 1px solid #ccc;
+    -moz-column-width: 30em;
+    -moz-column-gap: 60px;
+    -moz-column-rule: 1px solid #ccc;
+    column-width: 30em;
+    column-gap: 60px;
+    -column-rule: 1px solid #ccc;
+    word-wrap: break-word;
+    padding: 0;
+    margin: 0;
+    -webkit-transition-duration: 250ms;
+    -moz-transition-duration: 250ms;
+    -o-transition-duration: 250ms;
+    transition-duration: 250ms;
+    transition-timing-function: ease-out;
+    transition-property: transform;
+}
+
+/* Typography */
+
+article {
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size: 0.875em; /* 14px assuming parent is 16px */
+    line-height: 1.714; /* 24px leading space*/
+}
+
+article header {
+    font: 0.929em/1.846 "Arial Narrow", "ArialMT", Arial, sans-serif; /* 12px */
+}
+
+article h1,
+article h2,
+article h3,
+article h4,
+article h5,
+article h6,
+article strong {font-family: "HelveticaNeue-CondensedBold", "Arial Narrow", "ArialMT", "Arial", sans-serif;font-weight: bold}
+
+article h1{font-size: 1.714em; line-height: 1.5; margin-top: 1em;margin-bottom: 1em;font-weight: normal} /* 24px */
+article h2{font-size: 1.5em; line-height: 1.143; margin-top: 1.143em; margin-bottom: 1.143em;font-weight: normal; color: hsl(21, 48%, 40%)} /* 21px */
+article h3{font-size: 1.286em; line-height: 1.333; margin-top: 1.333em; margin-bottom: 1.333em;font-weight: normal; color: hsl(21, 48%, 30%)} /* 18px */
+article h4{font-size: 1.143em; line-height: 1.5; margin-top: 1.5em; margin-bottom: 1.5em;color: hsl(21, 48%, 20%)} /* 16px */
+article h5,
+article h6{font-size: 1em; line-height: 1.714; margin-top: 1.714em; margin-bottom: 1.714em;color: hsl(21, 48%, 10%)} /* 14px */
+        
+article header h1{font-size: 1.846em; line-height: 1.5; margin-top: 1em;} /* 24px */
+
+
+        
+h2, h3, h4, h5, h6 {
+    -webkit-column-break-after: avoid;
+    -moz-column-break-after: avoid;
+    column-break-after: avoid;
+    -webkit-column-break-inside:avoid;
+    -moz-column-break-inside: avoid;
+    column-break-inside: avoid;
+    -webkit-break-after: avoid;
+    -moz-break-after: avoid;
+    break-after: avoid;
+    -webkit-break-inside:avoid;
+    -moz-break-inside: avoid;
+    break-inside: avoid;
+}
+
+table, figure {
+    font-size: 0.875em;
+    line-height: 1.7142;
+    color: #666;
+    margin: 1.7142em 0;
+}
+
+figure .thumb {
+    margin-right: 0.8571em;
+    margin-bottom: 0.8571em;
+    max-width: 100px;
+}
+
+article p {
+    margin: 0;
+    text-indent: 2em;
+}
+
+article .authors {
+    font-size: 1.1666em;
+    line-height: 1.7142;
+}
+                                 
+
+/*** content features ***/
+
+article img {
+    max-width: 100%;
+}
+
+/*** typography widget support will be here ***/
+
+/* typesize */
+.small article {
+    font-size: 0.875em; /* 14px */
+}
+
+.medium article {
+    font-size: 1em;     /* 16px*/
+}
+
+.large article{
+    font-size: 1.125em; /* 18px */
+}
+
+/* typeface */
+.times article {
+    font-family: "Times New Roman", Times, serif;
+}
+
+.georgia article {
+    font-family: Georgia, serif;
+}
+
+.helvetica article {
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, sans-serif;
+    font-weight: 300;
+}
+
+.lucidag article {
+    font-family: "Lucida Grande", sans-serif;
+}
+
+.arial article {
+    font-family: "ArialMT", Arial, sans-serif;
+}
+
+.serif article {
+    font-family: serif;
+}
+
+.san-serif article {
+    font-family: san-serif;
+}
+
+
+/* leading space */
+
+.dense article {
+    line-height: 1.3
+}
+
+.cozy article {
+    line-height: 1.5; 
+}
+
+.scattered article{
+    line-height: 1.7; /* 30px , I think it should be 32px  */ 
+}
+
+/* contrast */
+
+.contrast-high {
+    color: #333;
+    background-color: white; 
+}
+
+.contrast-low {
+    color: #333;
+    background-color: #F5F1E8; /* some sort of sephia */
+}
+
+.contrast-night {
+    color: white;
+    background-color: #333; /* some sort of sephia */
+}
+
+.contrast-night table,
+.contrast-night figure {
+    color: #d0d0d0;
+}
+
+/* justification */
+
+.ragged article {
+    text-align: left; 
+}
+
+.justified article {
+    text-align: justify;
+}
+
+/* columns */
+.columns-auto article {
+    -webkit-column-width: 30em;
+    -moz-column-width: 30em;
+    column-width: 30em;
+    -webkit-column-count: auto;
+    -moz-column-count: auto;
+    column-count: auto;
+}
+
+.columns-1 article,
+.columns-2 article,
+.columns-3 article {
+    -webkit-column-width: auto;
+    -moz-column-width: auto;
+    column-width: auto;
+}
+
+.columns-1 article {
+    -webkit-column-count: 1;
+    -moz-column-count: 1;
+    column-count: 1;
+}
+
+.columns-2 article {
+    -webkit-column-count: 2;
+    -moz-column-count: 2;
+    column-count: 2;
+}
+
+.columns-3 article {
+    -webkit-column-count: 3;
+    -moz-column-count: 3;
+    column-count: 3;
+}

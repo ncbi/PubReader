@@ -1,0 +1,219 @@
+/* ObjectBox CSS for JATS Reader */
+/*
+  This work is in the public domain and may be reproduced, published or
+  otherwise used without the permission of the National Library of Medicine (NLM).
+
+  We request only that the NLM is cited as the source of the work.
+
+  Although all reasonable efforts have been taken to ensure the accuracy and
+  reliability of the software and data, the NLM and the U.S. Government  do
+  not and cannot warrant the performance or results that may be obtained  by
+  using this software or data. The NLM and the U.S. Government disclaim all
+  warranties, express or implied, including warranties of performance,
+  merchantability or fitness for any particular purpose.
+*/
+
+#jr-objectbox {
+    position: absolute;
+    width: auto;
+    height: auto;
+    max-height: none;
+    max-width: none;
+    bottom: 42pt;
+    -webkit-box-shadow: 0 0 10px #000;
+    -moz-box-shadow: 0 0 10px #000;
+    box-shadow: 0 0 10px #000;
+    background: rgba(0,0,0,.75);
+    left: 8pt;
+    right: 8pt;
+    top: 8pt;
+    z-index: 7000;
+}
+
+#jr-objectbox.help {
+    bottom: 8pt;
+}
+
+#jr-objectbox {
+    -webkit-transition:     -webkit-transform 0.75s, opacity 0.75s;
+    -moz-transition:        -moz-transform 0.75s, opacity 0.75s;
+    -o-transition:          -o-transform 0.75s, opacity 0.75s;
+    -ms-transition:         -ms-transform 0.75s, opacity 0.75s;
+    transition:             transform 0.75s, opacity 0.75s;
+}
+
+#jr-objectbox:after {
+    content: none;
+}
+
+#jr-objectbox.thidden {
+    opacity: 0;
+    left:0;
+    right: 0;
+    -webkit-transform:       translateX(100%);
+    -moz-transform:          translateX(100%);
+    -ms-transform:           translateX(100%);
+    -o-transform:            translateX(100%);
+    transform:               translateX(100%);
+}
+
+#jr-objectbox.csstransforms3d.thidden {
+    -webkit-transform:       translate3d(100%,0,0);
+    -moz-transform:          translate3d(100%,0,0);
+    -ms-transform:           translate3d(100%,0,0);
+    transform:               translate3d(100%,0,0);
+}
+
+
+aside#jr-objectbox .cnt {
+    background: none;
+    margin: 6pt;
+
+}
+
+
+#jr-objectbox .cnt {
+    position: absolute;
+    overflow: hidden;
+}
+
+.jr-objectbox-close {
+    position: absolute;
+    left: -8pt;
+    top: -8pt;
+    color: red;
+    background: white;
+    border: 6pt solid rgba(0,0,0,.75);
+    border-radius: 15pt;
+    width: 1.5em;
+    height: 1.5em;
+    line-height: 1.5em;
+    text-align: center;
+    z-index: 1;
+    font-weight: bold;
+    -webkit-box-shadow: 0 0 8px #444;
+    -moz-box-shadow: 0 0 8px #444;
+    box-shadow: 0 0 8px #444;
+    cursor: pointer;
+}
+
+.jr-objectbox-inner {
+    overflow: hidden;
+    position: absolute;
+    font-size: 1.5em;
+    top: 0;
+    left:0;
+    right: 0;
+    bottom: 0;
+}
+
+.jr-objectbox-drawer {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    position: static;
+    box-sizing: border-box;
+    background-color: #FFE; 
+}
+
+/* article's content (figures/tables) in the object box */
+#jr-objectbox article {
+    padding: 1em;
+    min-height: 100%;
+    box-sizing:  border-box;
+}
+
+#jr-objectbox article h3{
+    margin-top: 0;
+}
+
+#jr-objectbox article[data-type=fig] .figure {
+    text-align: center;
+    margin: 1em 0;
+}
+
+#jr-objectbox article img {
+    max-height: none;
+}
+
+/* table */
+#jr-objectbox article[data-type=table-wrap] {
+    border: none;
+    padding: 1em;
+}
+
+#jr-objectbox article[data-type=fig] > div > div,
+#jr-objectbox article[data-type=fig] > div > h3,
+#jr-objectbox article[data-type=fig] > div > p,
+#jr-objectbox article[data-type=table-wrap] > div > div,
+#jr-objectbox article[data-type=table-wrap] > div > h3,
+#jr-objectbox article[data-type=table-wrap] > div > p{
+    max-width: 6in;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+#jr-objectbox article[data-type=fig] > div > div.figure,
+#jr-objectbox article[data-type=table-wrap] > div > div.large_tbl {
+    max-width: none;
+}
+
+#jr-objectbox article[data-type=table-wrap] table {
+    margin-left:auto;
+    margin-right:auto;
+}
+
+/*********************************************************/
+/* Object boxen of class "note"                          */
+
+#jr-objectbox.note {
+    width: 38em;
+    height: 24em;
+    margin: auto;
+}
+
+#jr-objectbox.note .jr-objectbox-inner {
+  font-size: 1em;
+}
+
+#jr-objectbox.note .jr-objectbox-drawer {
+    background-color: white;
+    padding: 1em;
+}
+
+#jr-objectbox.note h1 {
+    /*font-size: 1.3em;*/
+/*    background: #CCC url(/core/jig/1.11.1/css/images/ui-bg_highlight-soft_75_cccccc_1x100.png) 50% 50% repeat-x; */
+    font: 18pt/36pt "Archivo Narrow", "Arial Narrow", Calibri, "Trebuchet MS", ArialMT, Arial, sans-serif;
+    color: #FFF8aa;
+    margin: 3pt;
+    padding-left: 20pt;
+    background-image: -moz-linear-gradient(bottom, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.3) 100%);
+    background-image: -webkit-linear-gradient(bottom, rgba(255,255,255,0.1) 50%,rgba(255,255,255,0.3) 100%);
+    background-image: -webkit-gradient(linear, left bottom, left top, color-stop(50%,rgba(255,255,255,0.1)), color-stop(100%,rgba(255,255,255,0.3)));
+    background-image: -o-linear-gradient(bottom, rgba(255,255,255,0.1) 50%,rgba(255,255,255,0.3) 100%);
+    background-image: -ms-linear-gradient(bottom, rgba(255,255,255,0.1) 50%,rgba(255,255,255,0.3) 100%);
+    background-image: linear-gradient(to top, rgba(255,255,255,0.1) 50%,rgba(255,255,255,0.3) 100%);
+    background-color: rgba(74,108,155, 1);
+    box-shadow: 0 -1px 0 rgba(0,0,0,0.8)inset, 0 1px 0 rgba(0,0,0,0.2)inset;
+    border-radius: 5px;
+}
+
+#jr-objectbox.note .contentpane {
+    margin: 0 1em 0 1em;
+}
+#jr-objectbox.note .buttonpane {
+    margin: 0 1em 0 1em;
+    border: 1px solid #AAA;
+    border-width: 1px 0 0 0;
+    padding: .3em 1em .5em .4em;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+#jr-objectbox.note .buttonpane a {
+  width: auto;
+}

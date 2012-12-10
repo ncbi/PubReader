@@ -1,0 +1,118 @@
+/*                         */
+/* styles for figure popup */
+/*                         */
+/* Author: Andrey Kolotev  */
+/* kolotev@ncbi            */
+
+
+/* figpopup related definitions ==================== */
+.figpopup,
+.in-progress,
+.inline-block
+{display:  -moz-inline-box !important; /* for FireFox 2.* */
+display:  inline-block !important;
+zoom:     1 !important;/* this and next line for IE6/7 to treat div as an inline element*/
+*display: inline !important;/* this and previuos line for IE6/7 to treat div as an inline element*/}
+
+.figpopup
+{cursor: pointer;
+.cursor: hand;
+}
+
+.co
+{z-index: 10000;
+display: none;
+position: absolute;
+}
+
+.co-default
+{
+color: #444;
+border: 5px #444 solid;
+border-color: rgba(0,0,0,0.7);
+.border-color: #444;
+.border-width: 5px;
+-moz-border-radius: 5px;
+-webkit-border-radius: 5px;
+border-radius: 5px;
+margin: 3mm;
+-moz-box-shadow: 0px 0px 5px 3px rgba(0,0,0, 0.3);
+-webkit-box-shadow: 0px 0px 5px 3px rgba(0,0,0, 0.3);
+box-shadow: 0px 0px 5px 3px rgba(0,0,0, 0.3);
+background: white;
+word-wrap:  break-word;
+font-size: 12pt;
+}
+
+.co-default a {
+text-decoration: none;
+}
+
+.co-fig {
+    margin:  3mm 3mm 12mm;
+}
+
+.co-refbox {
+    max-width: 3.5in;
+    max-height: 75%;
+    -webkit-overflow-scrolling: touch;
+    overflow: auto;
+    border-color: transparent;
+    background: #fffef1;
+}
+
+.co-refbox .co-inner {
+    padding: 2mm;
+    box-sizing: border-box;
+}
+
+.co-refbox .co-inner > div + div,
+.co-refbox .co-inner > li + li{
+    margin: 1em 0;
+}
+
+.in-progress {
+background-color: #444;
+background-image: url('../img/loading-in-progress.gif');
+background-repeat:no-repeat;
+background-position:center;
+width:35px;
+height:35px;
+border: 1px silver solid;
+display: inline-block;
+vertical-align: middle;
+}
+
+.large-thumb
+{border: 1px solid #444;
+display: none;
+vertical-align: middle;
+}
+
+.small-thumb
+{width: 100px;
+border: 1px solid #444;
+vertical-align:middle;}
+
+.figpopup-sensitive-area
+{cursor: pointer;
+.cursor: hand;
+text-decoration: none;
+position: absolute;
+top: 0;
+opacity: 0;
+filter: alpha(opacity=0);
+color: transparent;
+background-color: transparent;
+}
+
+.legend,
+.in-progress,
+.large-thumb {
+    margin: 2mm;
+}
+
+
+/* end of figpopup related definitions ==================== */
+
+

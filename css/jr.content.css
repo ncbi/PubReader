@@ -1,0 +1,444 @@
+/* $Id: jr.content.css 13432 2012-11-29 16:18:37Z kolotev $ */
+/*
+  This work is in the public domain and may be reproduced, published or
+  otherwise used without the permission of the National Library of Medicine (NLM).
+
+  We request only that the NLM is cited as the source of the work.
+
+  Although all reasonable efforts have been taken to ensure the accuracy and
+  reliability of the software and data, the NLM and the U.S. Government  do
+  not and cannot warrant the performance or results that may be obtained  by
+  using this software or data. The NLM and the U.S. Government disclaim all
+  warranties, express or implied, including warranties of performance,
+  merchantability or fitness for any particular purpose.
+*/
+
+/*** Content Typography ***/
+
+/* General declarations */
+
+body{
+    background-color: white;
+    font: 12pt/1.75 arial,helvetica,clean,sans-serif
+}
+
+p, pre, blockquote, dl, menu, ol, ul {
+    margin-top: 0.875em;
+    margin-bottom: 0.875em;
+}
+
+img {
+    max-width:100%;
+    max-height:100%;
+}
+
+img, figure, .iconblock, a {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+/* article */
+article {
+    font: 12pt/1.75 Georgia, "Times New Roman", Times, serif; /* 16/28 */
+    word-wrap:break-word;
+}
+
+a{color:#2f4a8b; text-decoration: none;}
+a:hover, article a:active{color:#985735}
+a:visited{color:#642a8f}
+
+/* journal / publisher branding */
+article .jrb {
+    background: hsl(204, 33%, 85%) url(../img/jrb.back.jpg);
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    line-height: 16pt;
+    padding: 2pt 6pt;
+    margin: auto;
+    max-width: 6in;
+}
+
+article .jrb.ms {
+    background: hsl(204, 10%, 55%) url(../img/jrb.back.ms.jpg);
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+article .jrb .t {
+    text-align: center;
+    color: #FFF;
+    font-size: 15.75pt;
+    line-height: 1.5em;
+}
+
+article .jrb .p {
+    text-align: right;
+    color: #A64;
+    font-size: 10pt;
+}
+
+article .jrb .p {
+    text-shadow: -1px -1px 3px #bbb, 1px 1px 3px #bbb;
+}
+
+
+article .jrb.ms .p {
+    text-shadow: -1px -1px 3px #FFF, 1px 1px 3px #FFF;
+}
+
+article .jrb .t,
+article .jrb.ms .ams {
+    text-shadow: 1px 1px 3px #444, 1px 1px 5px #444
+}
+
+article .jrb.ms .ams {
+    color: #fe9;
+    float: left;
+    font-size: 10pt;
+}
+
+
+/* vip notices, next to the banner */
+.vip-notice {
+    -webkit-border-radius: 6pt;
+    -moz-border-radius: 6pt;
+    border-radius: 6pt;
+    border: 1px solid  hsl(21, 60%, 80%);
+    padding: 6pt;
+    text-align: center;
+    font-family: "Archivo Narrow", "Arial Narrow", Calibri, "Trebuchet MS", ArialMT, Arial, sans-serif;
+}
+
+.vip-notice.retraction {
+    background-color: hsl(48,100%,90%);
+}
+
+.vip-notice strong {
+    text-transform: uppercase;
+}
+
+.vip-notice.retraction strong {
+    color: red;
+}
+
+/* headers and front matter */
+article header,
+article .fm-sec,
+.ref-list-sec {
+    font-size: 0.9375em;
+    line-height: 1.8667;
+}
+
+article header,
+article .fm-sec,
+article h1,
+article h2,
+article h3,
+article h4,
+article h5,
+article h6 {
+    font-family: "Archivo Narrow", "Arial Narrow", Calibri, "Trebuchet MS", ArialMT, Arial, sans-serif;
+    margin-bottom: 0;
+    font-weight: normal;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    -webkit-column-break-after: avoid;
+    -moz-column-break-after: avoid;
+    column-break-after: avoid;
+    -webkit-column-break-inside:avoid;
+    -moz-column-break-inside: avoid;
+    column-break-inside: avoid;
+}
+
+article h1, 
+article h2 {font-size: 1.5em; line-height: 1.5; margin-top: 1.1667em;} /*24/36 margin-top=28 bold black*/ 
+article h2 {line-height: 1.1667; color: hsl(21, 45%, 50%);} /*24/28 margin-top=28 normal copper*/
+article h3 {font-size: 1.3125em; line-height: 1.3333; margin-top: 1.3333em; color: hsl(21, 45%, 40%);} /*21/28 margin-top=28 normal copper*/
+article h4 {font-size: 1.1250em; line-height: 1.5556; margin-top: 1.5556em; color: hsl(21, 45%, 35%);} /*18/28 margin-top=28 normal copper*/
+article h5, 
+article h6 {font-size: 1em; line-height: 1.75; margin-top: 1.75em; color: hsl(21, 45%, 30%)} /*16/28 margin-top=28 normal copper*/
+article h6 {color: hsl(21, 40%, 25%)} /*16/28 margin-top=28 normal copper*/
+
+article strong {
+    font-size: 0.875em;
+    line-height: 2;
+}
+
+article header h1,
+article .fm-sec h1 {
+    font-size: 1.6em; 
+}
+
+article header h6,
+article header p,
+article .fm-sec h6,
+article .fm-sec p {
+    margin: 1.0667em 0;
+}
+
+article header .contribs,
+article .fm-sec .contribs {
+    font-size: 1.2em;
+    margin: .8889em 0;
+
+}
+
+article header strong,
+article .fm-sec strong {
+    font-size: 1em;
+    line-height: 1.75;
+}
+
+/* front matter panels */
+.fm-panel, .fm-author, .fm-citation {
+    margin: 1.0667em 0;
+}
+
+/* reference section */
+.ref-list-sec,
+.ref-list-sec > div {
+    margin: 1.0667em 0;
+}
+
+.nowrap {white-space: nowrap}
+
+/* inline headers */
+
+article h2.inline,
+article h3.inline,
+article h4.inline,
+article h5.inline,
+article h6.inline {
+    font-size: 1em;
+}
+
+article .inline + p {
+    display: inline;
+}
+
+article .inline {
+    display: inline;
+    margin-right: 0.25em;
+}
+
+/* tables and figures */
+table {
+    table-layout:fixed;
+    max-width: 100%;
+}
+
+table.rendered  td,
+table.rendered  th {
+    vertical-align: top;
+    padding: .2em;
+}
+
+.large_tbl {
+    overflow: hidden;
+}
+
+.iconblock, table, figure {
+    font-size: 0.875em;
+    line-height: 1.5;
+    margin: 1.1429em 0;
+}
+
+.iconblock, figure {
+    color: #888;
+    display: table;
+    width: 100%;
+    padding: 6pt;
+    border: #E0ECFF double 4pt;
+    -webkit-border-radius: 6pt;
+    -moz-border-radius: 6pt;
+    border-radius: 6pt;
+    -webkit-column-break-inside: avoid;
+    -moz-column-break-inside: avoid;
+    column-break-inside: avoid;
+}
+
+.iconblock .icnblk_img,
+.iconblock > a, figure > a {
+    min-width: 100px;
+    text-align: center;
+    display: table-cell;
+    vertical-align: top;
+}
+
+.iconblock .icnblk_cntnt,
+figure figcaption {
+    display: table-cell;
+    vertical-align: top;
+    width: 100%;
+}
+
+
+.iconblock > a > img,
+figure > a > img {
+    max-width: 100px;
+    max-height: 100px;
+    margin: 0 6pt 6pt 0;
+    width: auto;
+    vertical-align: top;
+}
+
+.graphic_only img {
+    max-width: 2in;
+}
+
+
+article[data-type=main] .fig .caption,
+.fig .attrib {
+    color: #888;
+    font-size: 0.875em;
+    line-height: 1.5;
+}
+
+.fig .attrib {
+    text-align: right;
+    margin: 1em 0 1em 2em;
+}
+
+/* boxed text */
+.boxed-text-box {
+    background: #eee;
+    padding: 0 1em;
+    -webkit-column-break-inside: avoid;
+    -moz-column-break-inside: avoid;
+    column-break-inside: avoid;
+}
+
+/* math */
+div.disp-formula {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+    margin: 1em 0;
+}
+
+div.disp-formula .f,
+div.disp-formula .l {
+    display: table-cell;
+    text-align: center;
+}
+
+div.disp-formula .f {
+    width: 90%;
+}
+
+div.disp-formula .l {
+    width: 10%;
+    color: hsl(21, 100%, 50%);
+    text-shadow: 0 0 1.5em #000;
+    white-space: nowrap;
+    vertical-align: middle;
+}
+
+img.equation,
+div.disp-formula .f img.eq-image {
+    vertical-align: middle;
+}
+
+/* MathJax adjustments */
+.MathJax_SVG_Display { /* block math */
+    margin:0 !important;
+}
+
+span.MathJax_SVG,
+span.MathJax_SVG svg { /* inline math */
+    max-width: 100% !important;
+}
+
+#MathJax_ZoomFrame {
+    max-width: 95%;
+    display: block !important;
+    width: 99in !important;
+    left: 8px;
+    z-index: 1;
+}
+
+#MathJax_Zoom {
+    background-color: #eee !important;
+    position: static !important;
+    display: block !important;
+    overflow: auto !important;
+    -webkit-box-shadow: 0 0 10px #000 !important;
+    -moz-box-shadow: 0 0 10px #000 !important;
+    box-shadow: 0 0 10px #000 !important;
+}
+
+#MathJax_Zoom span.MathJax_SVG,
+#MathJax_Zoom span.MathJax_SVG svg { /* inline math inside zoom panel */
+    max-width: none !important;
+}
+
+/* custom underlining */
+
+span.underline {
+    border-bottom: 1px solid #777;
+}
+    
+span.double-underline {
+    border-bottom: 3px double #777;
+}
+
+span.bold-double-underline {
+    border-bottom: 3px double black;
+}
+
+/* doi */
+
+.doi {white-space:nowrap}
+
+/* lists */
+.lower-alpha{list-style-type:lower-alpha}
+.upper-alpha{list-style-type:upper-alpha}
+.lower-roman{list-style-type:lower-roman}
+.upper-roman{list-style-type:upper-roman}
+.circle{list-style-type:circle}
+.square{list-style-type:square}
+.simple-list{list-style-type:none}
+.first-line-outdent{list-style-type:none}
+.first-line-outdent li:first-letter{margin-left:-1.5em}
+
+/* verse */
+p.verse-group {
+    font-style: italic;
+    margin-left: 1.75em;
+    color: #444;
+}
+
+/* tileshop related definitions */
+.ts_canvas {
+    display: inline-block;
+}
+
+.ts_canvas img {
+    -moz-box-shadow: 0 0 3px #fff, 0 0 6px #333;
+    -webkit-box-shadow: 0 0 3px #fff, 0 0 6px #333;
+    box-shadow: 0 0 3px #fff, 0 0 6px #333;
+}
+
+.no-touch .ts_bar {
+    height:0;
+    position: relative;
+}
+
+.touch .ts_bar {
+    display: none;
+}
+
+.ts_bar:after {
+    content: url(../img/mglss24.png);
+    position: absolute;
+    height: 24px;
+    width: 24px;
+    right: -13px;
+    top: -9px;
+}

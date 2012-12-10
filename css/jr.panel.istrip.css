@@ -1,0 +1,88 @@
+/* $Id: jr.panel.istrip.css 13234 2012-11-19 15:26:39Z maloneyc $ */
+/*
+  This work is in the public domain and may be reproduced, published or
+  otherwise used without the permission of the National Library of Medicine (NLM).
+
+  We request only that the NLM is cited as the source of the work.
+
+  Although all reasonable efforts have been taken to ensure the accuracy and
+  reliability of the software and data, the NLM and the U.S. Government  do
+  not and cannot warrant the performance or results that may be obtained  by
+  using this software or data. The NLM and the U.S. Government disclaim all
+  warranties, express or implied, including warranties of performance,
+  merchantability or fitness for any particular purpose.
+*/
+
+#jr-istrip {
+    text-align: center;
+    background: #fff;
+}
+
+#jr-is-next,
+#jr-is-prev {
+    position: absolute;
+    top: 0;
+    width: 24pt;
+    text-align: center;
+    text-decoration:none;
+    line-height:inherit;
+    height: 100%;
+}
+
+#jr-is-next {
+    right: 0pt;
+}
+
+#jr-is-prev {
+    left: 0pt;
+}
+
+#jr-istrip .panevp {
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 100%;
+    height: 100%;
+    margin: auto;
+    position: absolute;
+    left: 30pt;
+    right: 30pt;
+}
+
+#jr-istrip .pane {
+    height: 100%;
+}
+
+#jr-istrip .pane {
+    -moz-transition: -moz-transform 2s; /* Firefox 4 */
+    -webkit-transition: -webkit-transform 2s; /* Safari and Chrome */
+    -o-transition: -o-transform 2s; /* Opera */
+    -ms-transition: -ms-transform 2s; /* Opera */
+    transition: transform 2s;
+}
+
+.istrip .pane a {
+    position: relative;
+    top: -1pt;
+    display: inline-block;
+    vertical-align: middle;
+    border: 1px solid #ccc;
+    -webkit-border-radius: 3pt;
+    -moz-border-radius: 3pt;
+    border-radius: 3pt;
+    height: 32pt;
+    width: 42pt;
+    margin: 0 3pt;
+    background-size: auto 29pt;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-clip: content-box;
+    color: transparent;
+    padding: 0 2pt;
+}
+
+.istrip a svg {
+    vertical-align: middle;
+    height: 24pt;
+    position: relative;
+    top: -4pt;
+}

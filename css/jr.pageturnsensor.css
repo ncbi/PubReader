@@ -1,0 +1,84 @@
+/* $Id: jr.pageturnsensor.css 13234 2012-11-19 15:26:39Z maloneyc $ */
+/*
+  This work is in the public domain and may be reproduced, published or
+  otherwise used without the permission of the National Library of Medicine (NLM).
+
+  We request only that the NLM is cited as the source of the work.
+
+  Although all reasonable efforts have been taken to ensure the accuracy and
+  reliability of the software and data, the NLM and the U.S. Government  do
+  not and cannot warrant the performance or results that may be obtained  by
+  using this software or data. The NLM and the U.S. Government disclaim all
+  warranties, express or implied, including warranties of performance,
+  merchantability or fitness for any particular purpose.
+*/
+
+
+/*** Page Navigational Arrows for inputs mouse devices ***/
+/* the location of these element is defined in jr.ui.css */
+#jr-pm-left svg,
+#jr-pm-right svg {
+    height: 100%;
+    width: 100%;
+}
+
+
+#jr-pm-left svg path,
+#jr-pm-left svg text,
+#jr-pm-right svg path,
+#jr-pm-right svg text {
+    fill: #ddd;
+    stroke: #ddd;
+}
+
+/* end static definition of arrows in the button */
+
+/* animated states of arrow inside button */
+#jr-pm-left:hover svg path,
+#jr-pm-left:hover svg text,
+#jr-pm-right:hover svg path,
+#jr-pm-right:hover svg text {
+    fill: #999;
+    stroke: #999;
+}
+
+
+#jr-pm-left:active svg path,
+#jr-pm-left:active svg text,
+#jr-pm-right:active svg path,
+#jr-pm-right:active svg text {
+    fill: #444;
+    stroke: #444;
+}
+
+/* end of animated states of arrow inside button */
+
+/* arrows next to pagination info */
+#jr-pi svg {
+    vertical-align: middle;
+    height: 24pt;
+    position: relative;
+    top: -4pt;
+}
+
+#jr-pi-prev,
+#jr-pi-next {
+    position: absolute;
+    top: 0;
+    width: 24pt;
+    text-align: center;
+    text-decoration:none;
+    line-height:inherit;
+    height: 100%;
+    cursor: pointer;
+}
+
+#jr-pi-prev {
+    left: -24pt
+}
+
+#jr-pi-next {
+    right: -24pt
+}
+
+/*** end of Navigational Arrows ***/
