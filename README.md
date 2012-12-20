@@ -18,6 +18,13 @@ where _location_ is the domain and path of the repository parent directory, as s
 by your HTTP server.
 
 
+## Feedback
+
+We welcome your feedback, bug reports, and pull requests.  Feedback and bug reports
+can be sent to the
+<a href='http://www.ncbi.nlm.nih.gov/sites/ehelp?&Ncbi_App=pmc&Page=github.pubreader.readme'>PMC
+help desk</a>.
+
 ## Public domain notice
 
 This work is in the public domain and may be reproduced, published or
