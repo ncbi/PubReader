@@ -13,10 +13,20 @@
 # warranties, express or implied, including warranties of performance,
 # merchantability or fitness for any particular purpose.
 
+if [ "$SAXON9_HOME" = "" ] ; then
+  if [ -f saxon9he.jar ] ; then
+    SAXON9=saxon9he.jar
+  else
+    echo Looks like you need to download Saxon.  Please see the README.md file.
+    exit
+  fi
+else
+  SAXON9=$SAXON9_HOME/saxon9.jar
+fi
 
 for testfile in `ls test-*.xml`
 do
   filename=${testfile%.*}
   echo "Converting $testfile to $filename.html"
-  java -jar saxon9he.jar -xsl:test-page.xsl -s:$testfile > $filename.html
+  java -jar $SAXON9 -xsl:test-page.xsl -s:$testfile > $filename.html
 done
