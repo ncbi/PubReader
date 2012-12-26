@@ -18,5 +18,5 @@ for testfile in `ls test-*.xml`
 do
   filename=${testfile%.*}
   echo "Converting $testfile to $filename.html"
-  java -jar $SAXON9_HOME/saxon9.jar -xsl:test-page.xsl -s:$testfile > $filename.html
+  java -jar saxon9he.jar -xsl:test-page.xsl -s:$testfile > $filename.html
 done
