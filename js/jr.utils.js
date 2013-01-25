@@ -1,4 +1,4 @@
-/* $Id: jr.utils.js 13234 2012-11-19 15:26:39Z maloneyc $
+/* $Id: jr.utils.js 14142 2013-01-25 21:22:33Z maloneyc $
     Module:
 
         JATS Reader's Utilities via extended jQuery
@@ -64,32 +64,37 @@
 
     $.extend( $.jr.utils, {
         //translPattern:  'translate' + ($.jr.utils.csstransforms3d ? '3d' : 'X') + '(@px' + ($.jr.utils.csstransforms3d ? ',0,0)' : ')' ),
+
         transl2DPattern:  'translateX(@px)',
+
         transl3DPattern:  'translate3d(@px,0,0)',
+
         lsSet:                  function(key, val) {
-                if (!!ls) {
-                        try { // console.info('ls: write key = %s val = %s', key, val)
-                                ls.removeItem(key) // workaround for iOS devices (some versions)
-                                ls.setItem(key, val)
-                        } catch(e) {console.error(e.message)}
-                }
+            if (!!ls) {
+                try { // console.info('ls: write key = %s val = %s', key, val)
+                    ls.removeItem(key) // workaround for iOS devices (some versions)
+                    ls.setItem(key, val)
+                } catch(e) {console.error(e.message)}
+            }
         },
+
         lsGet:                  function(key) {
-                if (!!ls) {
-                        try { // console.info('ls: read key = %s val = %s', key, ls.getItem(key))
-                                var val = ls.getItem(key)
-                                return !!JSON
-                                        ? (/^(true|false|null)/.test(val)
-                                            ? JSON.parse(val)
-                                            : (val === "undefined" ? undefined : val))
-                                        : val
-                        } catch(e) {console.error(e.message)}
-                }
-                return undefined
+            if (!!ls) {
+                try { // console.info('ls: read key = %s val = %s', key, ls.getItem(key))
+                    var val = ls.getItem(key)
+                    return !!JSON
+                        ? (/^(true|false|null)/.test(val)
+                            ? JSON.parse(val)
+                            : (val === "undefined" ? undefined : val))
+                        : val
+                } catch(e) {console.error(e.message)}
+            }
+            return undefined
         },
+
         jqSafeId:               function(id) {
             return typeof id === "string" ? id.replace(/(:|\.)/g, '\\$1') : id
-        }
+        },
     })
 
 })( jQuery );

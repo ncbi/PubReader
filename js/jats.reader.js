@@ -1,4 +1,4 @@
-/* $Id: jats.reader.js 13234 2012-11-19 15:26:39Z maloneyc $
+/* $Id: jats.reader.js 14142 2013-01-25 21:22:33Z maloneyc $
 
     Module:
         Main JATS Reader's application
@@ -42,15 +42,21 @@
     }
 }(window);
 
+
 /* Main application */
 
 jQuery(document).ready(function () {
     var $u = $.jr.utils,
-        h  = window.location.href;
+        h  = window.location.href,
+        $jrContent = $('#jr-content');
 
     try {
         if (! ($u.csscolumns) ) {
-            console.error("Your browser is not supported. HTML5/CSS3 and ECMAScript, 5th Edition, CSS Multicolumn layout features are required.")
+            console.error("Your browser is not supported. HTML5/CSS3 and ECMAScript, " +
+                          "5th Edition, CSS Multicolumn layout features are required.")
+            /* Fire an event for unsupported browser, it relies on
+                csscolumns properties detected by Modernizr */
+            $jrContent.trigger('jr:util:unsupported-browser')
         } else {
             /* for cases when pixel offsets are not integers next
              * function adjust those properties on resize and the domReady time
@@ -222,3 +228,4 @@ jQuery(document).ready(function () {
         }
     } catch (e) {console.error(e.message)}
 });
+
