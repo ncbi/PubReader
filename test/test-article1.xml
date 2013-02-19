@@ -183,7 +183,7 @@
           <a href="/pmc/articles/PMC3479416/table/T1/"
             onclick="return startTarget(this, 'table',1024,800)" target="table" rid-ob="ob-T1"
             rid-figpopup="T1" class="table img_link icnblk_img figpopup"><img border="0"
-              alt="Table 1" title="Table 1" class="small-thumb" src="assets/T1.thumb.png"
+              alt="Table 1" title="Table 1" class=" " src="assets/T1.thumb.png"
               src-large="assets/T1.previmg.png"/></a><div class="icnblk_cntnt">
             <div>
               <a class="figpopup" href="/pmc/articles/PMC3479416/table/T1/" target="table"
@@ -649,7 +649,7 @@
       </div>
       <div id="__ref-listid438417" class="sec"><h2 class="head no_bottom_margin"
           id="__ref-listid438417title">References</h2><div class="ref-list-sec sec"
-          id="reference-list"><ul class="back-ref-list" style="list-style-type:decimal;">
+            id="reference-list"><ul class="first-line-outdent" style="list-style-type:decimal;">
             <li id="B1"><span>Dunbrack RL, Cohen FE. Bayesian statistical analysis of protein
                 side-chain rotamer preferences. <span><span class="ref-journal">Protein Sci.
                     </span>1997;<span class="ref-vol">6</span>:1661&#8211;1681. doi:
@@ -1397,7 +1397,7 @@
           <a class="inline_block ts_canvas"
             href="/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=3479416_1471-2105-13-236-4.jpg"
             target="tileshopwindow" onclick="return startTarget(this, 'tileshopwindow', 1024, 800)"
-              ><div class="ts_bar small" title="Click on image to zoom"> </div>
+              > 
             <img
               alt="An external file that holds a picture, illustration, etc.&#10;Object name is 1471-2105-13-236-4.jpg Object name is 1471-2105-13-236-4.jpg"
               title="Click on image to zoom" class="tileshop"
