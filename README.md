@@ -1,7 +1,7 @@
-# NLM/NCBI PubReader
+﻿# NLM/NCBI PubReader
 
 This is a suite of Javascript and CSS files for rendering journal articles in a
-PubReader view.
+PubReader™ view<sup>1</sup>.
 
 
 ## Quick Start
@@ -39,3 +39,8 @@ using this software or data. The NLM and the U.S. Government disclaim all
 warranties, express or implied, including warranties of performance,
 merchantability or fitness for any particular purpose.
 
+----
+
+<sup>1</sup> PubReader™ is a trademark of the U. S. National Library of
+Medicine. If you use this software on a public site, please include the
+preceding sentence as an acknowledgement on your site.
