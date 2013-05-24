@@ -10,7 +10,7 @@ Create a directory that is served by an HTTP server.  Then, from a bash shell wi
 that as the current working directory:
 
     git clone https://github.com/NCBITools/PubReader.git
-    cd test
+    cd PubReader/test
     ./make-test-pages.sh
 
 Point your browser to http://<em>location</em>/PubReader/test/test-article.html,
