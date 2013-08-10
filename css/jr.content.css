@@ -27,6 +27,15 @@ p, pre, blockquote, dl, menu, ol, ul {
     margin-bottom: 0.875em;
 }
 
+italic {
+    font-style: italic;
+    
+}
+
+bold {
+    font-weight: bold;
+}
+
 img {
     max-width:100%;
     max-height:100%;
@@ -413,6 +422,7 @@ p.verse-group {
     margin-left: 1.75em;
     color: #444;
 }
+
 
 /* tileshop related definitions */
 .ts_canvas {
