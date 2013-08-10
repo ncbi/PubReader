@@ -6,16 +6,21 @@ PubReader™ view<sup>1</sup>.
 
 ## Quick Start
 
-Create a directory that is served by an HTTP server.  Then, from a bash shell with
-that as the current working directory:
+This repository includes the JavaScript library and CSS files that comprise
+PubReader, as well as test/demo pages that you can view right away in your browser.
+
+To try it out, simply clone the repository to a directory on your hard drive:
 
     git clone https://github.com/NCBITools/PubReader.git
-    cd PubReader/test
-    ./make-test-pages.sh
 
-Point your browser to http://<em>location</em>/PubReader/test/test-article.html,
-where _location_ is the domain and path of the repository parent directory, as served
-by your HTTP server.
+And then, in your browser, open one of the files in the `test` directory.  For
+example, `PubReader/test/test-article1.html`.  It should work fine viewing articles
+either directly on your filesystem (the "file:" protocol) or, over an HTTP server
+("http:"), if you clone to a location that is served by one.
+
+The `test` directory also includes a simple script that will convert some XML
+files which contain article sources into HTML.  For more information, see the
+instructions under the [test](test) directory.
 
 
 ## Feedback
