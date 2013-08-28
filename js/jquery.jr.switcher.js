@@ -1,4 +1,4 @@
-/* $Id: jquery.jr.switcher.js 13234 2012-11-19 15:26:39Z maloneyc $
+/* $Id: jquery.jr.switcher.js 15003 2013-03-25 15:53:07Z kolotev $
 
     Module:
 
@@ -141,7 +141,8 @@
                 base.$el.removeClass('on')
                 //
                 if (base.autoOff) {
-                    $(document).unbind(base.clickEvName, base.turnOffHandler)
+                    $(document).unbind(base.clickEvName, base.turnOffHandler);
+                    $(document).unbind("show.canvas", base.turnOffHandler);
                 }
                 //
                 base.$poc.trigger(evt.SW_OFF_AFTER)                     // broadcast event for other buttons
@@ -156,7 +157,8 @@
                 base.$el.bind(evt.SW_OFF_STATELESS, base.turnOffHandler)           // bind itself to be notified programmatically
                 //
                 if (base.autoOff) {
-                    $(document).bind(base.clickEvName, base.turnOffHandler)
+                    $(document).bind(base.clickEvName, base.turnOffHandler);
+                    $(document).bind("show.canvas", base.turnOffHandler);
                 }
                 //
                 base.$poc.trigger(evt.SW_ON_AFTER)

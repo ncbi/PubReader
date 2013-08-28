@@ -1,4 +1,4 @@
-/* $Id: jr.ui.css 13234 2012-11-19 15:26:39Z maloneyc $ */
+/* $Id: jr.ui.css 17462 2013-08-08 15:32:22Z kolotev $ */
 /*
   This work is in the public domain and may be reproduced, published or
   otherwise used without the permission of the National Library of Medicine (NLM).
@@ -15,6 +15,11 @@
 
 .hidden {display: none!important}
 
+/* hack for debug info of the sanity checker on dev.ncbi site */                                                                                                                    
+body > div:first-child {display: none}                                                                                                                                              
+body > div#jr{display: block}                                                                                                                                                       
+
+           
 /*** definitions necessary for User Interface elements to be positioned on the screen ***/
 
 html, body, #jr {
@@ -24,9 +29,9 @@ html, body, #jr {
     position:relative;
 }
 
+
 #jr {
     overflow:hidden;
-    /*position: absolute;*/
     top:0;
     bottom:0;
     right: 0;
@@ -508,7 +513,7 @@ a.btn {
     min-height: 24pt;
     margin: 0 2pt;
     text-align: center;
-    border: 1px solid rgba(0,0,0,0.1);
+    border: 1px solid rgba(0,0,0,0.2);
     border-radius: 5px;
     padding: 0 1px;
     cursor:pointer;
@@ -664,3 +669,29 @@ li:target{
   0% { background-color: #FFB; }
   100% { background-color: transparent; }
 }
+
+@media print {
+    html, body, #jr, #jr-content { 
+	overflow: auto;
+	height: auto;
+	position: static;
+    }
+    
+    #jr-ui {
+	display:none;
+    }
+
+    .jr-fs-7 article {font-size: 6pt!important}
+    .jr-fs-8 article {font-size: 6pt!important}
+    .jr-fs-9 article {font-size: 7pt!important}
+    .jr-fs-10 article {font-size: 7pt!important}
+    .jr-fs-11 article {font-size: 8pt!important}
+    .jr-fs-12 article {font-size: 8pt!important}
+    .jr-fs-13 article {font-size: 9pt!important}
+    .jr-fs-14 article {font-size: 9pt!important}
+    .jr-fs-15 article {font-size: 10pt!important}
+    .jr-fs-18 article {font-size: 11pt!important}
+    .jr-fs-21 article {font-size: 12pt!important}
+    .jr-fs-24 article {font-size: 14pt!important}
+}
+

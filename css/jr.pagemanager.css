@@ -1,4 +1,4 @@
-/* $Id: jr.pagemanager.css 13234 2012-11-19 15:26:39Z maloneyc $ */
+/* $Id: jr.pagemanager.css 14674 2013-03-06 16:44:15Z kolotev $ */
 /*
   This work is in the public domain and may be reproduced, published or
   otherwise used without the permission of the National Library of Medicine (NLM).
@@ -58,7 +58,15 @@ html.csstransitions.animate #jr-content article[data-type=main] {
     transition:             transform 1s;
 }
 
-htlm.csstransitions.animate.touch #jr-content,
-htlm.csstransitions.animate.touch #jr-content article[data-type=main] { 
+html.csstransitions.animate.touch #jr-content,
+html.csstransitions.animate.touch #jr-content article[data-type=main] { 
     -webkit-backface-visibility: hidden;
+}
+
+@media print {
+    html.jr #jr-content article[data-type=main] {
+	-webkit-column-width: auto !important;
+        -moz-column-width:    auto !important;
+	column-width:         auto !important;
+    }
 }

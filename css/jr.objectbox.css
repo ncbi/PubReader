@@ -30,17 +30,25 @@
     z-index: 7000;
 }
 
-#jr-objectbox.help {
+#jr-objectbox.help,
+#jr-objectbox.note {
     bottom: 8pt;
 }
 
-#jr-objectbox {
+
+#jr-objectbox.about {
+    max-width: 40em;
+    max-height: 30em;
+    margin: auto;
+}
+
+/*#jr-objectbox {
     -webkit-transition:     -webkit-transform 0.75s, opacity 0.75s;
     -moz-transition:        -moz-transform 0.75s, opacity 0.75s;
     -o-transition:          -o-transform 0.75s, opacity 0.75s;
     -ms-transition:         -ms-transform 0.75s, opacity 0.75s;
     transition:             transform 0.75s, opacity 0.75s;
-}
+}*/
 
 #jr-objectbox:after {
     content: none;
@@ -168,8 +176,14 @@ aside#jr-objectbox .cnt {
 /* Object boxen of class "note"                          */
 
 #jr-objectbox.note {
-    width: 38em;
-    height: 24em;
+    max-width: 40em;
+    max-height: 30em;
+    margin: auto;
+}
+
+#jr-objectbox.note.small {
+    max-width: 25em;
+    max-height: 20em;
     margin: auto;
 }
 
@@ -183,12 +197,11 @@ aside#jr-objectbox .cnt {
 }
 
 #jr-objectbox.note h1 {
-    /*font-size: 1.3em;*/
-/*    background: #CCC url(/core/jig/1.11.1/css/images/ui-bg_highlight-soft_75_cccccc_1x100.png) 50% 50% repeat-x; */
     font: 18pt/36pt "Archivo Narrow", "Arial Narrow", Calibri, "Trebuchet MS", ArialMT, Arial, sans-serif;
     color: #FFF8aa;
     margin: 3pt;
-    padding-left: 20pt;
+    padding: 0 1em;
+	text-align: center;
     background-image: -moz-linear-gradient(bottom, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.3) 100%);
     background-image: -webkit-linear-gradient(bottom, rgba(255,255,255,0.1) 50%,rgba(255,255,255,0.3) 100%);
     background-image: -webkit-gradient(linear, left bottom, left top, color-stop(50%,rgba(255,255,255,0.1)), color-stop(100%,rgba(255,255,255,0.3)));
@@ -200,9 +213,22 @@ aside#jr-objectbox .cnt {
     border-radius: 5px;
 }
 
-#jr-objectbox.note .contentpane {
-    margin: 0 1em 0 1em;
+@media screen and (max-width: 4in) {
+	#jr-objectbox.note h1 {
+		font-size: 14pt;
+		line-height: 24pt;
+	}
 }
+	
+#jr-objectbox.note .contentpane {
+    margin: 3pt;
+}
+
+#jr-objectbox.note ul {
+	list-style-position: inside;
+	padding-left: 0;
+}
+
 #jr-objectbox.note .buttonpane {
     margin: 0 1em 0 1em;
     border: 1px solid #AAA;
@@ -212,8 +238,110 @@ aside#jr-objectbox .cnt {
     bottom: 0;
     left: 0;
     right: 0;
+	text-align: center;
 }
 
 #jr-objectbox.note .buttonpane a {
   width: auto;
 }
+
+#jr-objectbox.note .buttonpane a.centerbutton {
+  margin-left: auto; 
+  margin-right: auto;
+  padding: 0 1em;
+  max-width: 5em;
+  text-align: center;
+}
+
+
+span.pseudobutton {
+  border: 1px solid #E5E5E5;
+  color: #999;
+  padding: 4px 12px;
+  margin: 0 5px;
+  border-radius: 3px;
+}
+/* object box help, about and other help like content */
+    article[data-type=helper]{
+        line-height:0;
+        text-align:center;
+    }
+
+    article[data-type=helper] header {
+        background-color: #3b6c9d;
+        color: #FFF;
+        font-size: 32pt;
+        line-height: 64pt;
+        position: relative;
+    }
+
+    article[data-type=helper] > div {
+        background-color: #eee;
+        display: inline-block;
+        vertical-align: top;
+        max-width: 5in;
+        margin: 1em .5em 0;
+        padding: 8pt;
+    }
+
+    article[data-type=helper] table {
+        color: #000;
+        font: 14pt/1.75 "Archivo Narrow", "Arial Narrow", Calibri, "Trebuchet MS", ArialMT, Arial, sans-serif;
+        margin: 0;
+        text-align: left;
+        table-layout:fixed;
+        max-width: 100%;
+
+    }
+
+    article[data-type=helper] table td:first-child {
+        width: 60%;
+        vertical-align: top;
+        text-align: center;
+    }
+
+    article[data-type=helper] table ol{
+        list-style-position: inside;
+        padding: 0;
+        margin: 0;
+    }
+
+    #help-pmc-logo {
+        position: absolute;
+        left:6pt;
+        bottom:3pt;
+    }
+
+    #help-ncbi-logo {
+        position: absolute;
+        right:6pt;
+        bottom:9pt;
+    }
+
+    article[data-type=helper] header div {
+        margin-left: 64px;
+        margin-right: 64px;
+    }
+
+    @media screen and (max-width: 7in) {
+        article[data-type=helper] header {
+            font-size: 21pt;
+            line-height: 56pt;
+        }
+
+        article[data-type=helper] table,
+        article[data-type=helper] table tbody,
+        article[data-type=helper] table tr,
+        article[data-type=helper] table td,
+        article[data-type=helper] table td:first-child {
+            display: inline-block;
+            width: auto;
+        }
+    }
+
+    @media screen and (max-width: 4in) {
+        article[data-type=helper] header {
+            font-size: 16pt;
+            line-height: 32pt;
+        }
+    }

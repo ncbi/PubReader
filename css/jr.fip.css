@@ -1,0 +1,74 @@
+/* Find in Page CSS for JATS Reader */
+/*
+  This work is in the public domain and may be reproduced, published or
+  otherwise used without the permission of the National Library of Medicine (NLM).
+
+  We request only that the NLM is cited as the source of the work.
+
+  Although all reasonable efforts have been taken to ensure the accuracy and
+  reliability of the software and data, the NLM and the U.S. Government  do
+  not and cannot warrant the performance or results that may be obtained  by
+  using this software or data. The NLM and the U.S. Government disclaim all
+  warranties, express or implied, including warranties of performance,
+  merchantability or fitness for any particular purpose.
+*/
+/* focus highlightes supression */                                                                                                                                                  
+aside:focus,
+nav:focus,
+div:focus,
+span:focus {
+        outline: none;
+}             
+        
+#jr-fip button,
+#jr-fip input {
+	padding: 2px 6px;
+	margin: 0 2pt;
+	border-radius: 5px;
+	border: none;
+	background-color: #eee;
+	vertical-align: middle;
+	box-sizing: border-box;
+	height: 24pt;
+}
+
+#jr-fip a.btn {
+	background-color: #e4e4e4;
+	font: 18pt/24pt Arial, sans-serif;
+	vertical-align: middle;
+}
+
+#jr-fip-term-p,
+#jr-fip-info-p {
+	z-index: 11000;
+	position: absolute;
+	left:4pt;
+	right:4pt;
+	height: 36pt;
+	line-height: 36pt;
+	background-color: rgba(200,200,200,.9);
+	border: 1px solid #000;
+	text-align:center;
+}
+
+#jr-fip-term-p {
+	top:0;
+	border-top: none;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+}
+
+#jr-fip-info-p {
+	bottom:0;
+	border-bottom: none;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+}
+
+.fip_mark {
+	background-color: yellow;
+}
+
+.fip_active {
+	background-color: orange;
+}

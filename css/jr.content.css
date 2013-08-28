@@ -1,4 +1,4 @@
-/* $Id: jr.content.css 13432 2012-11-29 16:18:37Z kolotev $ */
+/* $Id: jr.content.css 17728 2013-08-27 14:28:46Z kolotev $ */
 /*
   This work is in the public domain and may be reproduced, published or
   otherwise used without the permission of the National Library of Medicine (NLM).
@@ -44,11 +44,24 @@ article {
     word-wrap:break-word;
 }
 
-a{color:#2f4a8b; text-decoration: none;}
-a:hover, article a:active{color:#985735}
-a:visited{color:#642a8f}
+a{
+    color:#2f4a8b;
+    text-decoration: none;
+}
+a:hover, article a:active{
+    color:#985735
+}
+a:visited{
+    color:#642a8f
+}
 
 /* journal / publisher branding */
+article .jrb-schm1 {
+    margin:auto;
+    max-width: 6in;
+    text-align: center;
+    line-height: 0;
+}
 article .jrb {
     background: hsl(204, 33%, 85%) url(../img/jrb.back.jpg);
     -webkit-background-size: cover;
@@ -69,9 +82,13 @@ article .jrb.ms {
     background-size: cover;
 }
 
+article .jrb .t a,
+article .jrb .t {
+    color: #FFF;
+}
+
 article .jrb .t {
     text-align: center;
-    color: #FFF;
     font-size: 15.75pt;
     line-height: 1.5em;
 }
@@ -156,12 +173,12 @@ h1, h2, h3, h4, h5, h6 {
     column-break-inside: avoid;
 }
 
-article h1, 
-article h2 {font-size: 1.5em; line-height: 1.5; margin-top: 1.1667em;} /*24/36 margin-top=28 bold black*/ 
+article h1,
+article h2 {font-size: 1.5em; line-height: 1.5; margin-top: 1.1667em;} /*24/36 margin-top=28 bold black*/
 article h2 {line-height: 1.1667; color: hsl(21, 45%, 50%);} /*24/28 margin-top=28 normal copper*/
 article h3 {font-size: 1.3125em; line-height: 1.3333; margin-top: 1.3333em; color: hsl(21, 45%, 40%);} /*21/28 margin-top=28 normal copper*/
 article h4 {font-size: 1.1250em; line-height: 1.5556; margin-top: 1.5556em; color: hsl(21, 45%, 35%);} /*18/28 margin-top=28 normal copper*/
-article h5, 
+article h5,
 article h6 {font-size: 1em; line-height: 1.75; margin-top: 1.75em; color: hsl(21, 45%, 30%)} /*16/28 margin-top=28 normal copper*/
 article h6 {color: hsl(21, 40%, 25%)} /*16/28 margin-top=28 normal copper*/
 
@@ -172,7 +189,7 @@ article strong {
 
 article header h1,
 article .fm-sec h1 {
-    font-size: 1.6em; 
+    font-size: 1.6em;
 }
 
 article header h6,
@@ -206,7 +223,6 @@ article .fm-sec strong {
     margin: 1.0667em 0;
 }
 
-.nowrap {white-space: nowrap}
 
 /* inline headers */
 
@@ -239,7 +255,9 @@ table.rendered  th {
     padding: .2em;
 }
 
-.large_tbl {
+/* we want to clip large tables in the main content view, but not in table view.
+   check PMC-16055 before changing or removing next class. */
+article[data-type=main] .large_tbl {
     overflow: hidden;
 }
 
@@ -355,24 +373,6 @@ span.MathJax_SVG svg { /* inline math */
     max-width: 100% !important;
 }
 
-#MathJax_ZoomFrame {
-    max-width: 95%;
-    display: block !important;
-    width: 99in !important;
-    left: 8px;
-    z-index: 1;
-}
-
-#MathJax_Zoom {
-    background-color: #eee !important;
-    position: static !important;
-    display: block !important;
-    overflow: auto !important;
-    -webkit-box-shadow: 0 0 10px #000 !important;
-    -moz-box-shadow: 0 0 10px #000 !important;
-    box-shadow: 0 0 10px #000 !important;
-}
-
 #MathJax_Zoom span.MathJax_SVG,
 #MathJax_Zoom span.MathJax_SVG svg { /* inline math inside zoom panel */
     max-width: none !important;
@@ -383,7 +383,7 @@ span.MathJax_SVG svg { /* inline math */
 span.underline {
     border-bottom: 1px solid #777;
 }
-    
+
 span.double-underline {
     border-bottom: 3px double #777;
 }
@@ -425,13 +425,9 @@ p.verse-group {
     box-shadow: 0 0 3px #fff, 0 0 6px #333;
 }
 
-.no-touch .ts_bar {
+.ts_bar {
     height:0;
     position: relative;
-}
-
-.touch .ts_bar {
-    display: none;
 }
 
 .ts_bar:after {
@@ -442,3 +438,44 @@ p.verse-group {
     right: -13px;
     top: -9px;
 }
+
+/* utility definitions */
+.nowrap {white-space: nowrap}
+
+/* unordered list */
+ul li.a_label {
+    position: relative;
+    list-style-type: none;
+}
+
+ul li.a_label div.a_label {
+    position: absolute;
+    left: -2em;
+    width: 1.85em;
+    text-align: right;
+}
+
+/* suppdata */
+.suppmat {
+	border: #E4E4E4 double 4pt;
+	border-radius: 4pt;
+	padding: 6pt;
+	margin: 1.1429em 0; 
+	-webkit-column-break-inside: avoid;
+	-moz-column-break-inside: avoid;
+	column-break-inside: avoid;
+}
+
+/* print media definitions */
+@media print {
+    body, article {
+        font-size: 8pt;
+    }
+
+    article .jrb,
+    article .jrb-schm1,
+    .fm-aai {
+        display: none;
+    }
+}
+

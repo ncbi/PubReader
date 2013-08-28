@@ -1,4 +1,4 @@
-/* $Id: jr.panel.css 13234 2012-11-19 15:26:39Z maloneyc $ */
+/* $Id: jr.panel.css 16824 2013-07-08 15:19:33Z kolotev $ */
 /*
   This work is in the public domain and may be reproduced, published or
   otherwise used without the permission of the National Library of Medicine (NLM).
@@ -57,11 +57,11 @@ aside#jr-alt-p:after {
 }
 
 aside#jr-cmap-p:after {
-    right: 36pt;    
+    right: 36pt;
 }
 
-aside#jr-typo-p:after {
-    right: 76pt;
+aside#jr-help-p:after {
+    right: 110pt;
 }
 
 
@@ -70,7 +70,7 @@ aside#jr-typo-p:after {
     aside#jr-links-p:after {
         left: 46pt;
     }
-    
+
     aside#jr-alt-p:after {
         left: 80pt;
     }
@@ -78,10 +78,10 @@ aside#jr-typo-p:after {
     aside#jr-cmap-p:after {
         right: 10pt;
     }
-    
-    aside#jr-typo-p:after {
-        right: 46pt;
-    }
+
+	aside#jr-help-p:after {
+		right: 80pt;
+	}
 }
 
 aside .tb {
@@ -156,7 +156,7 @@ aside .btn path {
 
 
 /* list of links */
-aside .lol a { 
+aside .lol a {
     background-color: #ddd;
     margin: 6pt;
     text-decoration: none;

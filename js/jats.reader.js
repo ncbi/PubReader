@@ -1,4 +1,4 @@
-/* $Id: jats.reader.js 14142 2013-01-25 21:22:33Z maloneyc $
+/* $Id: jats.reader.js 16825 2013-07-08 15:22:28Z kolotev $
 
     Module:
         Main JATS Reader's application
@@ -87,7 +87,11 @@ jQuery(document).ready(function () {
             } // end of adjustemnts
 
 
-            // Instantiate Page Turn Sensors
+            //
+			try { $('body').trackFocus()}
+            catch (e) { console.error(e.message) }
+
+			// Instantiate Page Turn Sensors
             // This is a temporary component for use in development:
             try { $('#jr-pi').jr_PaginationStatus({poc: '#jr-content'}).removeClass('hidden') }
             catch (e) { console.error(e.message) }
@@ -149,32 +153,33 @@ jQuery(document).ready(function () {
 
             // Links panel
             try {
-                $('#jr-links-p').jr_Panel({'poc': '#jr-links-sw'})
+                $('#jr-links-p').trackFocus().jr_Panel({'poc': '#jr-links-sw'})
                 $('#jr-links-sw').jr_Switcher({'poc': '#jr-head'})
             } catch (e) { console.error(e.message) }
 
             // Alternative views of the article panel
             try {
-                $('#jr-alt-p').jr_Panel({'poc': '#jr-alt-sw'})
+                $('#jr-alt-p').trackFocus().jr_Panel({'poc': '#jr-alt-sw'})
                 $('#jr-alt-sw').jr_Switcher({'poc': '#jr-head'})
             } catch (e) { console.error(e.message) }
 
             // contentMap panel
             try {
-                $('#jr-cmap-p').jr_Panel({'poc': '#jr-cmap-sw'})
+                $('#jr-cmap-p').trackFocus().jr_Panel({'poc': '#jr-cmap-sw'})
                 $('#jr-cmap-p').jr_PanelCmap({'poc': '#jr-content'})
                 $('#jr-cmap-sw').jr_Switcher({'poc': '#jr-head'})
             } catch (e) { console.error(e.message) }
 
 
             // Typography panel
-            try { $('#jr-typo-p').jr_Panel({'poc': '#jr-typo-sw'})
-                  $('#jr-typo-p').jr_PanelTypo()
-                  $('#jr-typo-sw').jr_Switcher({'poc': '#jr-head'})
+            try {
+                $('#jr-typo-p').trackFocus().jr_Panel({'poc': '#jr-typo-sw'})
+                $('#jr-typo-p').jr_PanelTypo()
+                $('#jr-typo-sw').jr_Switcher({'poc': '#jr-head'})
             } catch (e) { console.error(e.message) }
 
             // Instantiate page manager
-            try { $('#jr-content').jr_PageManager() }
+            try { $('#jr-content').trackFocus().trackFip({'default': true}).jr_PageManager() }
             catch (e) { console.error(e.message) }
 
 
@@ -182,8 +187,20 @@ jQuery(document).ready(function () {
             try { $('#jr-content').jr_HistoryKeeper() }
             catch (e) { console.error(e.message) }
 
-            // Instantiate ObjectBox links
+            // Instantiate "find in page" (fip) module
+			try { $('#jr-fip').trackFocus().jr_Fip({
+				'fipTargets': [
+								{'fipTarget': '#jr-content article[data-type=main]', 'poc': '#jr-content'},
+								{'fipTarget': '#jr-objectbox article', 'poc': '#jr-objectbox'}
+							]
+				})
+				$('#jr-fip-sw').bind('click', function() {$('#jr-fip').trigger("jr:fip:show");$('#jr-help-p').trigger("jr:panel:hide")}).removeClass('hidden')
+			}
+            catch (e) { console.error(e.message) }
+
+			// Instantiate ObjectBox links
             try {
+				$('#jr-objectbox').trackFocus().trackFip()
                 $('#jr-content').find('.figpopup, .icnblk_cntnt a')
                                 .jr_ObjectBox({
                                     handleClick: ! $u.touch,
@@ -191,11 +208,15 @@ jQuery(document).ready(function () {
                                     contentLocalAttr: 'rid-ob'
                                 });
             }
-            catch (e) { console.error(e.message) }
+            catch (e) { console.error(e.message)}
 
             // Instantiate help content
             try {
-                $('#jr-help-sw').jr_ObjectBox({'objectBoxClass': 'help'}).removeClass('hidden');
+                $('#jr-help-p').trackFocus().jr_Panel({'poc': '#jr-help-sw'})
+                $('#jr-help-sw').jr_Switcher({'poc': '#jr-head'});
+                $('#jr-about-sw').jr_ObjectBox({'objectBoxClass': 'about'})
+                $('#jr-helpobj-sw').jr_ObjectBox({'objectBoxClass': 'help'})
+				$('#jr-about-sw,#jr-helpobj-sw').on('click', function() {$('#jr-help-p').trigger("jr:panel:hide")})
             }
             catch (e) { console.error(e.message) }
 

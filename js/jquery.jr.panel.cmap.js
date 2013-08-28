@@ -1,4 +1,4 @@
-/* $Id: jquery.jr.panel.cmap.js 13234 2012-11-19 15:26:39Z maloneyc $
+/* $Id: jquery.jr.panel.cmap.js 14983 2013-03-22 19:47:47Z kolotev $
 
     Module:
 
@@ -121,6 +121,7 @@
 
         //
         base.handleLinks     = function (e) {
+	    window.location.hash = '' // PMC-15846
             var $t = $(this)
             base.closePanel();
             return true;

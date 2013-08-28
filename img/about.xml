@@ -1,0 +1,11 @@
+﻿<article data-type="helper">
+  <header>
+    <img id="help-pmc-logo" data-src="{$path}img/help-pmc.png"/>
+    <div>About PubReader™</div>
+    <img id="help-ncbi-logo" data-src="{$path}img/help-ncbi.png"/>
+  </header>
+  <div><table><tr><td><img data-src="{$path}img/about-jr.png"/></td>
+      <td>PubReader was developed by the National Center for Biotechnology Information at the US National Library of Medicine. Interested parties may obtain the software by download from <a href="https://github.com/NCBITools/PubReader">GitHub</a>.</td></tr>
+    </table>
+  </div>
+</article>

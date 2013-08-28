@@ -1,4 +1,4 @@
-/* $Id: jr.utils.js 14142 2013-01-25 21:22:33Z maloneyc $
+/* $Id: jr.utils.js 16755 2013-07-02 16:41:59Z kolotev $
     Module:
 
         JATS Reader's Utilities via extended jQuery
@@ -95,6 +95,11 @@
         jqSafeId:               function(id) {
             return typeof id === "string" ? id.replace(/(:|\.)/g, '\\$1') : id
         },
+		regexp: {
+			escape: function (s) {
+				return s.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
+			}
+		}
     })
 
 })( jQuery );

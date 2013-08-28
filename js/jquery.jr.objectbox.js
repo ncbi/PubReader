@@ -1,5 +1,5 @@
 /*!
- * $Id: jquery.jr.objectbox.js 13548 2012-12-07 16:22:09Z maloneyc $
+ * $Id: jquery.jr.objectbox.js 17637 2013-08-20 17:49:18Z kolotev $
  * JATS Reader ObjectBox.
  * Documentation:  https://confluence.ncbi.nlm.nih.gov/x/nACN.
  */
@@ -28,68 +28,83 @@
     $.jr.ObjectBox = function (el, options) {
         // To avoid scope issues, use "base" instead of "this"
         // to reference this class from internal events and functions.
-        var base = this;
+        var base = this,
+            $el  = $(el)
 
         // Provide access to the DOM and jQuery versions of the element
-        base.el = el;
-        var $el = $(el);
-        base.$el = $el;
+        base.el = el
+        base.$el = $el
 
         // Provide access back to this object from the jQuery element
-        base.$el.data('jr.ObjectBox', base);
+        $el.data('jr.ObjectBox', base)
+        //
         base.init = function() {
-            base.options = $.extend({}, $.jr.ObjectBox.defaultOptions, options)
+            var opts = base.options = $.extend({}, $.jr.ObjectBox.defaultOptions, options),
+                $el  = base.$el
 
-            base.$el.on((base.options.handleClick ? 'touchend.jr-ob click.jr-ob ' : '' ) + 'open', function(e) {
-                if (base.options.preventDefault) e.preventDefault();
-                if ( !base.$el.is('.jr-objectbox-trigger') ) {
-                    base.open();
+            $el.on(
+                (opts.handleClick ? 'click.jr-ob ' : '' ) + 'open',
+                function(e) {
+                    if (opts.preventDefault) e.preventDefault();
+                    if ( !$el.is('.jr-objectbox-trigger') ) {
+                        base.open();
+                    }
+                    return !opts.preventDefault;
                 }
-                return !base.options.preventDefault;
-            });
+            );
 
             // For external content, if not provided as options, get the href and path from
             // data-href and data-path attributes
-            if (!base.options.href && $el.attr('data-href')) {
-                base.options.href = $el.attr('data-href');
+            if (!opts.href && $el.attr('data-href')) {
+                opts.href = $el.attr('data-href');
             }
-            if (!base.options.path && $el.attr('data-path')) {
-                base.options.path = $el.attr('data-path');
+
+            if (!opts.path && $el.attr('data-path')) {
+                opts.path = $el.attr('data-path');
             }
-        };
+
+            if ( opts.focusOnOpen == true ) {
+                var $oel = $(opts.focusOnOpenElement)
+                if ( ! $.isNumeric($oel.attr('tabindex')) )
+                    $oel.attr('tabindex', "0")
+            }
+        }
 
         base.open = function() {
+            var opts = base.options,
+                $el  = base.$el
+                
             if ( $.jr.ObjectBox.OB.is(':visible') ) {
                 $.jr.ObjectBox.clean();
             }
             // mark the trigger element (used for positioning OB and, optionally, to receive focus on close:
-            base.$el.addClass('jr-objectbox-trigger');
+            $el.addClass('jr-objectbox-trigger');
 
             // For the title text of the OB, use the element's text, the @alt value of a child (e.g., IMG):
-            //var titleText = base.$el.text() !== '' ? base.$el.text() : ( base.$el.children('[alt]').length ? base.$el.children('[alt]:first').attr('alt') : '' );
+            //var titleText = $el.text() !== '' ? $el.text() : ( $el.children('[alt]').length ? $el.children('[alt]:first').attr('alt') : '' );
             // Set the titlebar text:
             //if ( titleText !== '' ) {
             //    $.jr.ObjectBox.OB.find('.title-text').text(titleText);
             //}
 
-            base.options.objectBoxClass !== ''
-                ? $.jr.ObjectBox.OB.addClass(base.options.objectBoxClass).data('objectBoxClass', base.options.objectBoxClass)
+            opts.objectBoxClass !== ''
+                ? $.jr.ObjectBox.OB.addClass(opts.objectBoxClass).data('objectBoxClass', opts.objectBoxClass)
                 : 0;
 
             // If the "contentLocal" option value is false (default), load the content in an IFRAME:
-            if ( !base.options.contentLocal ) {
+            if ( !opts.contentLocal ) {
                 var $drawer = $.jr.ObjectBox.OB.find('.jr-objectbox-drawer');
-                $drawer.load(base.options.href, function() {
+                $drawer.load(opts.href, function() {
                     $drawer.find('img[data-src]').each(function() {
                         var $t = $(this);
-                        $t.attr('src', $t.attr('data-src').replace(/\{\$path\}/g, base.options.path))
+                        $t.attr('src', $t.attr('data-src').replace(/\{\$path\}/g, opts.path))
                     }).end()
                 });
             } else {
                 // content is local, find it either from contentId or the contentLocalAttr
-                var contentSelector = base.options.contentId != ''
-                    ? '#' + base.options.contentId
-                    : base.options.contentLocalAttrPrefix + base.$el.attr(base.options.contentLocalAttr);
+                var contentSelector = opts.contentId != ''
+                    ? '#' + opts.contentId
+                    : opts.contentLocalAttrPrefix + $el.attr(opts.contentLocalAttr);
 
                 // Append the content and display the object box:
                 $(contentSelector)
@@ -101,18 +116,13 @@
                     .appendTo($.jr.ObjectBox.OB.find('.jr-objectbox-drawer'));
             }
 
-            $.jr.ObjectBox.open()
-
-            // send focus to ObjectBox:
-            if ( base.options.focusOnOpen == true ) {
-                $(options.focusOnOpenElement).focus();
-            }
+            $.jr.ObjectBox.open({'o': opts})
 
             // Bind event handlers to main content area to close OB:
             $('#jr-content').on(t ? 'touchend.jr-ob' : 'click.jr-ob', function(){
-                $.jr.ObjectBox.close();
-            });
-        };
+                $.jr.ObjectBox.close()
+            })
+        }
 
         // Run initializer
         base.init();
@@ -135,16 +145,12 @@
         }
     };
 
-    function __hideAndCleanOB (e) {$.jr.ObjectBox.OB.addClass('hidden');$.jr.ObjectBox.clean()}
+    function __hideAndCleanOB (e) {$.jr.ObjectBox.OB.blur().addClass('hidden').trigger("hide");$.jr.ObjectBox.clean()} // trigger "hide" here is for focus tracking purposes
     //
     $.jr.ObjectBox.close = function() {
         $.jr.ObjectBox.OB
             .addClass('thidden')
-            .css({
-                maxHeight: 'none' /*,
-                width: 'initial',
-                height: 'initial' */
-            })
+            
         var transFlag = parseFloat($.jr.ObjectBox.OB.css($u.transitionDuration)) > 0
         transFlag
             ? $.jr.ObjectBox.OB.one($u.transitionEndEvName, __hideAndCleanOB)
@@ -155,6 +161,8 @@
         $('.jr-objectbox-drawer').data('refLength','');
         // Announce the OB has closed:
         $.jr.ObjectBox.OB.trigger('ObjectBoxClose');
+        $(document).unbind('keydown', $.jr.ObjectBox.kbdHandler);
+        $.jr.ObjectBox.OB.unbind('jr:go:pos')
     };
 
     $.jr.ObjectBox.defaultOptions = {
@@ -162,8 +170,8 @@
         contentId: '',
         contentLocalAttr: 'rid',
         contentLocalAttrPrefix: '#',
-        focusOnOpen: false,
-        focusOnOpenElement: '.jr-objectbox-close',
+        focusOnOpen: true,
+        focusOnOpenElement: '#jr-objectbox', //.jr-objectbox-close
         objectBoxClass: '',
         handleClick: true,
         href: '',
@@ -171,12 +179,67 @@
         preventDefault: 'true'
     };
 
-    $.jr.ObjectBox.open = function() {
-        $.jr.ObjectBox.OB
-            .removeClass('hidden')
-            .trigger('ObjectBoxOpen');
-        setTimeout(function() {$.jr.ObjectBox.OB.removeClass('thidden')}, 50)
+    $.jr.ObjectBox.open = function(opt) {
+        //
+        function _initNcbiMedia () {
+            var $drawer = $.jr.ObjectBox.OB.find('.jr-objectbox-drawer')
+            $drawer.find('.ncbimedia').ncbimedia()
+        }
+
+        if (! $.jr.ObjectBox.OB.is(':visible')) {
+            var $el
+            if ( opt.o != null && opt.o.focusOnOpen == true ) {
+                $el = $(opt.o.focusOnOpenElement)
+            }
+            
+            $.jr.ObjectBox.OB
+                .removeClass('hidden')
+                .trigger('ObjectBoxOpen')
+                
+            setTimeout(function(){$.jr.ObjectBox.OB.removeClass('thidden')}, 50)
+
+            // local function to call at the end of the transition.
+            function _fn () {
+                $.jr.ObjectBox.OB.trigger('show')
+                setTimeout(function(){$.jr.ObjectBox.OB.focus()}, 100)
+                _initNcbiMedia()
+            }
+
+            
+            transFlag = parseFloat($.jr.ObjectBox.OB.css($u.transitionDuration)) > 0;
+            transFlag
+                ? $.jr.ObjectBox.OB.one($u.transitionEndEvName, _fn)
+                : setTimeout(_fn, 50)
+            
+            $(document).bind('keydown', $.jr.ObjectBox.kbdHandler)
+            $.jr.ObjectBox.OB.bind('jr:go:pos', $.jr.ObjectBox.goPosHandler)
+        }else {
+            _initNcbiMedia()
+        }
     };
+
+    $.jr.ObjectBox.kbdHandler = function(e) {
+        var $t = $(e.target),
+            $ob = $.jr.ObjectBox.OB
+
+        if ($t.closest($ob).length == 0 && $ob.closest($t).length == 0) return
+        
+        if (e.keyCode == 27)
+            $.jr.ObjectBox.close()
+    }
+    
+    $.jr.ObjectBox.goPosHandler = function(e, o) {
+        
+        if ( !$.isPlainObject(o)) o = { pos: {left: 0, top: 0}} 
+        
+        var $drawer = $.jr.ObjectBox.OB.find('.jr-objectbox-drawer'),
+            dTop    = $drawer.scrollTop(),
+            dLeft   = $drawer.scrollLeft(),
+            ih      = $drawer.innerHeight(),
+            iw      = $drawer.innerWidth()
+        
+        $drawer.stop().animate({ scrollTop: dTop + o.pos.top - ih/2, scrollLeft: dLeft + o.pos.left - iw / 2 });
+    }
 
     $.jr.ObjectBox.OB = $('#jr-objectbox');
 

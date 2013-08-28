@@ -1,4 +1,4 @@
-/* $Id: jquery.jr.pagemanager.js 13234 2012-11-19 15:26:39Z maloneyc $
+/* $Id: jquery.jr.pagemanager.js 16774 2013-07-02 21:31:25Z kolotev $
 
     Module:
 
@@ -61,6 +61,7 @@
             GO_PAGE:            'jr:pm:go:page',
             FIRST_PAGE:         'jr:pm:go:1st:page',
             LAST_PAGE:          'jr:pm:go:last:page',
+            GO_POS:             'jr:go:pos',
 
             // publisher for these events
             PAGE_TURN_BEFORE:   'jr:pm:page:turn:before',
@@ -84,7 +85,9 @@
         // init()
         base.init         = function() {
 
-            base.options     = $.extend({},$.jr.PageManager.defaultOptions, options);
+            base.options  = $.extend({},$.jr.PageManager.defaultOptions, options);
+            
+            //
             base.contentPollingIntervalMin =  base.contentPollingInterval = 1000
             base.contentPollingIntervalMax =  1000 * 1024
             base.contentPollingIntervalMul = 2;
@@ -97,7 +100,9 @@
                 console.error("jr.PageManager was not able to find article's content")
                 return false;
             };
-
+            
+            //
+            
             // if so then set article as a member
             base.article     = base.$article.get(0);
 
@@ -113,6 +118,8 @@
 
             // bind keyboard event
             $doc.bind('keydown',            base.kbdHandler);
+            //base.$el.bind('keydown',            base.kbdHandler);
+            
 
             // bind mouse and touch events
             if ($u.touch) {
@@ -132,12 +139,20 @@
             base.$el.bind(evt.FIRST_PAGE,   base.eventHandler);
             base.$el.bind(evt.LAST_PAGE,    base.eventHandler);
             base.$el.bind(evt.GO_PAGE,      base.eventHandler);
+            base.$el.bind(evt.GO_POS,       base.eventHandler);
 
             $doc.bind('jr:user:active click touchend', $.throttle(500, base.resetContentPollingInterval))
             $win.bind('resize', $.throttle(500, base.resetContentPollingInterval))
 
+            // bind mouseweel events
+            base.mw = {deltaAcc : 0, delta : 0} // preset defaults
+            base.$el.mousewheel(base.mousewheel)
+
             // setup polling of page dimensions
             base.startPollingContentMetrics();
+            
+            //
+            base.$el.trigger("show")
 
             //
             return true;
@@ -641,9 +656,15 @@
         // FIXME - there should be a way to identify which article is active to apply keyboard events
         // need to think how to decide which <article> is active.
         base.kbdHandler = function(e) {
-            var kc = e.keyCode;
-
-            if (kc === 38 || kc === 37 || kc === 33 ) {         // up arrow | left arrow | page Down buttons
+            var kc = e.keyCode,
+                $t  = $(e.target)
+            
+            // ignore key strokes if element controled by pagemanager (or its children or parents) is not focused
+            if (base.$el.closest($t).length == 0 && $t.closest(base.$el).length == 0) return
+            
+            if (kc === 9) { // tab key
+                e.preventDefault()
+            }else if (kc === 38 || kc === 37 || kc === 33 ) {         // up arrow | left arrow | page Down buttons
                 base.goPrevPage();
             } else if (kc === 40 || kc === 39 || kc ===34) {    // down arrow | right arrow | page Up buttons
                 base.goNextPage();
@@ -679,9 +700,11 @@
             } else  if (et === evt.GO_PAGE && $.isNumeric(parseFloat(o.po)) ) {
                 base.goPage(base.ppOffset2Page(parseFloat(o.po)));
             } else  if (et === evt.GO_PAGE && $.isNumeric(parseFloat(o.px)) ) {
-                base.goPage(base.pxOffset2Page(parseFloat(o.px)));
+                base.goPage(base.pxOffset2Page(parseFloat(o.px + base.contentPosLeft(true))));
             } else  if (et === evt.GO_PAGE && typeof o.id === "string" && o.id !== '') {
                 base.goPage(base.id2Page(o.id));
+            } else  if (et === evt.GO_POS && o.pos != null && $.isNumeric(parseFloat(o.pos.left)) ) {
+                base.goPage(base.pxOffset2Page(parseFloat(o.pos.left + base.contentPosLeft(true))));
             }
         };
 
@@ -705,7 +728,26 @@
 
             return false;
         }
+	
+	//	
+	base.mousewheel	= function (e, d, dx, dy) { // event, delta, deltaX, deltaY
+		// detect change in direction to reset accumulator
+		if ((base.mw.delta > 0 && d < 0 ) || (base.mw.delta < 0 && d > 0 )) // reset direction 
+			base.mw.deltaAcc = 0
+		base.mw.deltaAcc -= d
 
+		while (base.mw.deltaAcc >= 1 ) {
+			base.goNextPage()	
+			base.mw.deltaAcc--
+		} 
+	
+		while (base.mw.deltaAcc <= -1) {
+			base.goPrevPage()
+			base.mw.deltaAcc++
+		}
+		// save current delta value for detection of change in direction
+		base.mw.delta = d 
+	}
         // *********** Run initializer
         base.init();
     };
