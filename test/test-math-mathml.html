@@ -8,27 +8,27 @@
       <meta name="apple-mobile-web-app-capable" content="no" />
       <meta name="viewport" content="initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
       <link href="http://fonts.googleapis.com/css?family=Archivo+Narrow:400,700,400italic,700italic&amp;subset=latin" rel="stylesheet" type="text/css" />
-      <link rel="stylesheet" href="../lib/css/normalize.css" />
-      <link rel="stylesheet" href="../lib/css/figpopup.css" />
-      <link rel="stylesheet" href="../css/jr.ui.css" />
-      <link rel="stylesheet" href="../css/jr.pagemanager.css" />
-      <link rel="stylesheet" href="../css/jr.pageturnsensor.css" />
-      <link rel="stylesheet" href="../css/jr.pageprogressbar.css" />
-      <link rel="stylesheet" href="../css/jr.objectbox.css" />
-      <link rel="stylesheet" href="../css/jr.panel.css" />
-      <link rel="stylesheet" href="../css/jr.panel.typo.css" />
-      <link rel="stylesheet" href="../css/jr.panel.cmap.css" />
-      <link rel="stylesheet" href="../css/jr.panel.istrip.css" />
-      <link rel="stylesheet" href="../css/jr.content.css" />
+      <link rel="stylesheet" href="../lib/css/normalize.css" type="text/css" />
+      <link rel="stylesheet" href="../lib/css/figpopup.css" type="text/css" />
+      <link rel="stylesheet" href="../css/jr.ui.css" type="text/css" />
+      <link rel="stylesheet" href="../css/jr.pagemanager.css" type="text/css" />
+      <link rel="stylesheet" href="../css/jr.pageturnsensor.css" type="text/css" />
+      <link rel="stylesheet" href="../css/jr.pageprogressbar.css" type="text/css" />
+      <link rel="stylesheet" href="../css/jr.objectbox.css" type="text/css" />
+      <link rel="stylesheet" href="../css/jr.panel.css" type="text/css" />
+      <link rel="stylesheet" href="../css/jr.panel.typo.css" type="text/css" />
+      <link rel="stylesheet" href="../css/jr.panel.cmap.css" type="text/css" />
+      <link rel="stylesheet" href="../css/jr.panel.istrip.css" type="text/css" />
+      <link rel="stylesheet" href="../css/jr.fip.css" type="text/css" />
+      <link rel="stylesheet" href="../css/jr.content.css" type="text/css" />
    </head>
    <body>
       <div id="jr" data-jr-path="../">
          <div class="jr-unsupported">
             <table class="modal">
                <tr>
-                  <td><span class="attn inline-block"></span><br />Your browser does not support the NLM
-                     PubReader view.<br />Go to <a href="http://www.ncbi.nlm.nih.gov/pmc/about/pr-browsers/">this page</a> to see a
-                     list of supporting browsers.
+                  <td><br />Your browser does not support the NLM PubReader view.<br />Go to <a href="http://www.ncbi.nlm.nih.gov/pmc/about/pr-browsers/">this page</a> to see 
+                     a list of supporting browsers.
                   </td>
                </tr>
             </table>
@@ -36,8 +36,8 @@
          <div id="jr-ui" class="hidden">
             <nav id="jr-head">
                <div class="flexh tb">
-                  <div id="jr-tb1"><a id="jr-pmc-sw" href="http://www.ncbi.nlm.nih.gov/pmc/" class="btn link wsprkl" title="PMC Home Page"><img src="../img/pmc.logo.svg" /></a><a id="jr-links-sw" class="btn wsprkl hidden" title="Links">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+                  <div id="jr-tb1"><a id="jr-pmc-sw" href="http://www.ncbi.nlm.nih.gov/pmc/" class="btn link wsprkl" title="PMC Home Page"><img src="../img/pmc.logo.svg" alt="pmc logo" /></a><a id="jr-links-sw" class="btn wsprkl hidden " title="Links">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 100 100" preserveaspectratio="none">
                            <path fill="#999" d="M30,20l-20,0l0,60l80,0l0,-30l-5,5l0,20l-70,0l0,-50l10,0zM90,40l-30,-25l0,10c0,10 -70,5 -20,40c20,0 -40,-15, 20,-20 l0,10z"></path>
                         </svg></a><a id="jr-alt-sw" class="btn wsprkl hidden" title="Alternative formats of the Article">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="250 150 300 300" preserveAspectRatio="none">
@@ -70,8 +70,14 @@
                      <div class="t">MathML samples / test page</div>
                      <div class="j"></div>
                   </div>
-                  <div id="jr-tb2"><a id="jr-help-sw" class="btn wsprkl hidden" title="Help with NLM PubReader" data-path="../" data-href="../img/help.xml">?</a><a id="jr-typo-sw" class="btn wsprkl hidden" title="Typography configuration">Aa</a><a id="jr-cmap-sw" class="btn wsprkl hidden" title="Article navigation">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+                  <div id="jr-tb2"><a id="jr-help-sw" class="btn wsprkl hidden" title="Settings, typography and Help with NLM PubReader">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 512 512" preserveaspectratio="none">
+                           <path d="M462,283.742v-55.485l-29.981-10.662c-11.431-4.065-20.628-12.794-25.274-24.001 c-0.002-0.004-0.004-0.009-0.006-0.013c-4.659-11.235-4.333-23.918,0.889-34.903l13.653-28.724l-39.234-39.234l-28.72,13.652 c-10.979,5.219-23.68,5.546-34.908,0.889c-0.005-0.002-0.01-0.003-0.014-0.005c-11.215-4.65-19.933-13.834-24-25.273L283.741,50 h-55.484l-10.662,29.981c-4.065,11.431-12.794,20.627-24.001,25.274c-0.005,0.002-0.009,0.004-0.014,0.005 c-11.235,4.66-23.919,4.333-34.905-0.889l-28.723-13.653l-39.234,39.234l13.653,28.721c5.219,10.979,5.545,23.681,0.889,34.91 c-0.002,0.004-0.004,0.009-0.006,0.013c-4.649,11.214-13.834,19.931-25.271,23.998L50,228.257v55.485l29.98,10.661 c11.431,4.065,20.627,12.794,25.274,24c0.002,0.005,0.003,0.01,0.005,0.014c4.66,11.236,4.334,23.921-0.888,34.906l-13.654,28.723 l39.234,39.234l28.721-13.652c10.979-5.219,23.681-5.546,34.909-0.889c0.005,0.002,0.01,0.004,0.014,0.006 c11.214,4.649,19.93,13.833,23.998,25.271L228.257,462h55.484l10.595-29.79c4.103-11.538,12.908-20.824,24.216-25.525 c0.005-0.002,0.009-0.004,0.014-0.006c11.127-4.628,23.694-4.311,34.578,0.863l28.902,13.738l39.234-39.234l-13.66-28.737 c-5.214-10.969-5.539-23.659-0.886-34.877c0.002-0.005,0.004-0.009,0.006-0.014c4.654-11.225,13.848-19.949,25.297-24.021 L462,283.742z M256,331.546c-41.724,0-75.548-33.823-75.548-75.546s33.824-75.547,75.548-75.547 c41.723,0,75.546,33.824,75.546,75.547S297.723,331.546,256,331.546z"></path>
+                        </svg></a><a id="jr-fip-sw" class="btn wsprkl " title="Find">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 550 600" preserveaspectratio="none">
+                           <path fill="none" stroke="#000" stroke-width="36" stroke-linecap="round" style="fill:#FFF" d="m320,350a153,153 0 1,0-2,2l170,170m-91-117 110,110-26,26-110-110"></path>
+                        </svg></a><a id="jr-cmap-sw" class="btn wsprkl hidden" title="Article Navigation">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 100 100" preserveaspectratio="none">
                            <path d="M20,20h10v8H20V20zM36,20h44v8H36V20zM20,37.33h10v8H20V37.33zM36,37.33h44v8H36V37.33zM20,54.66h10v8H20V54.66zM36,54.66h44v8H36V54.66zM20,72h10v8 H20V72zM36,72h44v8H36V72z"></path>
                         </svg></a></div>
                </div>
@@ -124,27 +130,33 @@
                </div>
                <div class="cnt lol f1"></div>
             </aside>
-            <aside id="jr-typo-p" class="hidden flexv">
+            <aside id="jr-help-p" class="hidden flexv">
                <div class="tb sk-htbar flexh">
                   <div><a class="jr-p-close btn wsprkl">Done</a></div>
-                  <div class="title-text f1">Typography configuration </div>
+                  <div class="title-text f1"> Settings &amp; Help </div>
                </div>
-               <div class="cnt typo f1">
-                  <div><a class="sf btn wsprkl">A-</a><a class="lf btn wsprkl">A+</a></div>
-                  <div><a class="bcol-auto btn wsprkl">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100" preserveAspectRatio="none">
-                           <text x="10" y="70" style="font-size:60px;font-family: Trebuchet MS, ArialMT, Arial, sans-serif" textLength="180">AUTO</text>
-                        </svg></a><a class="bcol-1 btn wsprkl">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">
-                           <path d="M15,25 85,25zM15,40 85,40zM15,55 85,55zM15,70 85,70z"></path>
-                        </svg></a><a class="bcol-2 btn wsprkl">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">
-                           <path d="M5,25 45,25z M55,25 95,25zM5,40 45,40z M55,40 95,40zM5,55 45,55z M55,55 95,55zM5,70 45,70z M55,70 95,70z"></path>
-                        </svg></a></div>
+               <div class="cnt f1">
+                  <div id="jr-typo-p" class="typo">
+                     <div><a class="sf btn wsprkl">A-</a><a class="lf btn wsprkl">A+</a></div>
+                     <div><a class="bcol-auto btn wsprkl">
+                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100" preserveAspectRatio="none">
+                              <text x="10" y="70" style="font-size:60px;font-family: Trebuchet MS, ArialMT, Arial, sans-serif" textLength="180">AUTO</text>
+                           </svg></a><a class="bcol-1 btn wsprkl">
+                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+                              <path d="M15,25 85,25zM15,40 85,40zM15,55 85,55zM15,70 85,70z"></path>
+                           </svg></a><a class="bcol-2 btn wsprkl">
+                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+                              <path d="M5,25 45,25z M55,25 95,25zM5,40 45,40z M55,40 95,40zM5,55 45,55z M55,55 95,55zM5,70 45,70z M55,70 95,70z"></path>
+                           </svg></a></div>
+                  </div>
+                  <div class="lol"><a id="jr-helpobj-sw" data-path="../" data-href="../img/help.xml" href="">Help with
+                        PubReader</a><a href="/pmc/articles/PMC14900/?report=classic" class="">Switch to
+                        classic view</a><a href="mailto:pubmedcentral@ncbi.nlm.nih.gov?subject=PubReader%20feedback">Feedback /
+                        suggestions</a><a id="jr-about-sw" data-path="../" data-href="../img/about.xml" href="">About PubReader</a></div>
                </div>
             </aside>
             <aside id="jr-objectbox" class="thidden hidden">
-               <div class="jr-objectbox-close wsprkl">X </div>
+               <div class="jr-objectbox-close wsprkl"> ✘ </div>
                <div class="jr-objectbox-inner cnt">
                   <div class="jr-objectbox-drawer"></div>
                </div>
@@ -160,6 +172,14 @@
                      Page
                   </text>
                </svg>
+            </nav>
+            <nav id="jr-fip" class="hidden">
+               <nav id="jr-fip-term-p"><input type="search" placeholder="search within article" id="jr-fip-term" autocorrect="off" autocomplete="off" /><button id="jr-fip-mg" class="wsprkl" title="Find">
+                     <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 550 600" preserveaspectratio="none">
+                        <path fill="none" stroke="#000" stroke-width="36" stroke-linecap="round" style="fill:#FFF" d="m320,350a153,153 0 1,0-2,2l170,170m-91-117 110,110-26,26-110-110"></path>
+                     </svg></button><button id="jr-fip-done" class="wsprkl" title="Dismiss find">✘</button></nav>
+               <nav id="jr-fip-info-p"><button id="jr-fip-prev" class="wsprkl" title="Jump to previuos match">◄</button><span id="jr-fip-matches">no matches
+                     yet</span><button id="jr-fip-next" class="wsprkl" title="Jump to next match">►</button></nav>
             </nav>
          </div>
          <div id="jr-content">
@@ -618,8 +638,7 @@
                   
                   <h3>Ridiculously long and nasty equation</h3>
                   
-                  <p>This sample is from PMC3226351, and you can see what it looks like in classic PMC
-                     (as
+                  <p>This sample is from PMC3226351, and you can see what it looks like in classic PMC (as
                      an image) <a href="http://tinyurl.com/9a2sv6f">here</a>, or on the Elsevier site <a href="http://www.sciencedirect.com/science/article/pii/S0012365X11003372#p002150">here</a>. 
                   </p>
                   
@@ -3412,7 +3431,7 @@
             </article>
             
          </div>
-         <div id="jr-scripts"><script type="text/javascript" src="../lib/js/jquery-1.7.2.js"></script><script type="text/javascript" src="../lib/js/modernizr.jr.js"></script><script type="text/javascript" src="../lib/js/jquery.throttle.js"></script><script src="../lib/js/rangeinput.js"></script><script src="../lib/js/jquery.touchSwipe.js"></script><script src="../lib/js/jquery.hoverIntent.js"></script><script src="../lib/js/figpopup.js"></script><script src="../js/jr.utils.js"></script><script src="../js/jquery.jr.pagemanager.js"></script><script src="../js/jquery.jr.paginationstatus.js"></script><script src="../js/jquery.jr.pageturnsensor.js"></script><script src="../js/jquery.jr.pageprogressbar.js"></script><script src="../js/jquery.jr.links.js"></script><script src="../js/jquery.jr.historykeeper.js"></script><script src="../js/jquery.jr.objectbox.js"></script><script src="../js/jquery.jr.switcher.js"></script><script src="../js/jquery.jr.panel.js"></script><script src="../js/jquery.jr.panel.typo.js"></script><script src="../js/jquery.jr.panel.cmap.js"></script><script src="../js/jquery.jr.panel.istrip.js"></script><script src="../js/jats.reader.js"></script><script type="text/x-mathjax-config">  
+         <div id="jr-scripts"><script src="../lib/js/jquery-1.7.2.js" type="text/javascript"></script><script src="../lib/js/modernizr.jr.js" type="text/javascript"></script><script src="../lib/js/jquery.throttle.js" type="text/javascript"></script><script src="../lib/js/jquery.mousewheel.js?x=1" type="text/javascript"></script><script src="../lib/js/rangeinput.js" type="text/javascript"></script><script src="../lib/js/jquery.touchSwipe.js" type="text/javascript"></script><script src="../lib/js/jquery.hoverIntent.js" type="text/javascript"></script><script src="../lib/js/figpopup.js" type="text/javascript"></script><script src="../js/jr.utils.js" type="text/javascript"></script><script src="../js/jquery.jr.ft.js" type="text/javascript"></script><script src="../js/jquery.jr.pagemanager.js" type="text/javascript"></script><script src="../js/jquery.jr.paginationstatus.js" type="text/javascript"></script><script src="../js/jquery.jr.pageturnsensor.js" type="text/javascript"></script><script src="../js/jquery.jr.pageprogressbar.js" type="text/javascript"></script><script src="../js/jquery.jr.links.js" type="text/javascript"></script><script src="../js/jquery.jr.historykeeper.js" type="text/javascript"></script><script src="../js/jquery.jr.objectbox.js" type="text/javascript"></script><script src="../js/jquery.jr.switcher.js" type="text/javascript"></script><script src="../js/jquery.jr.panel.js" type="text/javascript"></script><script src="../js/jquery.jr.panel.typo.js" type="text/javascript"></script><script src="../js/jquery.jr.panel.cmap.js" type="text/javascript"></script><script src="../js/jquery.jr.panel.istrip.js" type="text/javascript"></script><script src="../js/jquery.jr.fip.js" type="text/javascript"></script><script src="../js/jats.reader.js" type="text/javascript"></script><script type="text/x-mathjax-config">  
               MathJax.Hub.Config({ 
                 SVG: { 
                   scale: 90, 

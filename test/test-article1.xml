@@ -91,11 +91,11 @@
           distributed, but for the most part are tightly clustered. A number of unbound rotamer
           libraries have been described previously [1-14] (see [15] for a review). Dunbrack and
           Cohen [1] used Bayesian statistics to estimate populations and dihedral angles for all
-          amino acids rotamers at all <img src="/corehtml/pmc/pmcents/x03C6.gif" border="0"
+          amino acids rotamers at all <img src="assets/x03C6.gif" border="0"
             alt="[var phi]" title=""/> and &#x003c8; values. A backbone-dependent rotamer library
-          [15] was obtained by dividing <img src="/corehtml/pmc/pmcents/x03C6.gif" border="0"
+          [15] was obtained by dividing <img src="assets/x03C6.gif" border="0"
             alt="[var phi]" title=""/> and &#x003c8; dihedral space into 10&#x000b0;&#x000d7;<img
-            src="/corehtml/pmc/pmcents/x2009.gif" border="0" alt=" " title=""/>10&#x000b0; bins,
+            src="assets/x2009.gif" border="0" alt=" " title=""/>10&#x000b0; bins,
           &#x003c7; angles into 120&#x000b0; bins, and calculating frequencies and average values of
           rotamers for each amino acid. A backbone-independent rotamer library was generated in a
           similar way. In a recent study [16], a new version of the backbone-dependent rotamer
@@ -121,8 +121,8 @@
           crystallography are affected by the crystal packing. The area of the protein surface
           involved in the crystal contacts is generally smaller than in biological interfaces [19],
           and the interface packing is looser [20]. Studies of the crystal packing effect on the
-          surface side chains [21-23] showed that<img src="/corehtml/pmc/pmcents/x2009.gif"
-            border="0" alt=" " title=""/>~<img src="/corehtml/pmc/pmcents/x2009.gif" border="0"
+          surface side chains [21-23] showed that<img src="assets/x2009.gif"
+            border="0" alt=" " title=""/>~<img src="assets/x2009.gif" border="0"
             alt=" " title=""/>20% of the exposed side chains change conformation, and the change
           increases with the increase of the side-chain solvent accessibility. Large polar or
           charged residues Arg, Lys, Glu, Gln, as well as Ser were found to be most flexible [21]. </p>
@@ -156,23 +156,23 @@
           [26]. The set consists of 233 complexes, with the unbound structures of both interacting
           proteins for 99 complexes, and the unbound structure of one interacting protein for 134
           complexes. The following criteria were used for generating the set: sequence identity
-          between bound and unbound structures<img src="/corehtml/pmc/pmcents/x2009.gif" border="0"
-            alt=" " title=""/>&#x0003e;<img src="/corehtml/pmc/pmcents/x2009.gif" border="0" alt=" "
+          between bound and unbound structures<img src="assets/x2009.gif" border="0"
+            alt=" " title=""/>&#x0003e;<img src="assets/x2009.gif" border="0" alt=" "
             title=""/>97%; sequence identity between complexes<img
-            src="/corehtml/pmc/pmcents/x2009.gif" border="0" alt=" " title=""/>&#x0003c;<img
-            src="/corehtml/pmc/pmcents/x2009.gif" border="0" alt=" " title=""/>30%; and
+            src="assets/x2009.gif" border="0" alt=" " title=""/>&#x0003c;<img
+            src="assets/x2009.gif" border="0" alt=" " title=""/>30%; and
           homomultimers, crystal packing, and obligate complexes excluded. </p>
         <p id="__p10">The core residues change conformation upon binding less than the surface ones
           [24]. Thus, our study focused on the surface residues only. Surface residues were defined
           as those with the relative solvent-accessible surface area<img
-            src="/corehtml/pmc/pmcents/x2009.gif" border="0" alt=" " title=""/>&#x02265;<img
-            src="/corehtml/pmc/pmcents/x2009.gif" border="0" alt=" " title=""/>25% in bound and
+            src="assets/x2009.gif" border="0" alt=" " title=""/>&#x02265;<img
+            src="assets/x2009.gif" border="0" alt=" " title=""/>25% in bound and
           unbound state. The change of the residue solvent-accessible surface area (SASA) upon
           binding was used to differentiate the interface residues from the non-interface ones. SASA
           was calculated using Naccess [27]. The interface residues were defined as those losing<img
-            src="/corehtml/pmc/pmcents/x2009.gif" border="0" alt=" " title=""/>&#x0003e;<img
-            src="/corehtml/pmc/pmcents/x2009.gif" border="0" alt=" " title=""/>1<img
-            src="/corehtml/pmc/pmcents/x2009.gif" border="0" alt=" " title=""/>&#x000c5;<sup>2</sup>
+            src="assets/x2009.gif" border="0" alt=" " title=""/>&#x0003e;<img
+            src="assets/x2009.gif" border="0" alt=" " title=""/>1<img
+            src="assets/x2009.gif" border="0" alt=" " title=""/>&#x000c5;<sup>2</sup>
           SASA upon binding. The statistics of the interface and non-interface residues in the bound
           and unbound structures are summarized in Table . The difference between the numbers of
           bound and unbound interface/non-interface residues reflects the difference between the
@@ -209,8 +209,8 @@
           dihedral angles for the non-interface unbound residues. </p>
         <!--fig ft0--><!--fig mode=article f1-->
         <div class="fig iconblock ten_col whole_rhythm clearfix" id="F1" co-legend-rid="lgnd_F1">
-          <a class="icnblk_img figpopup" href="/pmc/articles/PMC3479416/figure/F1/" 
-            target="figure" rid-figpopup="F1" rid-ob="ob-F1" 
+          <a class="icnblk_img figpopup" href="/pmc/articles/PMC3479416/figure/F1/"
+            target="figure" rid-figpopup="F1" rid-ob="ob-F1"
             onclick="return startTarget(this, 'figure',1024,800)"><img src="assets/1471-2105-13-236-1.gif" class="small-thumb" alt="Figure 1 "
               title="Figure 1 " src-large="assets/1471-2105-13-236-1.jpg"/></a>
           <div class="icnblk_cntnt" id="lgnd_F1">
@@ -329,8 +329,8 @@
           cells yielded more smooth/similar distributions). Table shows the grid spacing at which
           the correlation reaches a high level of 0.7. Most amino acids had high correlation between
           bound and unbound interface/non-interface distributions for grid spacing<img
-            src="/corehtml/pmc/pmcents/x2009.gif" border="0" alt=" " title=""/>&#x02264;<img
-            src="/corehtml/pmc/pmcents/x2009.gif" border="0" alt=" " title=""/>20&#x000b0;, except
+            src="assets/x2009.gif" border="0" alt=" " title=""/>&#x02264;<img
+            src="assets/x2009.gif" border="0" alt=" " title=""/>20&#x000b0;, except
           Met and Arg at the interface and non-interface, and Glu and Gln at the interface. The
           correlation coefficient for Met and Arg increased with the grid spacing increase and
           reached the high level of 0.7 at the 70&#x000b0; grid spacing for interface, and
@@ -408,7 +408,7 @@
             </div>
           </div>
         </div>
-        <p id="__p31">Equation<img src="/corehtml/pmc/pmcents/x2009.gif" border="0" alt=" " title=""
+        <p id="__p31">Equation<img src="assets/x2009.gif" border="0" alt=" " title=""
           />2 was used to calculate the Manhattan distance between bound and unbound
           interface/non-interface distributions. As in the case of correlation, the metric value
           depended on the grid spacing, with larger steps corresponding to more coarse-grained
@@ -419,14 +419,14 @@
           unbound and bound distributions for all long amino acids with three and four dihedral
           angles were the largest (Figure 4A). It agrees with our previous findings that long amino
           acids have higher flexibility in binding [24]. The Manhattan distance between the
-          probability functions was<img src="/corehtml/pmc/pmcents/x2009.gif" border="0" alt=" "
-            title=""/>&#x0003c;<img src="/corehtml/pmc/pmcents/x2009.gif" border="0" alt=" "
+          probability functions was<img src="assets/x2009.gif" border="0" alt=" "
+            title=""/>&#x0003c;<img src="assets/x2009.gif" border="0" alt=" "
             title=""/>30% for most amino acids, starting with 50&#x000b0; grid spacing, except for
           Met and Arg interface bound vs. unbound and non-interface vs. interface distributions. For
-          these distributions, the distance was<img src="/corehtml/pmc/pmcents/x2009.gif" border="0"
-            alt=" " title=""/>&#x0003c;<img src="/corehtml/pmc/pmcents/x2009.gif" border="0" alt=" "
-            title=""/>30% at grid spacing 70&#x000b0;, and<img src="/corehtml/pmc/pmcents/x2009.gif"
-            border="0" alt=" " title=""/>&#x0003c;<img src="/corehtml/pmc/pmcents/x2009.gif"
+          these distributions, the distance was<img src="assets/x2009.gif" border="0"
+            alt=" " title=""/>&#x0003c;<img src="assets/x2009.gif" border="0" alt=" "
+            title=""/>30% at grid spacing 70&#x000b0;, and<img src="assets/x2009.gif"
+            border="0" alt=" " title=""/>&#x0003c;<img src="assets/x2009.gif"
             border="0" alt=" " title=""/>35% for Met interface bound vs. unbound and Arg bound
           non-interface vs. interface. The high similarity between the DADFs at the 50&#x000b0; grid
           spacing is a result of the small number of rotamer-to-rotamer transitions induced by
@@ -573,7 +573,7 @@
                 >Alexander V Tuzikov</a>,<sup>2</sup> and <a
                 href="/sites/entrez?cmd=search&amp;db=PubMed&amp;term=%20Vakser%20IA%5Bauth%5D">Ilya
                 A Vakser</a><sup><img
-                  src="http://dev.ncbi.nlm.nih.gov/ipmc-dev1/cfm/ptpmc-backend/corehtml.cfm/pmc/pmcgifs/corrauth.gif"
+                  src="assets/corrauth.gif"
                   alt="corresponding author"/></sup><sup>1,</sup><sup>3</sup>
             </div>
           </div>
@@ -589,7 +589,7 @@
                 66045, KS, USA </div>
               <div>
                 <sup><img
-                    src="http://dev.ncbi.nlm.nih.gov/ipmc-dev1/cfm/ptpmc-backend/corehtml.cfm/pmc/pmcgifs/corrauth.gif"
+                    src="assets/corrauth.gif"
                     alt="corresponding author"/></sup>Corresponding author. </div>
               <div>
                 <span class="contrib-email" id="A1">Tatsiana Kirys: <span class="e_id496200"
