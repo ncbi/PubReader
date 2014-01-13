@@ -1,3 +1,5 @@
+#!/bin/sh
+
 # This script generates test HTML pages for PubReader.  Depends on Saxon 9.
 # $Id: make-test-pages.sh 14143 2013-01-25 22:00:33Z maloneyc $
 
@@ -21,7 +23,16 @@ if [ "$SAXON9_HOME" = "" ] ; then
     exit
   fi
 else
-  SAXON9=$SAXON9_HOME/saxon9.jar
+  if [ -f $SAXON9_HOME/saxon9he.jar ] ; then
+    SAXON9=$SAXON9_HOME/saxon9he.jar
+  else
+    if [ -f $SAXON9_HOME/saxon9.jar ] ; then
+      SAXON9=$SAXON9_HOME/saxon9.jar
+    else
+      echo Can\'t find Saxon jar file.  Please see the README.md file.
+      exit
+    fi
+  fi
 fi
 
 for testfile in `ls test-*.xml`
