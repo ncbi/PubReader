@@ -1,0 +1,165 @@
+#marker-bar,
+#txtselect_marker {
+    display: block;
+    visibility: hidden;
+    position: absolute;
+    z-index: 1200; /* more than assignment_wrapper_ok */
+    opacity: 0;
+    -webkit-transition: opacity .4s, visibility .1s linear .4s;
+    -moz-transition: opacity .4s, visibility .1s linear .4s;
+    -o-transition: opacity .4s, visibility .1s linear .4s;
+    transition: opacity .4s, visibility .1s linear .4s;
+    }
+#txtselect_marker {
+    cursor: pointer;
+    width: 48px;
+    height: 48px;
+    background:url(../img/textselect/marker.png) -0px -0px no-repeat;
+    }
+#marker-bar{
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    background: #fff;
+    padding: 5px 10px;
+    cursor: default;
+    box-shadow: 0px 0px 4px #ccc;
+    }
+    #txtselect_marker:hover {
+        background-position: -0px -48px;
+        }
+    #marker-bar.show,
+    #txtselect_marker.show {
+        /* XXX make a common css fadeIn/fadeOut classes */
+        visibility: visible;
+        -webkit-transition: opacity .4s, visibility 0s;
+        -moz-transition: opacity .4s, visibility 0s;
+        -o-transition: opacity .4s, visibility 0s;
+        transition: opacity .4s, visibility 0s;
+        opacity: 1;
+        }
+    #marker-bar .masha-social,
+    #marker-bar .masha-marker{
+        cursor: pointer;
+        display: block;
+        margin: 0 5px;
+        float: left;
+        }
+    #marker-bar .masha-marker{
+        line-height: 1em;
+        color: #aaa;
+        border-bottom: 1px dotted #aaa;
+        margin-right: 10px;
+        }
+        #marker-bar .masha-marker:hover {
+            color: #ea3e26;
+            border-color: #ea3e26;
+            }
+    .masha-social{
+        cursor: pointer;
+        width: 20px;
+        height: 20px;
+        background: url(../img/textselect/social-icons.png) 20px 20px no-repeat;
+        }
+        .masha-social.twitter{
+            background-position: 0 -20px;
+            }
+        .masha-social.twitter:hover {
+            background-position: 0 0;
+            }
+        .masha-social.facebook{
+            background-position: -20px -20px;
+            }
+        .masha-social.facebook:hover {
+            background-position: -20px 0;
+            }
+        .masha-social.vk{
+            background-position: -40px -20px;
+            }
+        .masha-social.vk:hover {
+            background-position: -40px 0;
+            }
+        .masha-social.gplus{
+            background-position: -60px -20px;
+            }
+        .masha-social.gplus:hover {
+            background-position: -60px 0;
+            }
+
+.user_selection, .user_selection_true {
+    background: #c4f47d;
+    padding: 2px 0;
+    }
+.user_selection a.txtsel_close, .user_selection_true a.txtsel_close {
+    display:none;
+    }
+.user_selection .closewrap, .user_selection_true .closewrap {
+    position: relative;
+    }
+.user_selection.hover a.txtsel_close, .user_selection_true.hover a.txtsel_close {
+    display: inline-block;
+    position: absolute;
+    top: -7px;
+    left: -5px;
+    width: 33px;
+    height: 33px;
+    background: url(../img/textselect/closemarker.png) -0px -0px no-repeat;
+    }
+    .user_selection.hover a.txtsel_close:hover, .user_selection_true.hover a.txtsel_close:hover {
+        background-position: -0px -33px;
+        }
+        
+#upmsg-selectable {
+    position: fixed;
+    top: -57px;
+    left: 0;
+    height: 57px;
+    width: 100%;
+    visibility:hidden;
+    background: url(../img/textselect/upmsg_bg.png) repeat-x;
+    z-index: 9999;
+    overflow:hidden;
+    -webkit-transition: top .4s, visibility .1s linear .4s;
+    -moz-transition: top .4s, visibility .1s linear .4s;
+    -o-transition: top .4s, visibility .1s linear .4s;
+    transition: top .4s, visibility .1s linear .4s;
+    }
+    #upmsg-selectable.show {
+        visibility: visible;
+        -webkit-transition: top .4s, visibility 0s;
+        -moz-transition: top .4s, visibility 0s;
+        -o-transition: top .4s, visibility 0s;
+        transition: top .4s, visibility 0s;
+        top: 0;
+        }
+    #upmsg-selectable .upmsg-selectable-inner {
+        width: 928px;
+        height: auto;
+        margin: 0 auto;
+        position: relative;
+        }
+        #upmsg-selectable .upmsg-selectable-inner img {
+            float: left;
+            }
+        #upmsg-selectable .upmsg-selectable-inner p {
+            color:white;
+            font-size:12px;
+            font-family: Arial, sans-serif;
+            white-space: nowrap;
+            margin-left:63px;
+            margin-top:17px;
+            text-align:left;
+            text-shadow:0 -1px 0 #000000;
+            }
+        #upmsg-selectable .upmsg-selectable-inner .upmsg_closebtn {
+            bottom:-4px;
+            display:block;
+            height:19px;
+            position:absolute;
+            right:0;
+            width:19px;
+            background: url(../img/textselect/upmsg_closebtn.png) no-repeat -0px -0px;
+            }
+            #upmsg-selectable .upmsg-selectable-inner .upmsg_closebtn:hover {
+                background-position: -0px -19px;
+                }
+                
