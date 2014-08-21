@@ -4,7 +4,7 @@ confuse to the original PubReader, to the NCBI/PubReader repository.
 With it, you can mark text, comment in lines, and share your emotions.
 To try it out, simply clone the repository to a directory on your pc:
 
-    git clone https://github.com/NCBITools/PubReader.git
+    git clone https://github.com/xiongzhp/PubReader.git
 
 And then, in your browser, open `PubReader/test/test-article2.html`, 
 which is adapted from the origin test page `PubReader/test/test-article1.html` in NCBI/PubReader repository, 
