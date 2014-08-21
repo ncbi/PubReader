@@ -8,6 +8,6 @@ To try it out, simply clone the repository to a directory on your pc:
 
 And then, in your browser, open `PubReader/test/test-article2.html`, 
 which is adapted from the origin test page `PubReader/test/test-article1.html` in NCBI/PubReader repository, 
-and you would see the change if you can select some text of the page .
+and you can see the changes if you select some text of the page.
 One of the dominante bugs is that all of your marks would disappear when you have marked many places and just wanna delete one of them.
 Hope someone would fix it.
