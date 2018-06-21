@@ -1,0 +1,158 @@
+/*
+  This work is in the public domain and may be reproduced, published or
+  otherwise used without the permission of the National Library of Medicine (NLM).
+
+  We request only that the NLM is cited as the source of the work.
+
+  Although all reasonable efforts have been taken to ensure the accuracy and
+  reliability of the software and data, the NLM and the U.S. Government  do
+  not and cannot warrant the performance or results that may be obtained  by
+  using this software or data. The NLM and the U.S. Government disclaim all
+  warranties, express or implied, including warranties of performance,
+  merchantability or fitness for any particular purpose.
+*/
+/* Commit: $Id$ */
+
+/* The following code implements request for support of small screen devices */
+@media screen and (max-width: 5in), screen and (max-height: 5in)  { 
+	/* keep both demensions in sync to prevent change in application
+	behaviuor  for the same screen turned in portarait or landscape modes.
+	Do not forget to sync with js code as well */
+	html,body,#jr {
+		height: 100% !important;
+		overflow: visible !important;
+	}
+
+	html {
+		overflow-y: auto !important;
+	}
+
+	@media (orientation:landscape) {
+		body {
+			position: static !important;
+		}
+	}
+
+    #jr-head {
+        left:6pt;
+        right:6pt
+    }
+
+    .jr-rhead {
+        visibility:hidden
+    }
+
+    .flexh .f1, .flexv .f1 {
+    	padding:0;
+	}
+
+	#jr-dash,
+    #jr-pm-left,
+    #jr-pm-right {
+		display: none;
+	}
+
+	#jr-fip {
+		position: fixed;
+		left:0;
+		right:0;
+		top:0;
+		bottom:0;
+		z-index: 1000;
+	}
+	
+	aside {
+		max-height: 80vh;
+	}
+
+    aside#jr-links-p:after { /*aside*/
+        left:10pt
+    }
+
+    aside#jr-alt-p:after { /*aside*/
+        left:46pt
+    }
+
+    aside#jr-cmap-p:after,
+    aside#jr-rtoc-p:after  { /*aside*/
+        right:10pt
+    }
+
+    aside#jr-help-p:after { /*aside*/
+        right:82pt
+    }
+    
+    aside#jr-bkhelp-p:after {
+    	right: 120pt;
+	}
+
+
+	.bcol-auto, .bcol-1, .bcol-2 {
+  		display: none !important;
+	}
+
+	#jr-content {
+		overflow: visible !important;
+        top: 42pt;
+        bottom: 42pt;
+        border: 12pt solid transparent;
+        border-top: none;
+        border-bottom: none;
+    }
+
+	html.jr article[data-type=main],
+	html.jr article[data-type=table],
+	html.jr article[data-type=fig] {
+		height: auto !important;
+		-webkit-column-width: auto !important;
+		-moz-column-width: auto !important;
+		column-width: auto !important;
+	}
+
+	.jr-col-2 article {
+	    -webkit-column-count:auto;
+	    -moz-column-count:auto;
+	    column-count:auto;
+	}
+
+
+	#jr-objectbox {
+		position: fixed;
+		bottom: 8pt;
+	}
+
+    #jr-objectbox.note h1, 
+    #jr-objectbox.note h2 {
+        font-size:14pt;
+        line-height:24pt;
+    }
+
+
+    article[data-type=helper] header {
+        font-size:16pt;
+        line-height:32pt;
+    }
+
+    article[data-type=helper] table, 
+    article[data-type=helper] table tbody,
+    article[data-type=helper] table tr,
+    article[data-type=helper] table td,
+    article[data-type=helper] table td:first-child {
+        display:inline-block;
+        width:auto
+    }
+
+    .small-screen-prev,
+    .small-screen-next{
+    	display:inline-block;
+    	height: 36pt;
+    	width: 36pt;
+    }
+
+    .small-screen-prev {
+    	float: left;
+    }
+    .small-screen-next {
+    	float: right;
+    }
+}

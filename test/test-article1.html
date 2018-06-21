@@ -10,27 +10,30 @@
       <meta name="apple-mobile-web-app-capable" content="no" />
       <meta name="viewport" content="initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
       <link href="http://fonts.googleapis.com/css?family=Archivo+Narrow:400,700,400italic,700italic&amp;subset=latin" rel="stylesheet" type="text/css" />
-      <link rel="stylesheet" href="../lib/css/normalize.css" type="text/css" />
-      <link rel="stylesheet" href="../lib/css/figpopup.css" type="text/css" />
-      <link rel="stylesheet" href="../css/jr.ui.css" type="text/css" />
-      <link rel="stylesheet" href="../css/jr.pagemanager.css" type="text/css" />
-      <link rel="stylesheet" href="../css/jr.pageturnsensor.css" type="text/css" />
-      <link rel="stylesheet" href="../css/jr.pageprogressbar.css" type="text/css" />
-      <link rel="stylesheet" href="../css/jr.objectbox.css" type="text/css" />
-      <link rel="stylesheet" href="../css/jr.panel.css" type="text/css" />
-      <link rel="stylesheet" href="../css/jr.panel.typo.css" type="text/css" />
-      <link rel="stylesheet" href="../css/jr.panel.cmap.css" type="text/css" />
-      <link rel="stylesheet" href="../css/jr.panel.istrip.css" type="text/css" />
-      <link rel="stylesheet" href="../css/jr.fip.css" type="text/css" />
-      <link rel="stylesheet" href="../css/jr.content.css" type="text/css" />
+      <link rel="stylesheet" href="../lib/css/normalize.css" />
+      <link rel="stylesheet" href="../lib/css/figpopup.css" />
+      <link rel="stylesheet" href="../css/jr.ui.css" />
+      <link rel="stylesheet" href="../css/jr.pagemanager.css" />
+      <link rel="stylesheet" href="../css/jr.pageturnsensor.css" />
+      <link rel="stylesheet" href="../css/jr.pageprogressbar.css" />
+      <link rel="stylesheet" href="../css/jr.objectbox.css" />
+      <link rel="stylesheet" href="../css/jr.panel.css" />
+      <link rel="stylesheet" href="../css/jr.panel.typo.css" />
+      <link rel="stylesheet" href="../css/jr.panel.cmap.css" />
+      <link rel="stylesheet" href="../css/jr.panel.istrip.css" />
+      <link rel="stylesheet" href="../css/jr.fip.css" />
+      <link rel="stylesheet" href="../css/jr.small.screen.css" />
+      <link rel="stylesheet" href="../css/jr.content.css" />
+      <link rel="stylesheet" href="../lib/css/citationexporter.css" />
    </head>
    <body>
       <div id="jr" data-jr-path="../">
          <div class="jr-unsupported">
             <table class="modal">
                <tr>
-                  <td><br />Your browser does not support the NLM PubReader view.<br />Go to <a href="http://www.ncbi.nlm.nih.gov/pmc/about/pr-browsers/">this page</a> to see
-                     a list of supporting browsers.
+                  <td><span class="attn inline-block"></span><br />Your browser does not support the NLM
+                     PubReader view.<br />Go to <a href="https://www.ncbi.nlm.nih.gov/pmc/about/pr-browsers/">this page</a> to see a
+                     list of supporting browsers.
                   </td>
                </tr>
             </table>
@@ -38,163 +41,144 @@
          <div id="jr-ui" class="hidden">
             <nav id="jr-head">
                <div class="flexh tb">
-                  <div id="jr-tb1"><a id="jr-pmc-sw" href="http://www.ncbi.nlm.nih.gov/pmc/" class="btn link wsprkl" title="PMC Home Page"><img src="../img/pmc.logo.svg" alt="pmc logo" /></a><a id="jr-links-sw" class="btn wsprkl hidden " title="Links">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 100 100" preserveaspectratio="none">
-                           <path fill="#999" d="M30,20l-20,0l0,60l80,0l0,-30l-5,5l0,20l-70,0l0,-50l10,0zM90,40l-30,-25l0,10c0,10 -70,5 -20,40c20,0 -40,-15, 20,-20 l0,10z"></path>
-                        </svg></a><a id="jr-alt-sw" class="btn wsprkl hidden" title="Alternative formats of the Article">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="250 150 300 300" preserveAspectRatio="none">
-                           <g transform="scale(0.80) skewY(25) skewX(-5) translate(240,-205)">
-                              <path style="fill:none" stroke-width="20" d="M417,334c0,17-10,31-22,31h-90c-12,0-22-14-22-31V209c0-17,10-31,22-31h90c12,0,22,14,22,31V334z"></path>
-                              <g stroke-width="7">
-                                 <line x1="302" y1="224" x2="396" y2="224"></line>
-                                 <line x1="302" y1="248" x2="396" y2="248"></line>
-                                 <line x1="302" y1="272" x2="396" y2="272"></line>
-                              </g>
-                           </g>
-                           <g transform="scale(0.80) skewY(-25) skewX(5) translate(20,260)">
-                              <path style="fill:none" stroke-width="20" d="M417,334c0,17-10,31-22,31h-90c-12,0-22-14-22-31V209c0-17,10-31,22-31h90c12,0,22,14,22,31V334z"></path>
-                              <g stroke-width="7">
-                                 <line x1="302" y1="224" x2="396" y2="224"></line>
-                                 <line x1="302" y1="248" x2="396" y2="248"></line>
-                                 <line x1="302" y1="272" x2="396" y2="272"></line>
-                                 <line x1="302" y1="296" x2="396" y2="296"></line>
-                                 <line x1="302" y1="319" x2="396" y2="319"></line>
-                              </g>
-                           </g>
-                           <g transform="translate(50,40)">
-                              <path style="fill:#FFF;" stroke-width="20" d="M417,334c0,17-10,31-22,31h-90c-12,0-22-14-22-31V209c0-17,10-31,22-31h90c12,0,22,14,22,31V334z"></path>
-                              <g transform="translate(302,205) scale(0.27) ">
-                                 <path style="fill:#F00" stroke="#F00" fill="#F91D0A" d="M115,262c11-21,23-46,34-71l0,0l4-9C140,130,132,90,139,64l0,0c1-6,9-10,18-10l0,0l5,0h0c11-0,17,14,17,20l0,0c1,9-3,25-3,25l0,0c0-6,0-17-3-26l0,0c-4-10-9-16-13-17l0,0c-2,1-4,4-4,9l0,0c-1,7-1,17-1,22l0,0c0,17,3,41,10,65l0,0c1-3,2-7,3-10l0,0c1-5,10-40,10-40l0,0c0,0-2,46-5,61l0,0c-0,3-1,5-2,9l0,0c11,31,29,60,51,80l0,0c8,8,19,14,29,20l0,0c22-3,43-4,60-4l0,0c22,0,39,3,46,10l0,0c3,3,4,7,5,11l0,0c0,1-0,5-0,6l0,0c0-1,0-7-18-13l0,0c-14-4-41-4-74-1l0,0c37,18,74,27,85,22l0,0c2-1,6-6,6-6l0,0c0,0-2,9-3,11l0,0c-1,2-5,5-9,6l0,0c-18,4-66-6-107-30l0,0c-46,6-97,19-138,32l0,0C64,389,34,422,9,409l0,0l-9-4c-3-2-4-7-3-11l0,0c2-14,20-35,55-56l0,0c3-2,20-11,20-11l0,0c0,0-12,12-15,14l0,0c-28,23-49,52-48,63l0,0l0,0C33,401,69,353,115,262 M130,270c-7,14-15,27-22,40l0,0c38-16,79-26,119-33l0,0c-5-3-10-7-15-11l0,0c-21-18-38-41-50-65l0,0C154,220,145,242,130,270"></path>
-                              </g>
-                           </g>
-                        </svg></a></div>
+                  <div id="jr-tb1"><a id="jr-links-sw" class="btn wsprkl hidden" title="Links"><img src="../img/pmc.logo.svg" alt="pmc logo" class="svg" /></a><a id="jr-alt-sw" class="btn wsprkl hidden" title="Alternative formats of the Article">Alt</a><a id="jr-pdf-sw" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC13901/pdf/BCR-3-1-061.pdf" class="btn wsprkl">PDF</a></div>
                   <div class="jr-rhead f1">
-                     <div class="t">Correlation analysis of the side-chains conformational distribution in bound and unbound
-                        proteins
+                     <div class="t">BRCA1 and BRCA2 protein expressions in an ovotestis of a 46, XX true hermaphrodite</div>
+                     <div class="j">
+                        Breast Cancer Res. 2001; 3(1): 61–65.
+                        
                      </div>
-                     <div class="j">BMC Bioinformatics. 2012; 13: 236. </div>
                   </div>
-                  <div id="jr-tb2"><a id="jr-help-sw" class="btn wsprkl hidden" title="Settings, typography and Help with NLM PubReader">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 512 512" preserveaspectratio="none">
-                           <path d="M462,283.742v-55.485l-29.981-10.662c-11.431-4.065-20.628-12.794-25.274-24.001 c-0.002-0.004-0.004-0.009-0.006-0.013c-4.659-11.235-4.333-23.918,0.889-34.903l13.653-28.724l-39.234-39.234l-28.72,13.652 c-10.979,5.219-23.68,5.546-34.908,0.889c-0.005-0.002-0.01-0.003-0.014-0.005c-11.215-4.65-19.933-13.834-24-25.273L283.741,50 h-55.484l-10.662,29.981c-4.065,11.431-12.794,20.627-24.001,25.274c-0.005,0.002-0.009,0.004-0.014,0.005 c-11.235,4.66-23.919,4.333-34.905-0.889l-28.723-13.653l-39.234,39.234l13.653,28.721c5.219,10.979,5.545,23.681,0.889,34.91 c-0.002,0.004-0.004,0.009-0.006,0.013c-4.649,11.214-13.834,19.931-25.271,23.998L50,228.257v55.485l29.98,10.661 c11.431,4.065,20.627,12.794,25.274,24c0.002,0.005,0.003,0.01,0.005,0.014c4.66,11.236,4.334,23.921-0.888,34.906l-13.654,28.723 l39.234,39.234l28.721-13.652c10.979-5.219,23.681-5.546,34.909-0.889c0.005,0.002,0.01,0.004,0.014,0.006 c11.214,4.649,19.93,13.833,23.998,25.271L228.257,462h55.484l10.595-29.79c4.103-11.538,12.908-20.824,24.216-25.525 c0.005-0.002,0.009-0.004,0.014-0.006c11.127-4.628,23.694-4.311,34.578,0.863l28.902,13.738l39.234-39.234l-13.66-28.737 c-5.214-10.969-5.539-23.659-0.886-34.877c0.002-0.005,0.004-0.009,0.006-0.014c4.654-11.225,13.848-19.949,25.297-24.021 L462,283.742z M256,331.546c-41.724,0-75.548-33.823-75.548-75.546s33.824-75.547,75.548-75.547 c41.723,0,75.546,33.824,75.546,75.547S297.723,331.546,256,331.546z"></path>
-                        </svg></a><a id="jr-fip-sw" class="btn wsprkl " title="Find">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 550 600" preserveaspectratio="none">
-                           <path fill="none" stroke="#000" stroke-width="36" stroke-linecap="round" style="fill:#FFF" d="m320,350a153,153 0 1,0-2,2l170,170m-91-117 110,110-26,26-110-110"></path>
-                        </svg></a><a id="jr-cmap-sw" class="btn wsprkl hidden" title="Article Navigation">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 100 100" preserveaspectratio="none">
-                           <path d="M20,20h10v8H20V20zM36,20h44v8H36V20zM20,37.33h10v8H20V37.33zM36,37.33h44v8H36V37.33zM20,54.66h10v8H20V54.66zM36,54.66h44v8H36V54.66zM20,72h10v8 H20V72zM36,72h44v8H36V72z"></path>
-                        </svg></a></div>
+                  <div id="jr-tb2"><a id="jr-help-sw" class="btn wsprkl hidden" title="Settings, typography and Help with NLM PubReader"><img src="../img/pmc.gear.svg" alt="settings &amp; help" class="svg" /></a><a id="jr-fip-sw" class="btn wsprkl hidden" title="Find"><img src="../img/pmc.mg.svg" alt="Search on this page" class="svg" /></a><a id="jr-cmap-sw" class="btn wsprkl hidden" title="Article Navigation"><img src="../img/pmc.cmap.svg" alt="Table of Content" class="svg" /></a></div>
                </div>
             </nav>
             <nav id="jr-dash" class="noselect">
                <div id="jr-pi" class="hidden"><a id="jr-pi-prev" class="hidden" title="Previous page">
-                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+                     <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 100 100" preserveaspectratio="none">
                         <path d="M75,30 c-80,60 -80,0 0,60 c-30,-60 -30,0 0,-60"></path>
-                        <text x="20" y="28" textLength="60" style="font-size:25px">Prev</text>
-                     </svg></a><div class="pginfo"> Page <i class="jr-pg-pn">0</i> of <i class="jr-pg-lp">0</i></div><a id="jr-pi-next" class="hidden" title="Next page">
-                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+                        <text x="20" y="28" textlength="60" style="font-size:25px">Prev</text>
+                     </svg></a><div class="pginfo">Page <i class="jr-pg-pn">0</i> of <i class="jr-pg-lp">0</i></div><a id="jr-pi-next" class="hidden" title="Next page">
+                     <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 100 100" preserveaspectratio="none">
                         <path d="M25,30c80,60 80,0 0,60 c30,-60 30,0 0,-60"></path>
-                        <text x="20" y="28" textLength="60" style="font-size:25px">Next</text>
+                        <text x="20" y="28" textlength="60" style="font-size:25px">Next</text>
                      </svg></a></div>
                <div id="jr-is-tb"><a id="jr-is-sw" class="btn wsprkl hidden" title="Switch between Figures/Tables strip and Progress bar">
-                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+                     <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 100 100" preserveaspectratio="none">
                         <rect x="10" y="40" width="20" height="20"></rect>
                         <rect x="40" y="40" width="20" height="20"></rect>
                         <rect x="70" y="40" width="20" height="20"></rect>
                      </svg></a></div>
                <nav id="jr-istrip" class="istrip hidden"><a id="jr-is-prev" href="#" class="hidden" title="Previous">
-                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+                     <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 100 100" preserveaspectratio="none">
                         <path d="M80,40 60,65 80,90 70,90 50,65 70,40z M50,40 30,65 50,90 40,90 20,65 40,40z"></path>
-                        <text x="35" y="25" textLength="60" style="font-size:25px">Prev</text>
+                        <text x="35" y="25" textlength="60" style="font-size:25px">Prev</text>
                      </svg></a><a id="jr-is-next" href="#" class="hidden" title="Next">
-                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+                     <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 100 100" preserveaspectratio="none">
                         <path d="M20,40 40,65 20,90 30,90 50,65 30,40z M50,40 70,65 50,90 60,90 80,65 60,40z"></path>
-                        <text x="15" y="25" textLength="60" style="font-size:25px">Next</text>
+                        <text x="15" y="25" textlength="60" style="font-size:25px">Next</text>
                      </svg></a></nav>
                <nav id="jr-progress"></nav>
             </nav>
             <aside id="jr-links-p" class="hidden flexv">
                <div class="tb sk-htbar flexh">
                   <div><a class="jr-p-close btn wsprkl">Done</a></div>
-                  <div class="title-text f1"> Links </div>
+                  <div class="title-text f1">Links</div>
                </div>
                <div class="cnt lol f1">
                   <a xmlns:t="http://www.ncbi.nlm.nih.gov/ns/test" href="http://www.ncbi.nlm.nih.gov/pmc/journals/" class="navlink">Journal List</a>
                   <a xmlns:t="http://www.ncbi.nlm.nih.gov/ns/test" class="navlink" href="http://www.ncbi.nlm.nih.gov/pmc/journals/13/">BMC Bioinformatics</a>
                   <a xmlns:t="http://www.ncbi.nlm.nih.gov/ns/test" class="navlink" href="http://www.ncbi.nlm.nih.gov/pmc/issues/204821/">v.13; 2012</a>
-                  
-               </div>
+                  <a class="btn share" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.ncbi.nlm.nih.gov%2Fpmc%2Farticles%2FPMC13901%2F"><img src="../img/pmc.fb.svg" alt="Facebook's f logo" class="svg" /> Share on Facebook
+                     </a><a class="btn share" target="_blank" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fwww.ncbi.nlm.nih.gov%2Fpmc%2FFarticles%2FPMC13901%2F&amp;text=BRCA1%20and%20BRCA2%20protein%20expressions%20in%20an%20ovotestis%20of%20a%2046%2C%20XX%20true%20hermaphrodite"><img src="../img/pmc.twitter.svg" alt="Twitter t logo" class="svg" /> Share on Twitter
+                     </a><a class="btn share" target="_blank" href="https://plus.google.com/share?url=https%3A%2F%2Fwww.ncbi.nlm.nih.gov%2Fpmc%2Farticles%2FPMC13901%2F"><img src="../img/pmc.gplus.svg" alt="Google Plus logo" class="svg" /> Share on Google+
+                     </a></div>
             </aside>
             <aside id="jr-alt-p" class="hidden flexv">
                <div class="tb sk-htbar flexh">
                   <div><a class="jr-p-close btn wsprkl">Done</a></div>
-                  <div class="title-text f1"> Alternative formats </div>
+                  <div class="title-text f1">Alternative formats</div>
                </div>
                <div class="cnt lol f1">
                   <a xmlns:t="http://www.ncbi.nlm.nih.gov/ns/test" href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3479416/" class="">Article</a>
                   <a xmlns:t="http://www.ncbi.nlm.nih.gov/ns/test" href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3479416/epub/" class="">ePub (beta)</a>
                   <a xmlns:t="http://www.ncbi.nlm.nih.gov/ns/test" href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3479416/pdf/1471-2105-13-236.pdf" class="">PDF (707K)</a>
-                  
-               </div>
+                  <a class="citationexporter ctxp" href="#" data-citationid="PMC13901">Citation</a></div>
             </aside>
             <aside id="jr-cmap-p" class="hidden flexv">
                <div class="tb sk-htbar flexh">
                   <div><a class="jr-p-close btn wsprkl">Done</a></div>
-                  <div class="title-text f1">Article navigation </div>
+                  <div class="title-text f1">Article navigation</div>
                </div>
                <div class="cnt lol f1"></div>
             </aside>
             <aside id="jr-help-p" class="hidden flexv">
                <div class="tb sk-htbar flexh">
                   <div><a class="jr-p-close btn wsprkl">Done</a></div>
-                  <div class="title-text f1"> Settings &amp; Help </div>
+                  <div class="title-text f1">Settings &amp; Help</div>
                </div>
                <div class="cnt f1">
                   <div id="jr-typo-p" class="typo">
                      <div><a class="sf btn wsprkl">A-</a><a class="lf btn wsprkl">A+</a></div>
                      <div><a class="bcol-auto btn wsprkl">
-                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100" preserveAspectRatio="none">
-                              <text x="10" y="70" style="font-size:60px;font-family: Trebuchet MS, ArialMT, Arial, sans-serif" textLength="180">AUTO</text>
+                           <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 200 100" preserveaspectratio="none">
+                              <text x="10" y="70" style="font-size:60px;font-family: Trebuchet MS, ArialMT, Arial, sans-serif" textlength="180">AUTO</text>
                            </svg></a><a class="bcol-1 btn wsprkl">
-                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+                           <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 100 100" preserveaspectratio="none">
                               <path d="M15,25 85,25zM15,40 85,40zM15,55 85,55zM15,70 85,70z"></path>
                            </svg></a><a class="bcol-2 btn wsprkl">
-                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+                           <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 100 100" preserveaspectratio="none">
                               <path d="M5,25 45,25z M55,25 95,25zM5,40 45,40z M55,40 95,40zM5,55 45,55z M55,55 95,55zM5,70 45,70z M55,70 95,70z"></path>
                            </svg></a></div>
                   </div>
-                  <div class="lol"><a id="jr-helpobj-sw" data-path="../" data-href="../img/help.xml" href="">Help with
-                        PubReader</a><a href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC14900/?report=classic" class="">Switch to
-                        classic view</a><a href="mailto:pubmedcentral@ncbi.nlm.nih.gov?subject=PubReader%20feedback">Feedback /
-                        suggestions</a><a id="jr-about-sw" data-path="../" data-href="../img/about.xml" href="">About PubReader</a></div>
+                  <div class="lol"><a id="jr-helpobj-sw" data-path="../" data-href="../img/help.xml" href="">Help with PubReader</a><a href="mailto:your_name@your_domain?subject=PubReader%20feedback%20/%20PMC13901%20/%20sid:5D1947B4B2C0C061_0014SID%20/%20phid:5D1947B4B2B2250100000000000E000C.2">Feedback / suggestions</a><a id="jr-about-sw" data-path="../" data-href="../img/about.xml" href="">About PubReader</a></div>
                </div>
             </aside>
             <aside id="jr-objectbox" class="thidden hidden">
-               <div class="jr-objectbox-close wsprkl"> ✘ </div>
+               <div class="jr-objectbox-close wsprkl">✘</div>
                <div class="jr-objectbox-inner cnt">
                   <div class="jr-objectbox-drawer"></div>
                </div>
             </aside>
             <nav id="jr-pm-left" class="hidden">
-               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 1000" preserveAspectRatio="none">
-                  <text x="850" y="-20" transform="rotate(90)" textLength="150" font-size="23">Previous Page</text>
+               <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 100 1000" preserveaspectratio="none">
+                  <text x="850" y="-20" transform="rotate(90)" textlength="150" font-size="23">Previous Page</text>
                </svg>
             </nav>
             <nav id="jr-pm-right" class="hidden">
-               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 1000" preserveAspectRatio="none">
-                  <text x="850" y="-70" transform="rotate(90)" textLength="150" font-size="23">Next
-                     Page
-                  </text>
+               <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 100 1000" preserveaspectratio="none">
+                  <text x="850" y="-70" transform="rotate(90)" textlength="150" font-size="23">Next Page</text>
                </svg>
             </nav>
             <nav id="jr-fip" class="hidden">
-               <nav id="jr-fip-term-p"><input type="search" placeholder="search within article" id="jr-fip-term" autocorrect="off" autocomplete="off" /><button id="jr-fip-mg" class="wsprkl" title="Find">
-                     <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 550 600" preserveaspectratio="none">
-                        <path fill="none" stroke="#000" stroke-width="36" stroke-linecap="round" style="fill:#FFF" d="m320,350a153,153 0 1,0-2,2l170,170m-91-117 110,110-26,26-110-110"></path>
-                     </svg></button><button id="jr-fip-done" class="wsprkl" title="Dismiss find">✘</button></nav>
-               <nav id="jr-fip-info-p"><button id="jr-fip-prev" class="wsprkl" title="Jump to previuos match">◄</button><span id="jr-fip-matches">no matches
-                     yet</span><button id="jr-fip-next" class="wsprkl" title="Jump to next match">►</button></nav>
+               <nav id="jr-fip-term-p"><input type="search" placeholder="search this page" id="jr-fip-term" autocorrect="off" autocomplete="off" /><a id="jr-fip-mg" class="wsprkl btn" title="Find"><img src="../img/pmc.mg.svg" alt="Find" class="svg" /></a><a id="jr-fip-done" class="wsprkl btn" title="Dismiss find">✘</a></nav>
+               <nav id="jr-fip-info-p"><a id="jr-fip-prev" class="wsprkl btn" title="Jump to previuos match">◀</a><button id="jr-fip-matches">no matches yet</button><a id="jr-fip-next" class="wsprkl btn" title="Jump to next match">▶</a></nav>
             </nav>
+         </div>
+         <div id="jr-epub-interstitial" class="hidden">
+            <h2 role="dialog">Making articles easier to read in PMC</h2>
+            <div class="contentpane">
+               <p> We are experimenting with display styles that make it easier to read articles in
+                  PMC. The ePub format uses eBook readers, which have several "ease of reading" features
+                  already built in. 
+               </p>
+               <p> The ePub format is best viewed in the iBooks reader. You may notice problems with
+                  the display of certain parts of an article in other eReaders. 
+               </p>
+               <p> Generating an ePub file may take a long time, please be patient. </p>
+            </div>
+            <div class="buttonpane lol"><a id="cancelEpub" style="float: right">Cancel</a><a id="downloadEpub" style="float: left">Download article</a></div>
+         </div><a id="jr-welcome-trigger" class="hidden">t</a><div id="jr-welcome" class="hidden">
+            <h2 role="dialog">Welcome to PubReader!</h2>
+            <div class="contentpane">
+               <p> Click on <a class="btn"><img src="../img/pmc.gear.svg" alt="settings &amp; help" class="svg" /></a> above to: 
+                  
+               </p>
+               <ul>
+                  <li>Get help with PubReader, or </li>
+                  <li>Switch to the classic article view.</li>
+               </ul>
+            </div>
+            <div class="buttonpane lol"><a id="okayWelcome" class="btn centerbutton">Okay</a></div>
          </div>
          <div id="jr-content">
             
@@ -434,10 +418,10 @@
                   <!--table-wrap mode=article t1-->
                   
                   <div class="table-wrap iconblock ten_col whole_rhythm clearfix" id="T1">
-                     <a href="/pmc/articles/PMC3479416/table/T1/" onclick="return startTarget(this, 'table',1024,800)" target="table" rid-ob="ob-T1" rid-figpopup="T1" class="table img_link icnblk_img figpopup"><img border="0" alt="Table 1" title="Table 1" class="small-thumb" src="assets/T1.thumb.png" src-large="assets/T1.previmg.png" /></a><div class="icnblk_cntnt">
+                     <a href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3479416/table/T1/" onclick="return startTarget(this, 'table',1024,800)" target="table" rid-ob="ob-T1" rid-figpopup="T1" class="table img_link icnblk_img figpopup"><img border="0" alt="Table 1" title="Table 1" class="small-thumb" src="assets/T1.thumb.png" src-large="assets/T1.previmg.png" /></a><div class="icnblk_cntnt">
                         
                         <div>
-                           <a class="figpopup" href="/pmc/articles/PMC3479416/table/T1/" target="table" rid-figpopup="T1" rid-ob="ob-T1" onclick="return startTarget(this, 'table',1024,800)">Table 1</a>
+                           <a class="figpopup" href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3479416/table/T1/" target="table" rid-figpopup="T1" rid-ob="ob-T1" onclick="return startTarget(this, 'table',1024,800)">Table 1</a>
                            
                         </div>
                         
@@ -475,12 +459,12 @@
                   <!--fig mode=article f1-->
                   
                   <div class="fig iconblock ten_col whole_rhythm clearfix" id="F1" co-legend-rid="lgnd_F1">
-                     <a class="icnblk_img figpopup" href="/pmc/articles/PMC3479416/figure/F1/" target="figure" rid-figpopup="F1" rid-ob="ob-F1" onclick="return startTarget(this, 'figure',1024,800)"><img src="assets/1471-2105-13-236-1.gif" class="small-thumb" alt="Figure 1 " title="Figure 1 " src-large="assets/1471-2105-13-236-1.jpg" /></a>
+                     <a class="icnblk_img figpopup" href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3479416/figure/F1/" target="figure" rid-figpopup="F1" rid-ob="ob-F1" onclick="return startTarget(this, 'figure',1024,800)"><img src="assets/1471-2105-13-236-1.gif" class="small-thumb" alt="Figure 1 " title="Figure 1 " src-large="assets/1471-2105-13-236-1.jpg" /></a>
                      
                      <div class="icnblk_cntnt" id="lgnd_F1">
                         
                         <div>
-                           <a class="figpopup" href="/pmc/articles/PMC3479416/figure/F1/" target="figure" rid-figpopup="F1" rid-ob="ob-F1" onclick="return startTarget(this, 'figure',1024,800)">Figure 1 </a>
+                           <a class="figpopup" href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3479416/figure/F1/" target="figure" rid-figpopup="F1" rid-ob="ob-F1" onclick="return startTarget(this, 'figure',1024,800)">Figure 1 </a>
                            
                         </div>
                         
@@ -786,10 +770,10 @@
                   
                   <!--fig ft0-->
                   <!--fig mode=article f1-->
-                  <div class="fig iconblock ten_col whole_rhythm clearfix" id="F2" co-legend-rid="lgnd_F2"><a class="icnblk_img figpopup" href="/pmc/articles/PMC3479416/figure/F2/" target="figure" rid-figpopup="F2" rid-ob="ob-F2" onclick="return startTarget(this, 'figure',1024,800)"><img src="assets/1471-2105-13-236-2.gif" class="small-thumb" alt="Figure 2 " title="Figure 2 " src-large="assets/1471-2105-13-236-2.jpg" /></a><div class="icnblk_cntnt" id="lgnd_F2">
+                  <div class="fig iconblock ten_col whole_rhythm clearfix" id="F2" co-legend-rid="lgnd_F2"><a class="icnblk_img figpopup" href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3479416/figure/F2/" target="figure" rid-figpopup="F2" rid-ob="ob-F2" onclick="return startTarget(this, 'figure',1024,800)"><img src="assets/1471-2105-13-236-2.gif" class="small-thumb" alt="Figure 2 " title="Figure 2 " src-large="assets/1471-2105-13-236-2.jpg" /></a><div class="icnblk_cntnt" id="lgnd_F2">
                         
                         <div>
-                           <a class="figpopup" href="/pmc/articles/PMC3479416/figure/F2/" target="figure" rid-figpopup="F2" rid-ob="ob-F2" onclick="return startTarget(this, 'figure',1024,800)">Figure 2 </a>
+                           <a class="figpopup" href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3479416/figure/F2/" target="figure" rid-figpopup="F2" rid-ob="ob-F2" onclick="return startTarget(this, 'figure',1024,800)">Figure 2 </a>
                            
                         </div>
                         
@@ -825,10 +809,10 @@
                   
                   <!--fig ft0-->
                   <!--fig mode=article f1-->
-                  <div class="fig iconblock ten_col whole_rhythm clearfix" id="F3" co-legend-rid="lgnd_F3"><a class="icnblk_img figpopup" href="/pmc/articles/PMC3479416/figure/F3/" target="figure" rid-figpopup="F3" rid-ob="ob-F3" onclick="return startTarget(this, 'figure',1024,800)"><img src="assets/1471-2105-13-236-3.gif" class="small-thumb" alt="Figure 3 " title="Figure 3 " src-large="assets/1471-2105-13-236-3.jpg" /></a><div class="icnblk_cntnt" id="lgnd_F3">
+                  <div class="fig iconblock ten_col whole_rhythm clearfix" id="F3" co-legend-rid="lgnd_F3"><a class="icnblk_img figpopup" href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3479416/figure/F3/" target="figure" rid-figpopup="F3" rid-ob="ob-F3" onclick="return startTarget(this, 'figure',1024,800)"><img src="assets/1471-2105-13-236-3.gif" class="small-thumb" alt="Figure 3 " title="Figure 3 " src-large="assets/1471-2105-13-236-3.jpg" /></a><div class="icnblk_cntnt" id="lgnd_F3">
                         
                         <div>
-                           <a class="figpopup" href="/pmc/articles/PMC3479416/figure/F3/" target="figure" rid-figpopup="F3" rid-ob="ob-F3" onclick="return startTarget(this, 'figure',1024,800)">Figure 3 </a>
+                           <a class="figpopup" href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3479416/figure/F3/" target="figure" rid-figpopup="F3" rid-ob="ob-F3" onclick="return startTarget(this, 'figure',1024,800)">Figure 3 </a>
                            
                         </div>
                         
@@ -850,10 +834,10 @@
                   
                   <!--table ft1-->
                   <!--table-wrap mode=article t1-->
-                  <div class="table-wrap iconblock ten_col whole_rhythm clearfix" id="T2"><a href="/pmc/articles/PMC3479416/table/T2/" onclick="return startTarget(this, 'table',1024,800)" target="table" rid-ob="ob-T2" rid-figpopup="T2" class="table img_link icnblk_img figpopup"><img border="0" alt="Table 2" title="Table 2" class="small-thumb" src="assets/T2.thumb.png" src-large="assets/T2.previmg.png" /></a><div class="icnblk_cntnt">
+                  <div class="table-wrap iconblock ten_col whole_rhythm clearfix" id="T2"><a href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3479416/table/T2/" onclick="return startTarget(this, 'table',1024,800)" target="table" rid-ob="ob-T2" rid-figpopup="T2" class="table img_link icnblk_img figpopup"><img border="0" alt="Table 2" title="Table 2" class="small-thumb" src="assets/T2.thumb.png" src-large="assets/T2.previmg.png" /></a><div class="icnblk_cntnt">
                         
                         <div>
-                           <a class="figpopup" href="/pmc/articles/PMC3479416/table/T2/" target="table" rid-figpopup="T2" rid-ob="ob-T2" onclick="return startTarget(this, 'table',1024,800)">Table 2</a>
+                           <a class="figpopup" href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3479416/table/T2/" target="table" rid-figpopup="T2" rid-ob="ob-T2" onclick="return startTarget(this, 'table',1024,800)">Table 2</a>
                            
                         </div>
                         
@@ -884,10 +868,10 @@
                   
                   <!--table ft1-->
                   <!--table-wrap mode=article t1-->
-                  <div class="table-wrap iconblock ten_col whole_rhythm clearfix" id="T3"><a href="/pmc/articles/PMC3479416/table/T3/" onclick="return startTarget(this, 'table',1024,800)" target="table" rid-ob="ob-T3" rid-figpopup="T3" class="table img_link icnblk_img figpopup"><img border="0" alt="Table 3" title="Table 3" class="small-thumb" src="assets/T3.thumb.png" src-large="assets/T3.previmg.png" /></a><div class="icnblk_cntnt">
+                  <div class="table-wrap iconblock ten_col whole_rhythm clearfix" id="T3"><a href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3479416/table/T3/" onclick="return startTarget(this, 'table',1024,800)" target="table" rid-ob="ob-T3" rid-figpopup="T3" class="table img_link icnblk_img figpopup"><img border="0" alt="Table 3" title="Table 3" class="small-thumb" src="assets/T3.thumb.png" src-large="assets/T3.previmg.png" /></a><div class="icnblk_cntnt">
                         
                         <div>
-                           <a class="figpopup" href="/pmc/articles/PMC3479416/table/T3/" target="table" rid-figpopup="T3" rid-ob="ob-T3" onclick="return startTarget(this, 'table',1024,800)">Table 3</a>
+                           <a class="figpopup" href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3479416/table/T3/" target="table" rid-figpopup="T3" rid-ob="ob-T3" onclick="return startTarget(this, 'table',1024,800)">Table 3</a>
                            
                         </div>
                         
@@ -928,10 +912,10 @@
                   
                   <!--fig ft0-->
                   <!--fig mode=article f1-->
-                  <div class="fig iconblock ten_col whole_rhythm clearfix" id="F4" co-legend-rid="lgnd_F4"><a class="icnblk_img figpopup" href="/pmc/articles/PMC3479416/figure/F4/" target="figure" rid-figpopup="F4" rid-ob="ob-F4" onclick="return startTarget(this, 'figure',1024,800)"><img src="assets/1471-2105-13-236-4.gif" class="small-thumb" alt="Figure 4" title="Figure 4" src-large="assets/1471-2105-13-236-4.jpg" /></a><div class="icnblk_cntnt" id="lgnd_F4">
+                  <div class="fig iconblock ten_col whole_rhythm clearfix" id="F4" co-legend-rid="lgnd_F4"><a class="icnblk_img figpopup" href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3479416/figure/F4/" target="figure" rid-figpopup="F4" rid-ob="ob-F4" onclick="return startTarget(this, 'figure',1024,800)"><img src="assets/1471-2105-13-236-4.gif" class="small-thumb" alt="Figure 4" title="Figure 4" src-large="assets/1471-2105-13-236-4.jpg" /></a><div class="icnblk_cntnt" id="lgnd_F4">
                         
                         <div>
-                           <a class="figpopup" href="/pmc/articles/PMC3479416/figure/F4/" target="figure" rid-figpopup="F4" rid-ob="ob-F4" onclick="return startTarget(this, 'figure',1024,800)">Figure 4</a>
+                           <a class="figpopup" href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3479416/figure/F4/" target="figure" rid-figpopup="F4" rid-ob="ob-F4" onclick="return startTarget(this, 'figure',1024,800)">Figure 4</a>
                            
                         </div>
                         
@@ -951,10 +935,10 @@
                   
                   <!--fig ft0-->
                   <!--fig mode=article f1-->
-                  <div class="fig iconblock ten_col whole_rhythm clearfix" id="F5" co-legend-rid="lgnd_F5"><a class="icnblk_img figpopup" href="/pmc/articles/PMC3479416/figure/F5/" target="figure" rid-figpopup="F5" rid-ob="ob-F5" onclick="return startTarget(this, 'figure',1024,800)"><img src="assets/1471-2105-13-236-5.gif" class="small-thumb" alt="Figure 5 " title="Figure 5 " src-large="assets/1471-2105-13-236-5.jpg" /></a><div class="icnblk_cntnt" id="lgnd_F5">
+                  <div class="fig iconblock ten_col whole_rhythm clearfix" id="F5" co-legend-rid="lgnd_F5"><a class="icnblk_img figpopup" href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3479416/figure/F5/" target="figure" rid-figpopup="F5" rid-ob="ob-F5" onclick="return startTarget(this, 'figure',1024,800)"><img src="assets/1471-2105-13-236-5.gif" class="small-thumb" alt="Figure 5 " title="Figure 5 " src-large="assets/1471-2105-13-236-5.jpg" /></a><div class="icnblk_cntnt" id="lgnd_F5">
                         
                         <div>
-                           <a class="figpopup" href="/pmc/articles/PMC3479416/figure/F5/" target="figure" rid-figpopup="F5" rid-ob="ob-F5" onclick="return startTarget(this, 'figure',1024,800)">Figure 5 </a>
+                           <a class="figpopup" href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3479416/figure/F5/" target="figure" rid-figpopup="F5" rid-ob="ob-F5" onclick="return startTarget(this, 'figure',1024,800)">Figure 5 </a>
                            
                         </div>
                         
@@ -1120,9 +1104,9 @@
                      <div class="half_rhythm">
                         
                         <div class="contrib-group fm-author">
-                           <a href="/sites/entrez?cmd=search&amp;db=PubMed&amp;term=%20Kirys%20T%5Bauth%5D">Tatsiana Kirys</a>,<sup>1,</sup><sup>2</sup>
-                           <a href="/sites/entrez?cmd=search&amp;db=PubMed&amp;term=%20Ruvinsky%20AM%5Bauth%5D">Anatoly M Ruvinsky</a>,<sup>1</sup>
-                           <a href="/sites/entrez?cmd=search&amp;db=PubMed&amp;term=%20Tuzikov%20AV%5Bauth%5D">Alexander V Tuzikov</a>,<sup>2</sup> and <a href="/sites/entrez?cmd=search&amp;db=PubMed&amp;term=%20Vakser%20IA%5Bauth%5D">Ilya
+                           <a href="http://www.ncbi.nlm.nih.gov/sites/entrez?cmd=search&amp;db=PubMed&amp;term=%20Kirys%20T%5Bauth%5D">Tatsiana Kirys</a>,<sup>1,</sup><sup>2</sup>
+                           <a href="http://www.ncbi.nlm.nih.gov/sites/entrez?cmd=search&amp;db=PubMed&amp;term=%20Ruvinsky%20AM%5Bauth%5D">Anatoly M Ruvinsky</a>,<sup>1</sup>
+                           <a href="http://www.ncbi.nlm.nih.gov/sites/entrez?cmd=search&amp;db=PubMed&amp;term=%20Tuzikov%20AV%5Bauth%5D">Alexander V Tuzikov</a>,<sup>2</sup> and <a href="http://www.ncbi.nlm.nih.gov/sites/entrez?cmd=search&amp;db=PubMed&amp;term=%20Vakser%20IA%5Bauth%5D">Ilya
                               A Vakser</a><sup><img src="assets/corrauth.gif" alt="corresponding author" /></sup><sup>1,</sup><sup>3</sup>
                            
                         </div>
@@ -1195,7 +1179,7 @@
                         
                         <div class="fm-cpl-info fm-panel half_rhythm">
                            
-                           <div class="fm-copyright half_rhythm"><a href="/pmc/about/copyright.html">Copyright</a> ©2012 Kirys et al.; licensee BioMed Central Ltd. 
+                           <div class="fm-copyright half_rhythm"><a href="http://www.ncbi.nlm.nih.gov/pmc/about/copyright.html">Copyright</a> ©2012 Kirys et al.; licensee BioMed Central Ltd. 
                            </div>
                            
                            <div class="fm-copyright half_rhythm"> This is an Open Access article distributed
@@ -1224,32 +1208,32 @@
                               side-chain rotamer preferences. <span><span class="ref-journal">Protein Sci.
                                     </span>1997;<span class="ref-vol">6</span>:1661–1681. doi:
                                  10.1002/pro.5560060807.</span>
-                              <span class="nowrap ref pmc">[<a class="int-reflink" href="/pmc/articles/PMC2143774/">PMC free article</a>]</span>
-                              <span class="nowrap ref pubmed">[<a href="/pubmed/9260279" target="pmc_ext" onclick="focuswin('pmc_ext')">PubMed</a>]</span>
+                              <span class="nowrap ref pmc">[<a class="int-reflink" href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2143774/">PMC free article</a>]</span>
+                              <span class="nowrap ref pubmed">[<a href="http://www.ncbi.nlm.nih.gov/pubmed/9260279" target="pmc_ext" onclick="focuswin('pmc_ext')">PubMed</a>]</span>
                               <span class="nowrap ref crossref">[<a href="http://dx.doi.org/10.1002%2Fpro.5560060807" target="pmc_ext" onclick="focuswin('pmc_ext')">Cross Ref</a>]</span></span></li>
                         
                         <li id="B2"><span>Dunbrack RL, Karplus M. Backbone-dependent rotamer library for
                               proteins: application to side-chain prediction. <span><span class="ref-journal">J
                                     Mol Biol. </span>1993;<span class="ref-vol">230</span>:543–574. doi:
                                  10.1006/jmbi.1993.1170.</span>
-                              <span class="nowrap ref pubmed">[<a href="/pubmed/8464064" target="pmc_ext" onclick="focuswin('pmc_ext')">PubMed</a>]</span>
+                              <span class="nowrap ref pubmed">[<a href="http://www.ncbi.nlm.nih.gov/pubmed/8464064" target="pmc_ext" onclick="focuswin('pmc_ext')">PubMed</a>]</span>
                               <span class="nowrap ref crossref">[<a href="http://dx.doi.org/10.1006%2Fjmbi.1993.1170" target="pmc_ext" onclick="focuswin('pmc_ext')">Cross Ref</a>]</span></span></li>
                         
                         <li id="B3"><span>Janin J, Wodak S. Conformation of amino acid side-chains in proteins.
                               <span><span class="ref-journal">J Mol Biol. </span>1978;<span class="ref-vol">125</span>:357–386. doi: 10.1016/0022-2836(78)90408-4.</span>
-                              <span class="nowrap ref pubmed">[<a href="/pubmed/731698" target="pmc_ext" onclick="focuswin('pmc_ext')">PubMed</a>]</span>
+                              <span class="nowrap ref pubmed">[<a href="http://www.ncbi.nlm.nih.gov/pubmed/731698" target="pmc_ext" onclick="focuswin('pmc_ext')">PubMed</a>]</span>
                               <span class="nowrap ref crossref">[<a href="http://dx.doi.org/10.1016%2F0022-2836(78)90408-4" target="pmc_ext" onclick="focuswin('pmc_ext')">Cross Ref</a>]</span></span></li>
                         
                         <li id="B4"><span>Mcgregor MJ, Islam SA, Sternberg MJE. Analysis of the relationship
                               between side-chain conformation and secondary structure in globular-proteins.
                               <span><span class="ref-journal">J Mol Biol. </span>1987;<span class="ref-vol">198</span>:295–310. doi: 10.1016/0022-2836(87)90314-7.</span>
-                              <span class="nowrap ref pubmed">[<a href="/pubmed/3430610" target="pmc_ext" onclick="focuswin('pmc_ext')">PubMed</a>]</span>
+                              <span class="nowrap ref pubmed">[<a href="http://www.ncbi.nlm.nih.gov/pubmed/3430610" target="pmc_ext" onclick="focuswin('pmc_ext')">PubMed</a>]</span>
                               <span class="nowrap ref crossref">[<a href="http://dx.doi.org/10.1016%2F0022-2836(87)90314-7" target="pmc_ext" onclick="focuswin('pmc_ext')">Cross Ref</a>]</span></span></li>
                         
                         <li id="B5"><span>Lovell SC, Word JM, Richardson JS, Richardson DC. The penultimate
                               rotamer library. <span><span class="ref-journal">Proteins. </span>2000;<span class="ref-vol">40</span>:389–408. doi:
                                  10.1002/1097-0134(20000815)40:3&lt;389::AID-PROT50&gt;3.0.CO;2-2.</span>
-                              <span class="nowrap ref pubmed">[<a href="/pubmed/10861930" target="pmc_ext" onclick="focuswin('pmc_ext')">PubMed</a>]</span>
+                              <span class="nowrap ref pubmed">[<a href="http://www.ncbi.nlm.nih.gov/pubmed/10861930" target="pmc_ext" onclick="focuswin('pmc_ext')">PubMed</a>]</span>
                               <span class="nowrap ref crossref">[<a href="http://dx.doi.org/10.1002%2F1097-0134(20000815)40%3A3%3C389%3A%3AAID-PROT50%3E3.0.CO%3B2-2" target="pmc_ext" onclick="focuswin('pmc_ext')">Cross Ref</a>]</span></span></li>
                         
                         <li id="B6"><span>Tuffery P, Etchebest C, Hazout S, Lavery R. A new approach to the
@@ -1263,7 +1247,7 @@
                         <li id="B8"><span>Chandrasekaran R, Ramachandran GN. Studies on the conformation of
                               amino acids. XI. Analysis of the observed side group conformation in proteins.
                               <span><span class="ref-journal">Int J Protein Res. </span>1970;<span class="ref-vol">2</span>:223–233.</span>
-                              <span class="nowrap ref pubmed">[<a href="/pubmed/5538390" target="pmc_ext" onclick="focuswin('pmc_ext')">PubMed</a>]</span></span></li>
+                              <span class="nowrap ref pubmed">[<a href="http://www.ncbi.nlm.nih.gov/pubmed/5538390" target="pmc_ext" onclick="focuswin('pmc_ext')">PubMed</a>]</span></span></li>
                         
                         <li id="B9"><span>Bhat TN, Sasisekharan V, Vijayan M. Analysis of side-chain
                               conformation in proteins. <span><span class="ref-journal">Int J Pept Prot Res.
@@ -1273,12 +1257,12 @@
                               packing criteria in the enumeration of allowed sequences for different structural
                               classes. <span><span class="ref-journal">J Mol Biol. </span>1987;<span class="ref-vol">193</span>:775–791. doi:
                                  10.1016/0022-2836(87)90358-5.</span>
-                              <span class="nowrap ref pubmed">[<a href="/pubmed/2441069" target="pmc_ext" onclick="focuswin('pmc_ext')">PubMed</a>]</span>
+                              <span class="nowrap ref pubmed">[<a href="http://www.ncbi.nlm.nih.gov/pubmed/2441069" target="pmc_ext" onclick="focuswin('pmc_ext')">PubMed</a>]</span>
                               <span class="nowrap ref crossref">[<a href="http://dx.doi.org/10.1016%2F0022-2836(87)90358-5" target="pmc_ext" onclick="focuswin('pmc_ext')">Cross Ref</a>]</span></span></li>
                         
                         <li id="B11"><span>Schrauber H, Eisenhaber F, Argos P. Rotamers: to be or not to be? An
                               analysis of amino acid side-chain conformations in globular proteins. <span><span class="ref-journal">J Mol Biol. </span>1993;<span class="ref-vol">230</span>:592–612. doi: 10.1006/jmbi.1993.1172.</span>
-                              <span class="nowrap ref pubmed">[<a href="/pubmed/8464066" target="pmc_ext" onclick="focuswin('pmc_ext')">PubMed</a>]</span>
+                              <span class="nowrap ref pubmed">[<a href="http://www.ncbi.nlm.nih.gov/pubmed/8464066" target="pmc_ext" onclick="focuswin('pmc_ext')">PubMed</a>]</span>
                               <span class="nowrap ref crossref">[<a href="http://dx.doi.org/10.1006%2Fjmbi.1993.1172" target="pmc_ext" onclick="focuswin('pmc_ext')">Cross Ref</a>]</span></span></li>
                         
                         <li id="B12"><span>Kono H, Doi J. A new method for side-chain conformation prediction
@@ -1288,7 +1272,7 @@
                         <li id="B13"><span>DeMaeyer M, Desmet J, Lasters I. All in one: a highly detailed
                               rotamer library improves both accuracy and speed in the modelling of sidechains by
                               dead-end elimination. <span><span class="ref-journal">Fold Des. </span>1997;<span class="ref-vol">2</span>:53–66. doi: 10.1016/S1359-0278(97)00006-0.</span>
-                              <span class="nowrap ref pubmed">[<a href="/pubmed/9080199" target="pmc_ext" onclick="focuswin('pmc_ext')">PubMed</a>]</span>
+                              <span class="nowrap ref pubmed">[<a href="http://www.ncbi.nlm.nih.gov/pubmed/9080199" target="pmc_ext" onclick="focuswin('pmc_ext')">PubMed</a>]</span>
                               <span class="nowrap ref crossref">[<a href="http://dx.doi.org/10.1016%2FS1359-0278(97)00006-0" target="pmc_ext" onclick="focuswin('pmc_ext')">Cross Ref</a>]</span></span></li>
                         
                         <li id="B14"><span>Beglov D, Hall D, Brenke R, Shapovalov MV, Dunbrack RL, Kozakov D,
@@ -1296,34 +1280,34 @@
                               interactions. <span><span class="ref-journal">Proteins. </span>2011;<span class="ref-vol">80</span>:591–601.</span></span></li>
                         
                         <li id="B15"><span>Dunbrack RL. Rotamer libraries in the 21st century. <span><span class="ref-journal">Curr Opin Struct Biol. </span>2002;<span class="ref-vol">12</span>:431–440. doi: 10.1016/S0959-440X(02)00344-5.</span>
-                              <span class="nowrap ref pubmed">[<a href="/pubmed/12163064" target="pmc_ext" onclick="focuswin('pmc_ext')">PubMed</a>]</span>
+                              <span class="nowrap ref pubmed">[<a href="http://www.ncbi.nlm.nih.gov/pubmed/12163064" target="pmc_ext" onclick="focuswin('pmc_ext')">PubMed</a>]</span>
                               <span class="nowrap ref crossref">[<a href="http://dx.doi.org/10.1016%2FS0959-440X(02)00344-5" target="pmc_ext" onclick="focuswin('pmc_ext')">Cross Ref</a>]</span></span></li>
                         
                         <li id="B16"><span>Shapovalov MS, Dunbrack RL. A smoothed backbone-dependent rotamer
                               library for proteins derived from adaptive kernel density estimates and regressions.
                               <span><span class="ref-journal">Structure. </span>2011;<span class="ref-vol">19</span>:844–858. doi: 10.1016/j.str.2011.03.019.</span>
-                              <span class="nowrap ref pmc">[<a class="int-reflink" href="/pmc/articles/PMC3118414/">PMC free article</a>]</span>
-                              <span class="nowrap ref pubmed">[<a href="/pubmed/21645855" target="pmc_ext" onclick="focuswin('pmc_ext')">PubMed</a>]</span>
+                              <span class="nowrap ref pmc">[<a class="int-reflink" href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3118414/">PMC free article</a>]</span>
+                              <span class="nowrap ref pubmed">[<a href="http://www.ncbi.nlm.nih.gov/pubmed/21645855" target="pmc_ext" onclick="focuswin('pmc_ext')">PubMed</a>]</span>
                               <span class="nowrap ref crossref">[<a href="http://dx.doi.org/10.1016%2Fj.str.2011.03.019" target="pmc_ext" onclick="focuswin('pmc_ext')">Cross Ref</a>]</span></span></li>
                         
                         <li id="B17"><span>Pickett SD, Sternberg MJE. Empirical scale of side-chain
                               conformational entropy in protein folding. <span><span class="ref-journal">J Mol
                                     Biol. </span>1993;<span class="ref-vol">231</span>:825–839. doi:
                                  10.1006/jmbi.1993.1329.</span>
-                              <span class="nowrap ref pubmed">[<a href="/pubmed/8515453" target="pmc_ext" onclick="focuswin('pmc_ext')">PubMed</a>]</span>
+                              <span class="nowrap ref pubmed">[<a href="http://www.ncbi.nlm.nih.gov/pubmed/8515453" target="pmc_ext" onclick="focuswin('pmc_ext')">PubMed</a>]</span>
                               <span class="nowrap ref crossref">[<a href="http://dx.doi.org/10.1006%2Fjmbi.1993.1329" target="pmc_ext" onclick="focuswin('pmc_ext')">Cross Ref</a>]</span></span></li>
                         
                         <li id="B18"><span>Guharoy M, Janin J, Robert CH. Side-chain rotamer transitions at
                               protein–protein interfaces. <span><span class="ref-journal">Proteins.
                                     </span>2010;<span class="ref-vol">78</span>:3219–3225. doi:
                                  10.1002/prot.22821.</span>
-                              <span class="nowrap ref pubmed">[<a href="/pubmed/20737439" target="pmc_ext" onclick="focuswin('pmc_ext')">PubMed</a>]</span>
+                              <span class="nowrap ref pubmed">[<a href="http://www.ncbi.nlm.nih.gov/pubmed/20737439" target="pmc_ext" onclick="focuswin('pmc_ext')">PubMed</a>]</span>
                               <span class="nowrap ref crossref">[<a href="http://dx.doi.org/10.1002%2Fprot.22821" target="pmc_ext" onclick="focuswin('pmc_ext')">Cross Ref</a>]</span></span></li>
                         
                         <li id="B19"><span>Carugo O, Argos P. Protein-protein crystal-packing contacts.
                               <span><span class="ref-journal">Protein Sci. </span>1997;<span class="ref-vol">6</span>:2261–2263.</span>
-                              <span class="nowrap ref pmc">[<a class="int-reflink" href="/pmc/articles/PMC2143556/">PMC free article</a>]</span>
-                              <span class="nowrap ref pubmed">[<a href="/pubmed/9336849" target="pmc_ext" onclick="focuswin('pmc_ext')">PubMed</a>]</span></span></li>
+                              <span class="nowrap ref pmc">[<a class="int-reflink" href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2143556/">PMC free article</a>]</span>
+                              <span class="nowrap ref pubmed">[<a href="http://www.ncbi.nlm.nih.gov/pubmed/9336849" target="pmc_ext" onclick="focuswin('pmc_ext')">PubMed</a>]</span></span></li>
                         
                         <li id="B20"><span>Janin J, Bahadur RP, Chakrabarti P. Protein-protein interaction and
                               quaternary structure. <span><span class="ref-journal">Quart Rev Biophys.
@@ -1332,36 +1316,36 @@
                         <li id="B21"><span>Zhao S, Goodsell DS, Olson AJ. Analysis of a data set of paired
                               uncomplexed protein structures: new metrics for side-chain flexibility and model
                               evaluation. <span><span class="ref-journal">Proteins. </span>2001;<span class="ref-vol">43</span>:271–279. doi: 10.1002/prot.1038.</span>
-                              <span class="nowrap ref pubmed">[<a href="/pubmed/11288177" target="pmc_ext" onclick="focuswin('pmc_ext')">PubMed</a>]</span>
+                              <span class="nowrap ref pubmed">[<a href="http://www.ncbi.nlm.nih.gov/pubmed/11288177" target="pmc_ext" onclick="focuswin('pmc_ext')">PubMed</a>]</span>
                               <span class="nowrap ref crossref">[<a href="http://dx.doi.org/10.1002%2Fprot.1038" target="pmc_ext" onclick="focuswin('pmc_ext')">Cross Ref</a>]</span></span></li>
                         
                         <li id="B22"><span>Jacobson MP, Friesner RA, Xiang Z, Honig B. On the role of the
                               crystal environment in determining protein side-chain conformations. <span><span class="ref-journal">J Mol Biol. </span>2002;<span class="ref-vol">320</span>:597–608. doi: 10.1016/S0022-2836(02)00470-9.</span>
-                              <span class="nowrap ref pubmed">[<a href="/pubmed/12096912" target="pmc_ext" onclick="focuswin('pmc_ext')">PubMed</a>]</span>
+                              <span class="nowrap ref pubmed">[<a href="http://www.ncbi.nlm.nih.gov/pubmed/12096912" target="pmc_ext" onclick="focuswin('pmc_ext')">PubMed</a>]</span>
                               <span class="nowrap ref crossref">[<a href="http://dx.doi.org/10.1016%2FS0022-2836(02)00470-9" target="pmc_ext" onclick="focuswin('pmc_ext')">Cross Ref</a>]</span></span></li>
                         
                         <li id="B23"><span>Eyal E, Gerzon S, Potapov V, Edelman M, Sobolev V. The limit of
                               accuracy of protein modeling: influence of crystal packing on protein structure.
                               <span><span class="ref-journal">J Mol Biol. </span>2005;<span class="ref-vol">351</span>:431–442. doi: 10.1016/j.jmb.2005.05.066.</span>
-                              <span class="nowrap ref pubmed">[<a href="/pubmed/16005885" target="pmc_ext" onclick="focuswin('pmc_ext')">PubMed</a>]</span>
+                              <span class="nowrap ref pubmed">[<a href="http://www.ncbi.nlm.nih.gov/pubmed/16005885" target="pmc_ext" onclick="focuswin('pmc_ext')">PubMed</a>]</span>
                               <span class="nowrap ref crossref">[<a href="http://dx.doi.org/10.1016%2Fj.jmb.2005.05.066" target="pmc_ext" onclick="focuswin('pmc_ext')">Cross Ref</a>]</span></span></li>
                         
                         <li id="B24"><span>Ruvinsky AM, Kirys T, Tuzikov AV, Vakser IA. Side-chain
                               conformational changes upon protein-protein association. <span><span class="ref-journal">J Mol Biol. </span>2011;<span class="ref-vol">408</span>:356–365. doi: 10.1016/j.jmb.2011.02.030.</span>
-                              <span class="nowrap ref pmc">[<a class="int-reflink" href="/pmc/articles/PMC3073032/">PMC free article</a>]</span>
-                              <span class="nowrap ref pubmed">[<a href="/pubmed/21354429" target="pmc_ext" onclick="focuswin('pmc_ext')">PubMed</a>]</span>
+                              <span class="nowrap ref pmc">[<a class="int-reflink" href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3073032/">PMC free article</a>]</span>
+                              <span class="nowrap ref pubmed">[<a href="http://www.ncbi.nlm.nih.gov/pubmed/21354429" target="pmc_ext" onclick="focuswin('pmc_ext')">PubMed</a>]</span>
                               <span class="nowrap ref crossref">[<a href="http://dx.doi.org/10.1016%2Fj.jmb.2011.02.030" target="pmc_ext" onclick="focuswin('pmc_ext')">Cross Ref</a>]</span></span></li>
                         
                         <li id="B25"><span>Kirys T, Ruvinsky A, Tuzikov AV, Vakser IA. Rotamer libraries and
                               probabilities of transition between rotamers for the side chains in protein-protein
                               binding. <span><span class="ref-journal">Proteins. </span>2012;<span class="ref-vol">80</span>:2089–2098.</span>
-                              <span class="nowrap ref pmc">[<a class="int-reflink" href="/pmc/articles/PMC3393779/">PMC free article</a>]</span>
-                              <span class="nowrap ref pubmed">[<a href="/pubmed/22544766" target="pmc_ext" onclick="focuswin('pmc_ext')">PubMed</a>]</span></span></li>
+                              <span class="nowrap ref pmc">[<a class="int-reflink" href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3393779/">PMC free article</a>]</span>
+                              <span class="nowrap ref pubmed">[<a href="http://www.ncbi.nlm.nih.gov/pubmed/22544766" target="pmc_ext" onclick="focuswin('pmc_ext')">PubMed</a>]</span></span></li>
                         
                         <li id="B26"><span>Gao Y, Douguet D, Tovchigrechko A, Vakser IA. DOCKGROUND system of
                               databases for protein recognition studies: unbound structures for docking.
                               <span><span class="ref-journal">Proteins. </span>2007;<span class="ref-vol">69</span>:845–851. doi: 10.1002/prot.21714.</span>
-                              <span class="nowrap ref pubmed">[<a href="/pubmed/17803215" target="pmc_ext" onclick="focuswin('pmc_ext')">PubMed</a>]</span>
+                              <span class="nowrap ref pubmed">[<a href="http://www.ncbi.nlm.nih.gov/pubmed/17803215" target="pmc_ext" onclick="focuswin('pmc_ext')">PubMed</a>]</span>
                               <span class="nowrap ref crossref">[<a href="http://dx.doi.org/10.1002%2Fprot.21714" target="pmc_ext" onclick="focuswin('pmc_ext')">Cross Ref</a>]</span></span></li>
                         
                         <li id="B27"><span>Hubbard SJ, Thornton JM. <span class="ref-journal">NACCESS, computer
@@ -1385,27 +1369,27 @@
                               Braden BC, Li Y, Smith-Gill SJ. A mutational analysis of binding interactions in an
                               antigen-antibody protein-protein complex. <span><span class="ref-journal">Biochemistry. </span>1998;<span class="ref-vol">37</span>:7981–799. doi:
                                  10.1021/bi980148j.</span>
-                              <span class="nowrap ref pubmed">[<a href="/pubmed/9609690" target="pmc_ext" onclick="focuswin('pmc_ext')">PubMed</a>]</span>
+                              <span class="nowrap ref pubmed">[<a href="http://www.ncbi.nlm.nih.gov/pubmed/9609690" target="pmc_ext" onclick="focuswin('pmc_ext')">PubMed</a>]</span>
                               <span class="nowrap ref crossref">[<a href="http://dx.doi.org/10.1021%2Fbi980148j" target="pmc_ext" onclick="focuswin('pmc_ext')">Cross Ref</a>]</span></span></li>
                         
                         <li id="B33"><span>Bhat TN, Bentley GA, Boulot G, Greene MI, Tello D, Dall'Acqua W,
                               Souchon H, Schwarz FP, Mariuzza RA, Poljak RJ. Bound water molecules and
                               conformational stabilization help mediate an antigen-antibody association.
                               <span><span class="ref-journal">Proc Natl Acad Sci USA. </span>1994;<span class="ref-vol">91</span>:1089–1093. doi: 10.1073/pnas.91.3.1089.</span>
-                              <span class="nowrap ref pmc">[<a class="int-reflink" href="/pmc/articles/PMC521459/">PMC free article</a>]</span>
-                              <span class="nowrap ref pubmed">[<a href="/pubmed/8302837" target="pmc_ext" onclick="focuswin('pmc_ext')">PubMed</a>]</span>
+                              <span class="nowrap ref pmc">[<a class="int-reflink" href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC521459/">PMC free article</a>]</span>
+                              <span class="nowrap ref pubmed">[<a href="http://www.ncbi.nlm.nih.gov/pubmed/8302837" target="pmc_ext" onclick="focuswin('pmc_ext')">PubMed</a>]</span>
                               <span class="nowrap ref crossref">[<a href="http://dx.doi.org/10.1073%2Fpnas.91.3.1089" target="pmc_ext" onclick="focuswin('pmc_ext')">Cross Ref</a>]</span></span></li>
                         
                         <li id="B34"><span>Frigerio F, Coda A, Pugliese L, Lionetti C, Menegatti E, Amiconi G,
                               Schnebli HP, Ascenzi P, Bolognesi M. Crystal and molecular structure of the bovine
                               alpha-chymotrypsin-eglin c complex at 2.0 a resolution. <span><span class="ref-journal">J Mol Biol. </span>1992;<span class="ref-vol">225</span>:107–123. doi: 10.1016/0022-2836(92)91029-O.</span>
-                              <span class="nowrap ref pubmed">[<a href="/pubmed/1583684" target="pmc_ext" onclick="focuswin('pmc_ext')">PubMed</a>]</span>
+                              <span class="nowrap ref pubmed">[<a href="http://www.ncbi.nlm.nih.gov/pubmed/1583684" target="pmc_ext" onclick="focuswin('pmc_ext')">PubMed</a>]</span>
                               <span class="nowrap ref crossref">[<a href="http://dx.doi.org/10.1016%2F0022-2836(92)91029-O" target="pmc_ext" onclick="focuswin('pmc_ext')">Cross Ref</a>]</span></span></li>
                         
                         <li id="B35"><span>Dixon MM, Matthews BW. Is gamma-chymotrypsin a tetrapeptide
                               acyl-enzyme adduct of alpha-chymotrypsin? <span><span class="ref-journal">Biochemistry. </span>1989;<span class="ref-vol">28</span>:7033–7038. doi:
                                  10.1021/bi00443a038.</span>
-                              <span class="nowrap ref pubmed">[<a href="/pubmed/2819046" target="pmc_ext" onclick="focuswin('pmc_ext')">PubMed</a>]</span>
+                              <span class="nowrap ref pubmed">[<a href="http://www.ncbi.nlm.nih.gov/pubmed/2819046" target="pmc_ext" onclick="focuswin('pmc_ext')">PubMed</a>]</span>
                               <span class="nowrap ref crossref">[<a href="http://dx.doi.org/10.1021%2Fbi00443a038" target="pmc_ext" onclick="focuswin('pmc_ext')">Cross Ref</a>]</span></span></li>
                         
                      </ul>
@@ -1739,7 +1723,7 @@
                   </div>
                   
                   <div class="large-table-link align_right small" style="display: none">
-                     <a target="object" onclick="return startTarget(this, 'object', 1200, 800)" href="/pmc/articles/PMC3479416/table/T1/?report=objectonly">View it in a separate
+                     <a target="object" onclick="return startTarget(this, 'object', 1200, 800)" href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3479416/table/T1/?report=objectonly">View it in a separate
                         window</a>
                      
                   </div>
@@ -2160,7 +2144,7 @@
                   </div>
                   
                   <div class="large-table-link align_right small" style="display: none">
-                     <a target="object" onclick="return startTarget(this, 'object', 1200, 800)" href="/pmc/articles/PMC3479416/table/T2/?report=objectonly">View it in a separate
+                     <a target="object" onclick="return startTarget(this, 'object', 1200, 800)" href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3479416/table/T2/?report=objectonly">View it in a separate
                         window</a>
                      
                   </div>
@@ -2718,7 +2702,7 @@
                   </div>
                   
                   <div class="large-table-link align_right small" style="display: none">
-                     <a target="object" onclick="return startTarget(this, 'object', 1200, 800)" href="/pmc/articles/PMC3479416/table/T3/?report=objectonly">View it in a separate
+                     <a target="object" onclick="return startTarget(this, 'object', 1200, 800)" href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3479416/table/T3/?report=objectonly">View it in a separate
                         window</a>
                      
                   </div>
@@ -2792,19 +2776,19 @@
             
             
          </div>
-         <div id="jr-scripts"><script src="../lib/js/jquery-1.7.2.js" type="text/javascript"></script><script src="../lib/js/modernizr.jr.js" type="text/javascript"></script><script src="../lib/js/jquery.throttle.js" type="text/javascript"></script><script src="../lib/js/jquery.mousewheel.js?x=1" type="text/javascript"></script><script src="../lib/js/rangeinput.js" type="text/javascript"></script><script src="../lib/js/jquery.touchSwipe.js" type="text/javascript"></script><script src="../lib/js/jquery.hoverIntent.js" type="text/javascript"></script><script src="../lib/js/figpopup.js" type="text/javascript"></script><script src="../js/jr.utils.js" type="text/javascript"></script><script src="../js/jquery.jr.ft.js" type="text/javascript"></script><script src="../js/jquery.jr.pagemanager.js" type="text/javascript"></script><script src="../js/jquery.jr.paginationstatus.js" type="text/javascript"></script><script src="../js/jquery.jr.pageturnsensor.js" type="text/javascript"></script><script src="../js/jquery.jr.pageprogressbar.js" type="text/javascript"></script><script src="../js/jquery.jr.links.js" type="text/javascript"></script><script src="../js/jquery.jr.historykeeper.js" type="text/javascript"></script><script src="../js/jquery.jr.objectbox.js" type="text/javascript"></script><script src="../js/jquery.jr.switcher.js" type="text/javascript"></script><script src="../js/jquery.jr.panel.js" type="text/javascript"></script><script src="../js/jquery.jr.panel.typo.js" type="text/javascript"></script><script src="../js/jquery.jr.panel.cmap.js" type="text/javascript"></script><script src="../js/jquery.jr.panel.istrip.js" type="text/javascript"></script><script src="../js/jquery.jr.fip.js" type="text/javascript"></script><script src="../js/jats.reader.js" type="text/javascript"></script><script type="text/x-mathjax-config">
-              MathJax.Hub.Config({
-                SVG: {
-                  scale: 90,
+         <div id="jr-scripts"><script src="../lib/js/hand-1.3.8.js"> </script><script src="../lib/js/modernizr.jr.js"> </script><script src="../lib/js/jquery-2.2.3.js"> </script><script src="../lib/js/jquery-migrate-1.4.1.js"> </script><script src="../lib/js/jquery.throttle.js"> </script><script src="../lib/js/jquery.mousewheel.js"> </script><script src="../lib/js/rangeinput.js"> </script><script src="../lib/js/jquery.touchSwipe.js"> </script><script src="../lib/js/jquery.hoverIntent.js"> </script><script src="../lib/js/figpopup.js"> </script><script src="../js/jr.utils.js"> </script><script src="../js/jquery.jr.ft.js"> </script><script src="../js/jquery.jr.pagemanager.js"> </script><script src="../js/jquery.jr.paginationstatus.js"> </script><script src="../js/jquery.jr.pageturnsensor.js"> </script><script src="../js/jquery.jr.pageprogressbar.js"> </script><script src="../js/jquery.jr.links.js"> </script><script src="../js/jquery.jr.historykeeper.js"> </script><script src="../js/jquery.jr.objectbox.js"> </script><script src="../js/jquery.jr.switcher.js"> </script><script src="../js/jquery.jr.panel.js"> </script><script src="../js/jquery.jr.panel.typo.js"> </script><script src="../js/jquery.jr.panel.cmap.js"> </script><script src="../js/jquery.jr.panel.istrip.js"> </script><script src="../js/jquery.jr.fip.js"> </script><script src="../lib/js/jquery.citationexporter.js"></script><script src="../js/jats.reader.js"> </script><script type="text/x-mathjax-config">  
+              MathJax.Hub.Config({ 
+                SVG: { 
+                  scale: 90, 
                   linebreaks: {
-                    automatic: true,
-                    width: "container"
-                  }
-                },
-                showProcessingMessages: false,
+                    automatic: true, 
+                    width: "container" 
+                  } 
+                }, 
+                showProcessingMessages: false, 
                 messageStyle: "none"
-              });
-            </script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG"></script></div>
+              }); 
+              </script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG"></script></div>
       </div>
    </body>
 </html>

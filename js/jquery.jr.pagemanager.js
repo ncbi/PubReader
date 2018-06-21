@@ -1,4 +1,4 @@
-/* $Id: jquery.jr.pagemanager.js 16774 2013-07-02 21:31:25Z kolotev $
+/* $Id: jquery.jr.pagemanager.js 21813 2014-05-09 20:29:43Z kolotev $
 
     Module:
 
@@ -47,7 +47,7 @@
     }
 
     // check the presense of Modernizr
-    if (typeof Modernizr === "undefined") {console.error("jr.PageManager is dependent on Modernizr, which is not defined"); return false}
+    if (typeof Modernizr == "undefined") {console.error("jr.PageManager is dependent on Modernizr, which is not defined"); return false}
 
     // some localized "global" variables ("global" within this function)
     var $win                = $(window),
@@ -67,7 +67,11 @@
             PAGE_TURN_BEFORE:   'jr:pm:page:turn:before',
             PAGE_TURN_AFTER:    'jr:pm:page:turn:after',
             PAGES_CHANGED:      'jr:pm:pages:changed'
-        }
+        },
+        pmState              = {
+            SCROLL:          'jr:pm:state:scroll',
+            PAGE:            'jr:pm:state:page'
+	}
 
     $.jr.PageManager    = function(el, options) {
 
@@ -111,49 +115,71 @@
 
             // save the current right offset
             base.right = parseFloat(base.$el.css('right'));
-            base.calcMetrics()
-            base.calcPages()
 
+            // bind mouse and touch events
+            if ($u.touch && $.fn.swipe !== null) {
+                // bind touch events
+                base.$el.swipe({threshold: 25, swipe:          base.swipeHandler});
+                // tap over side of the content areas to simplify page turning process.
+                base.$el.on('pointerdown', base.tapHandler);
+            }
+
+            // setup page manager state for scrolling or paging 
+            // (narrow vs normal/wide devices/screens)
+            base.applyPMState()
+
+            // setup polling of page dimensions
+            base.calcMetrics()
+            
+            // check if inter units navigation info present
+            base.metaPrevUnitHref = $('meta[name=jr-prev-unit]').attr('content');
+            base.metaNextUnitHref = $('meta[name=jr-next-unit]').attr('content');
             // *** Bind Events
 
             // bind keyboard event
-            $doc.bind('keydown',            base.kbdHandler);
-            //base.$el.bind('keydown',            base.kbdHandler);
-            
-
-            // bind mouse and touch events
-            if ($u.touch) {
-                // bind touch events
-                base.$el.swipe({threshold: 25, swipe:          base.swipeHandler});    // FIXME - replace with Erics event library
-                // tap over side of the content areas to simplify page turning process.
-                base.$el.bind('touchstart', base.tapHandler);
-            }
+            $doc.on('keydown',            base.kbdHandler);
 
             // bind scroll event
-            base.$el.scroll(base.scrollHandler)
+            base.$el.on('scroll', base.scrollHandler)
 
             // bind custom events to implement API for turning pages
             // from outside of this component
-            base.$el.bind(evt.NEXT_PAGE,    base.eventHandler);
-            base.$el.bind(evt.PREV_PAGE,    base.eventHandler);
-            base.$el.bind(evt.FIRST_PAGE,   base.eventHandler);
-            base.$el.bind(evt.LAST_PAGE,    base.eventHandler);
-            base.$el.bind(evt.GO_PAGE,      base.eventHandler);
-            base.$el.bind(evt.GO_POS,       base.eventHandler);
+            base.$el.on(evt.NEXT_PAGE,    base.eventHandler);
+            base.$el.on(evt.PREV_PAGE,    base.eventHandler);
+            base.$el.on(evt.FIRST_PAGE,   base.eventHandler);
+            base.$el.on(evt.LAST_PAGE,    base.eventHandler);
+            base.$el.on(evt.GO_PAGE,      base.eventHandler);
+            base.$el.on(evt.GO_POS,       base.eventHandler);
 
-            $doc.bind('jr:user:active click touchend', $.throttle(500, base.resetContentPollingInterval))
-            $win.bind('resize', $.throttle(500, base.resetContentPollingInterval))
+            //
+            $doc.on('jr:user:active pointerup', $.throttle(500, base.resetContentPollingInterval))
 
+
+            //
+            $win.on('resize', $.throttle(500, base.resetContentPollingInterval))
+            $win.on('resize', $.throttle(500, base.resetRightPropOnWinResize))
+            $win.on('resize', $.throttle(500, base.onWinResize))
+            $win.on('scroll', $.throttle(500, base.onWinScroll))
+
+            
             // bind mouseweel events
-            base.mw = {deltaAcc : 0, delta : 0} // preset defaults
-            base.$el.mousewheel(base.mousewheel)
-
-            // setup polling of page dimensions
-            base.startPollingContentMetrics();
+            base.$el.mousewheel(base.mousewheelHandler)
             
             //
-            base.$el.trigger("show")
+            base.startPollingContentMetrics()
+            
+            //
+            base.$el.trigger("show:after")
 
+            // check the presence of cookie
+            // to jump to last page if inter unit navigation provided.
+            { 
+                var initEvent = $u.lsGet('jr:pm:init:phase')
+                if (initEvent == evt.LAST_PAGE) {
+                    $u.lsSet('jr:pm:init:phase', null);
+                    base.$el.trigger(initEvent)
+                }
+            }
             //
             return true;
         };
@@ -174,8 +200,8 @@
         //
         base.fPage              = function (pNum) {
             var _fp = base._fp;
-            if (_fp == null || _fp === 0) { base._fp    = base.calcFPage() }
-            base._fp = ( $.isNumeric( pNum ) ?   base._fp = parseInt(pNum) : (base._fp != null ? base._fp : 0) );
+            if (_fp === null || _fp === 0) { base._fp    = base.calcFPage() }
+            base._fp = ( $.isNumeric( pNum ) ?   base._fp = parseInt(pNum, 10) : (base._fp !== null ? base._fp : 0) );
             if (_fp !== base._fp) {
                 base.pagesChanged(true);
             }
@@ -184,8 +210,8 @@
         //
         base.lPage               = function (pNum) {
             var _lp = base._lp;
-            if (_lp == null || _lp === 0) { base._lp    = base.calcLPage() }
-            base._lp = ($.isNumeric( pNum ) ?   base._lp = parseInt(pNum) : (base._lp != null ? base._lp : 0) );
+            if (_lp === null || _lp === 0) { base._lp    = base.calcLPage() }
+            base._lp = ($.isNumeric( pNum ) ?   base._lp = parseInt(pNum, 10) : (base._lp !== null ? base._lp : 0) );
             if (_lp !== base._lp) {
                 base.pagesChanged(true);
             }
@@ -194,8 +220,8 @@
         //
         base.cPage               = function (pNum) {
             var _cp = base._cp;
-            if (_cp == null || _cp === 0) { base._cp    = base.calcCPage() }
-            base._cp = ($.isNumeric( pNum ) ?   base._cp = parseInt(pNum) : (base._cp != null ? base._cp : 0) );
+            if (_cp === null || _cp === 0) { base._cp    = base.calcCPage() }
+            base._cp = ($.isNumeric( pNum ) ? base._cp = parseInt(pNum, 10) : (base._cp !== null ? base._cp : 0) );
             if (_cp !== base._cp) {
                 base.pagesChanged(true);
             }
@@ -204,43 +230,70 @@
 
         //
         base.pagesChanged           = function (o) {
-            typeof o === "boolean" ?  base._pChanged  = o : 0;
-            return base._pChanged;
+            if (typeof o == "boolean")
+                base._pChanged  = o
+            return base._pChanged
         };
 
         //
         base._dumpPages             = function () {
-            console.info('_dumpPages(): fp=%s cp=%s lp=%s pChanged=%s', base._fp, base._cp, base._lp, base._pChanged);
+            console.trace()
+            var piobj = base.pInfo()
+            console.info('_dumpPages(): fp=%s cp=%s lp=%s pChanged=%s cp/lp: %s%% [pInfo: cp: %s ln: %s po: %s%%]', base._fp, base._cp, base._lp, base._pChanged, (base._cp/base._lp).toPrecision(4)*100, piobj.pn, piobj.lp, piobj.po);
         };
 
         // *** Pages calculator
         //
         base.calcFPage              = function () {
-            var _fp         = (base.contentWidth() > 0 ) ? 1 : 0;
+            var _fp         = (base.contentWidth() > 0 ) ? 1 : 0
             return _fp
         }
         //
         base.calcCPage              = function () {
-            var _cp         = base.pxOffset2Page( base.contentPosLeft(), 'r' ),
-                _fp         = base.fPage(),
-                _lp         = base.lPage();
+            var _cp = base.pxOffset2Page( base.contentPosLeft(), 'f' ),
+                _fp = base.fPage(),
+                _lp = base.lPage();
+ 
+            if (_cp <  _fp ) {
+                _cp = _fp
+            } else if ( _cp > _lp ) {
+                _cp = _lp
+            }
 
-            (_cp <  _fp ) ?  _cp = _fp : (_cp > _lp) ? _cp = _lp : 0;
             return _cp;
         };
         //
         base.calcLPage              = function () {
-            var _lp        = base.pxOffset2Page( base.contentWidth() - 1, 'f' )
+            var _lp         = base.pxOffset2Page( base.contentWidth() - 1, 'f' )
             return _lp;
         }
 
         // Content Metrics related functions
         //
         base.calcMetrics            = function () {
+            //
+            base.adjustContentRightSide()
+
+            //            
             base.contentColumnGap(true)
             base.contentPosLeft(true)
             base.contentWidth(true)
             base.pageWidth(true)
+
+            if (base.metricsChanged()) {
+                var _poInPP = base.cPage2OffsetInPP()
+                //console.info('PageManager: calcMetrics(): _poInPP = %s', _poInPP)
+                
+                base.calcPages()
+
+                if (base._pmState === pmState.PAGE) {
+                    // adjust current page if it is become missaligned
+                    // because of the resizing
+                    base.goPage(base.ppOffset2Page(_poInPP))
+                }
+
+                base.metricsChanged(false)
+            }
         }
         //
         base.contentColumnGap          = function (o) {
@@ -259,12 +312,21 @@
             var _pl         = base._pl;
 
             if (o === true) {
-                if ( base.options.useTrans ) {
-                    base._pl    = - base.$article.position().left
+                if (base._pmState == pmState.SCROLL) {
+                    // the viewport is narrower than 6in
+                    base._pl = $win.scrollTop()
                 } else {
-                    base._pl    = base.el.scrollLeft;
+                    if ( base.options.useTrans ) {
+                        base._pl    = - base.$article.position().left
+                    } else {
+                        base._pl    = base.el.scrollLeft;
+                    }
                 }
             }
+
+            //if (_pl !== base._pl) {
+            //    base.metricsChanged(true);
+            //}
 
             return base._pl;
         };
@@ -274,13 +336,18 @@
             var _cw         = base._cw
             if (o === true) {
 
-                var sw = base.article.scrollWidth
-                if ( sw > base.article.clientWidth ) { // on browsers where scrollwidth larger then client width we do not need cpu intensive steps down below
-                    base._cw    = sw
-                } else {                             // special case, it is CPU intensive, therefore it is called from content width polling funciton
-                    base.$article.css('overflow', 'hidden');
-                    base._cw    = base.article.scrollWidth
-                    base.$article.css('overflow', 'visible');
+                if (base._pmState == pmState.SCROLL) {
+                    // the viewport is narrower than 6in
+                    base._cw = $doc.height()
+                } else {
+                    var sw = base.article.scrollWidth
+                    if ( sw > base.article.clientWidth ) { // on browsers where scrollwidth larger then client width we do not need cpu intensive steps down below
+                        base._cw    = sw
+                    } else {                             // special case, it is CPU intensive, therefore it is called from content width polling funciton
+                        base.$article.css('overflow', 'hidden');
+                        base._cw    = base.article.scrollWidth
+                        base.$article.css('overflow', 'visible');
+                    }
                 }
 
                 if (_cw !== base._cw) {
@@ -290,21 +357,32 @@
 
             return base._cw;
         };
-        //
+        // for horizontal paging base.pageWidth - means actualy width
+        // for vertical scrolling base.pageWidth - means vertical height
         base.pageWidth              = function (o) {
+
             var _pw         = base._pw;
+
             if (o === true) {
-                base._pw        = parseFloat( base.$article.innerWidth() + base.contentColumnGap(o));
-                if (_pw !== base._pw) {
-                    base.metricsChanged(true);
+                if (base._pmState == pmState.SCROLL) {
+                    // the viewport is narrower than 6in
+                    base._pw    = $win.height()
+                } else {
+                    base._pw    = parseFloat( base.$article.innerWidth() + base.contentColumnGap(o));
+                    //console.info('PageManager: base.pageWidth(): $article.innerWidth = %s columnGap = %s pageWidth = %s', base.$article.innerWidth(), base.contentColumnGap(o), base._pw)
                 }
             }
+
+            if (_pw !== base._pw) {
+                base.metricsChanged(true);
+            }
+
             return base._pw;
         };
 
         //
         base.metricsChanged         = function (o) {
-            if (typeof o === "boolean") {
+            if (typeof o == "boolean") {
                 base._mChanged = o;
             }
             return base._mChanged;
@@ -319,19 +397,19 @@
         // nextPage
         base.nextPage               = function () {
             var cp              = base.cPage();
-            return cp < base.lPage() ? cp + 1 : cp;
+            return cp < base.lPage() ? cp + 1 : base.metaNextUnitHref !== null ? cp + 1 : cp;
         };
         // previous Page
         base.prevPage               = function () {
             var cp              = base.cPage();
-            return cp > base.fPage() ? cp - 1 : cp;
+            return cp > base.fPage() ? cp - 1 : base.metaPrevUnitHref !== null ? cp - 1 : cp;
         };
         // current Page number -> offset in Percentage points
         base.cPage2OffsetInPP         = function (page) {
             var _lp = base.lPage(),
                 _cp = $.isNumeric(page) ? Math.min(_lp, Math.max(1, page)) : base.cPage()
             //return _lp > 1 ? 100 * (_cp - 1) / ( base.lPage() - 1 ) : 100;
-            return _lp > 1 ? ( 100 * (_cp/_lp - .5/_lp) ): 100
+            return _lp > 1 ? ( 100 * (_cp/_lp - .5/_lp) ): typeof _lp !== 'undefined' ? 100 : 0
         }
 
         // PercentagePointsOffset -> Page number
@@ -355,9 +433,18 @@
         // location, the 2nd one is good
         // for keeping aproximate context.
         base.pxOffset2Page = function (pxOffset, type) {
-            return type != null && type === 'r'
+
+            if (base._pmState == pmState.SCROLL) 
+                pxOffset += base.$article.offset().top
+
+            
+            var pg = type != null && type == 'r'
                     ?  Math.round((pxOffset) / base.pageWidth()) + 1
                     :  Math.floor((pxOffset) / base.pageWidth()) + 1
+
+            // console.info('PageManager: pxOffset2Page(): pxOffset = %s pageWidth = %s page = %s', pxOffset, base.pageWidth(), pg)
+
+            return pg
         };
         // id of DOM element -> Page number
         // @param id - id of the DOM element (in pure id or in this form "#xxx" with hash oin front)
@@ -367,9 +454,11 @@
             if (id != null && id !== '') {
                 ! /^#/.test(id) ? id = '#' + id : 0
                 $id = $($u.jqSafeId(id))
-                if ($id.length === 1) {
+                if ($id.length == 1) {
+                    //console.info('PageManager: id2Page(): id = %s contentPosLeft = %s id.position().left = %s', id, base.contentPosLeft(true), $id.position().left)
                     pxo = $id.position().left + base.contentPosLeft(true)  // pixels offset
                     pn  = base.pxOffset2Page(pxo)                          // page number
+                    //console.info('PageManager: id2Page(): pxo = %s pn = %s', pxo, pn)
                 }
             }
             return pn
@@ -379,8 +468,10 @@
         //
         base.startPollingContentMetrics           = function () {
             base.clearPollContentMetricsIntervalId()
-            base.pollContentMetricsIntervalId = setInterval(base.pollContentMetrics, base.contentPollingInterval)
-            base.isPollingContentMetrics(true)
+            if (base._pmState == pmState.PAGE) {
+                base.pollContentMetricsIntervalId = setInterval(base.pollContentMetrics, base.contentPollingInterval)
+                base.isPollingContentMetrics(true)
+            }
         };
 
         //
@@ -394,7 +485,7 @@
                 clearInterval(base.pollContentMetricsIntervalId)
                 base.pollContentMetricsIntervalId = null
             }
-        }
+        };
 
         //
         base.resetContentPollingInterval    = function () {
@@ -402,11 +493,48 @@
                 ? (base.contentPollingInterval = base.contentPollingIntervalMin,
                    base.stopPollingContentMetrics(), base.startPollingContentMetrics())
                 : 0
-        }
+        };
+        
+        //
+        base.resetRightPropOnWinResize      = function () {
+            base.$el.css('right', '')
+            base.right = parseFloat(base.$el.css('right'))
+        };
+        
+        //
+        base.applyPMState                   = function () {
+            if (window.matchMedia("(max-width: 5in)").matches ||
+                window.matchMedia("(max-height: 5in)").matches) { // do not forget to sync with css
+                // the viewport is narrower than 6in
+                base._pmState = pmState.SCROLL
+                if ($u.touch && $.fn.swipe != null && typeof base.$el.swipe === "function") {
+                    base.$el.swipe("disable")
+                }
+                base.$el.unmousewheel(base.mousewheelHandler)
+                base.$article.css($u.transformCssPropName, 'none')
+                base.stopPollingContentMetrics()
+            } else {
+                base._pmState = pmState.PAGE
+                if ($u.touch && $.fn.swipe !== null && typeof base.$el.swipe === "function") {
+                    base.$el.swipe("enable")
+                }
+                base.$el.mousewheel(base.mousewheelHandler)
+                base.startPollingContentMetrics()
+            }
+        };
 
+        //
+        base.onWinResize                       = function () {
+            base.applyPMState()
+            base.calcMetrics()
+        };
+
+        //
+        base.onWinScroll                       = base.onWinResize
+	
         // get polling flag or set if option is provided
         base.isPollingContentMetrics = function (o) {
-            if (typeof o === "boolean") {
+            if (typeof o == "boolean") {
                 return base._isPollingContentMetrics = o;
             }
             return base._isPollingContentMetrics;
@@ -420,7 +548,7 @@
                 _aW         = $el.innerWidth(),
                 _colW, _colWG, _colWHG, _colC, _colG   = parseFloat( _cssColG )
             //
-            if (_cssColC === "auto" && _cssColW !== "auto") {
+            if (_cssColC == "auto" && _cssColW !== "auto") {
                 _colW   = parseFloat(_cssColW)
                 _colC   = Math.floor((_aW + _colG) / (_colW + _colG))
             } else if ($.isNumeric(_cssColC)) {
@@ -453,14 +581,13 @@
 
             //
             if (_adjW != null && base.right + _adjW !== _rPos) {
-                //console.info('original right: %s need adjustments %s', base.right, base.right + _adjW)
+                // console.warn('original right: %s need adjustments %s', base.right, base.right + _adjW)
+                // console.trace()
                 base.$el.css('right', base.right + _adjW);
             }
         }
         // Infinite polling of the content metrics
         base.pollContentMetrics       = function () {
-            // adjust right side of the page align columns with viewable area
-            base.adjustContentRightSide();
             // adjust scrollLeft property
             if (base.el.scrollLeft !== 0) {base.$el.scrollLeft(0)}
             if (base.el.scrollTop !== 0) {base.$el.scrollTop(0)}
@@ -476,12 +603,6 @@
                 // save current position just in case metrics had changed we
                 // can jump to the closest page based on calculation %% offset
                 base.calcMetrics()
-                if (base.metricsChanged()) {
-                    var _poInPP = base.cPage2OffsetInPP();
-                    base.calcPages()
-                    base.goPage(base.ppOffset2Page(_poInPP));             // adjust current page if it is become missaligned because of the resizing
-                    base.metricsChanged(false)
-                }
 
             }
             // after each poll increase interval until it reaches max
@@ -490,21 +611,30 @@
                 : 0
         };
 
+        base.pInfo                     = function () {
+            return {    
+                        pn: base.cPage(), 
+                        po: base.cPage2OffsetInPP().toPrecision(6), 
+                        lp: base.lPage(),
+                        pu: base.metaPrevUnitHref, 
+                        nu: base.metaNextUnitHref
+            }
+        }
         // *********** Page Manager notification functions
         // notify subsribers before page jump
         base.triggerPageTurnBefore     = function () {
             //console.info('triggerPageTurnBefore() pn: %s po: %s lp: %s', base.cPage(), base.cPage2OffsetInPP(), base.lPage())
-            base.$el.trigger(evt.PAGE_TURN_BEFORE, {pn: base.cPage(), po: base.cPage2OffsetInPP(), lp: base.lPage()});
+            base.$el.trigger(evt.PAGE_TURN_BEFORE, base.pInfo());
         };
         // notify subsribers after page jump
         base.triggerPageTurnAfter     = function () {
             //console.info('triggerPageTurnAfter() pn: %s po: %s lp: %s', base.cPage(), base.cPage2OffsetInPP(), base.lPage())
-            base.$el.trigger(evt.PAGE_TURN_AFTER, {pn: base.cPage(), po: base.cPage2OffsetInPP(), lp: base.lPage()});
+            base.$el.trigger(evt.PAGE_TURN_AFTER, base.pInfo());
             base.pagesChanged(false);
         };
         // notify subsribers about page information change
         base.triggerPagesChanged     = function () {
-            base.$el.trigger(evt.PAGES_CHANGED, {pn: base.cPage(), po: base.cPage2OffsetInPP().toPrecision(6), lp: base.lPage()});
+            base.$el.trigger(evt.PAGES_CHANGED, base.pInfo());
             base.resetContentPollingInterval()
         };
 
@@ -517,16 +647,19 @@
 
         // goPage (pageNum)
         // pNum is page number to jump to
-        base.goPage                 = function(pNum) {
+        base.goPage                 = function(pNum) { 
+            // console.trace()
+            // console.info('PageManager: goPage(): pNum = %s start: style = %s', pNum, base.$article.attr('style'))
+
             var _cp     = base.cPage(),
                 _mCh    = base.metricsChanged(),
                 _pCh    = base.pagesChanged(),
                 _pw     = base.pageWidth();
             // sanity check for pNum
-            if ($.isNumeric(pNum) === true
-                && pNum >= base.fPage()
-                && pNum <= base.lPage()
-                && ( _mCh === true || pNum !== _cp)) {
+            if ($.isNumeric(pNum) === true &&
+                pNum >= base.fPage() &&
+                pNum <= base.lPage() &&
+                ( _mCh === true || pNum !== _cp)) {
 
                 // set new current page
                 var nCp = Math.floor(parseFloat(pNum));
@@ -534,47 +667,64 @@
                 // or current page is not matching new page
                 if (_mCh || _pCh || nCp !== _cp) {
                     // trigger before event
-                    base.triggerPageTurnBefore();
+                    base.triggerPageTurnBefore()
                     base.stopPollingContentMetrics()
-                    base.transX = (_pw * (nCp - 1))
-                    //
-                    if (base.transX != base.transXcurr) {
-                        if ( base.options.useTrans ) {
-                            var transFlag = parseFloat(base.$article.css($u.transitionDuration)) > 0
-                            //
-                            if (transFlag) {
-                                base.$article.unbind($u.transitionEndEvName)
-                                base.$article.one($u.transitionEndEvName, base.transitionEnd)
-                            }
 
-                            // set transform property with new value
+                    var _translateX = (_pw * (nCp - 1))
+                    base.transX = _translateX
+
+                    if (base.transX != base.transXcurr) {
+                        base.transXcurr = base.transX
+
+                        if (base._pmState === pmState.SCROLL) {
+                            $win.scrollTop(base.transX)
                             base.cPage(nCp)
                             base.pagesChanged() ? base.triggerPagesChanged() : 0
-
-                            var translPattern = $u.csstransforms3d && $html.hasClass('animate') ? $u.transl3DPattern : $u.transl2DPattern
-                            base.$article.css ( $u.transformCssPropName, (translPattern).replace(/@/g, - base.transX) )
-
-                            //
-                            base.transXcurr = base.transX
-
-                            // just in case if transitions are not supported or not set
-                            // execute transitionEnd()
-                            ! transFlag ? base.transitionEnd() : 0
                         } else {
-                            base.$el.stop(true, true);
-                            base.$el.animate({
-                                scrollLeft: base.transX
-                            }, 250, base.transitionEnd);
+                            if ( base.options.useTrans ) {
+                                var transFlag = parseFloat(base.$article.css($u.transitionDuration)) > 0
+                                //
+                                if (transFlag) {
+                                    base.$article.unbind($u.transitionEndEvName)
+                                    base.$article.one($u.transitionEndEvName, base.transitionEnd)
+                                }
+
+                                // set transform property with new value
+                                base.cPage(nCp)
+                                base.pagesChanged() ? base.triggerPagesChanged() : 0
+
+                                var translPattern = $u.csstransforms3d && $html.hasClass('animate') ? $u.transl3DPattern : $u.transl2DPattern
+                                base.$article.css ( $u.transformCssPropName, (translPattern).replace(/@/g, - base.transX) )
+
+                                // just in case if transitions are not supported or not set
+                                // execute transitionEnd()
+                                ! transFlag ? base.transitionEnd() : 0
+                            } else {
+                                base.$el.stop(true, true);
+                                base.$el.animate({
+                                    scrollLeft: base.transX
+                                }, 250, base.transitionEnd);
+                            }
                         }
-                    }else {
+                    } else {
                         base.startPollingContentMetrics();
                     }
                 }
+            }else if ($.isNumeric(pNum) == true && pNum < base.fPage() && base.metaPrevUnitHref != null)
+            {
+                var href = base.metaPrevUnitHref
+                window.open(href, "_self")
+                $u.lsSet('jr:pm:init:phase', evt.LAST_PAGE)
+            }else if ($.isNumeric(pNum) == true && pNum > base.lPage() && base.metaNextUnitHref != null) {
+                var href = base.metaNextUnitHref
+                window.open(href, "_self")
             }
+            //console.info('pagemanager: goPage(): end: style=  %s', base.$article.attr('style'))   
         };
         //
         base.transitionEnd             = function (e) {
             //console.info('transitionEnd e.type = ' + (e == null ? "undefined" : e.type))
+            //console.info('PageManager: transitionEnd(): style=  %s', base.$article.attr('style'))   
             base.triggerPageTurnAfter();                                // trigger after event
             base.startPollingContentMetrics();
         };
@@ -599,7 +749,7 @@
         };
         // clickHandler (event)
         base.clickHandler           = function (e) {
-            if (e.type === 'click') {
+            if (e.type == 'click') {
                 var $t = $(e.currentTarget)
                 var _offsetP = ( e.clientX - $t.position().left ) / $t.innerWidth();
                 if (_offsetP <= 0.2 ) {
@@ -618,21 +768,21 @@
                 base._touch = true
             }
             // check that the touch was on left or right border
-            if (e.type === 'touchstart') {
-                base.$el.bind('touchend touchmove touchcancel', base.tapHandler);
-                base._touches = e.originalEvent.targetTouches.length
-                base._pageX = e.originalEvent.targetTouches[0].pageX
+            if (e.type == 'pointerdown') {
+                base.$el.on('pointerup pointermove', base.tapHandler);
+                //base._pageX = e.originalEvent.targetTouches[0].pageX
+                base._pageX = e.originalEvent.pageX
             }
             // move
             // touch move cancels tap, by reseting base._touchClientX value
-            if (e.type === 'touchmove' || e.type === 'touchcancel') {
+            if (e.type == 'pointermove' || e.type == 'pointercancel') {
                 base._pageX = null
             }
             // end
             // if event is touchend and there is value in base._touchClientX
             // the event considered as tap, otherwise swipe handler will
             // handle the event
-            if (e.type === 'touchend' && base._pageX != null) {
+            if (e.type == 'pointerup' && base._pageX != null) {
                 var _pageX      = base._pageX
                     _oW         = base.$el.outerWidth()
                     _lbW        = parseFloat(base.$el.css('border-left-width')),
@@ -646,8 +796,8 @@
                 base._pageX = null
             }
 
-            if (e.type === 'touchend' || e.type === 'touchcancel') {
-                base.$el.unbind('touchend touchmove touchcancel', base.tapHandler);
+            if (e.type == 'pointerup' || e.type == 'pointercancel') {
+                base.$el.unbind('pointerup pointermove pointercancel', base.tapHandler);
             }
 
             return true
@@ -656,22 +806,26 @@
         // FIXME - there should be a way to identify which article is active to apply keyboard events
         // need to think how to decide which <article> is active.
         base.kbdHandler = function(e) {
+            // console.error('PageManager: kbdHandler(): focused = %s document.activeElement = %s', $.trackFocus.focused().get(0), document.activeElement)
             var kc = e.keyCode,
                 $t  = $(e.target)
             
             // ignore key strokes if element controled by pagemanager (or its children or parents) is not focused
             if (base.$el.closest($t).length == 0 && $t.closest(base.$el).length == 0) return
             
-            if (kc === 9) { // tab key
-                e.preventDefault()
-            }else if (kc === 38 || kc === 37 || kc === 33 ) {         // up arrow | left arrow | page Down buttons
-                base.goPrevPage();
-            } else if (kc === 40 || kc === 39 || kc ===34) {    // down arrow | right arrow | page Up buttons
-                base.goNextPage();
-            } else if (kc === 35 ) {                // End button
-                base.goLastPage();
-            } else if (kc === 36 ) {                // Home button
-                base.goFirstPage();
+            if (base._pmState === pmState.PAGE) {
+                 // the viewport is wider than 6in
+                if (kc == 9) { // tab key
+                    e.preventDefault()
+                }else if (kc == 38 || kc == 37 || kc == 33 ) {         // up arrow | left arrow | page Down buttons
+                    base.goPrevPage();
+                } else if (kc == 40 || kc == 39 || kc == 34 || kc == 32) {    // down arrow | right arrow | page Up buttons
+                    base.goNextPage();
+                } else if (kc == 35 ) {                // End button
+                    base.goLastPage();
+                } else if (kc == 36 ) {                // Home button
+                    base.goFirstPage();
+                }
             }
         };
 
@@ -685,69 +839,101 @@
         base.eventHandler = function(e, o) {
             var et = e.type;
 
+            // console.info('PageManager: base.eventHandler(): et: %s', et)
+
             if ( !$.isPlainObject(o)) {o = { pn: base.fPage() }; }
 
-            if (et === evt.NEXT_PAGE) {
+            if (et == evt.NEXT_PAGE) {
                 base.goNextPage();
-            } else  if (et === evt.PREV_PAGE) {
+            } else  if (et == evt.PREV_PAGE) {
                 base.goPrevPage();
-            } else  if (et === evt.FIRST_PAGE) {
+            } else  if (et == evt.FIRST_PAGE) {
                 base.goFirstPage();
-            } else  if (et === evt.LAST_PAGE) {
+            } else  if (et == evt.LAST_PAGE) {
                 base.goLastPage();
-            } else  if (et === evt.GO_PAGE && $.isNumeric(parseFloat(o.pn)) ) {
+            } else  if (et == evt.GO_PAGE && $.isNumeric(parseFloat(o.pn)) ) {
                 base.goPage(parseFloat(o.pn));
-            } else  if (et === evt.GO_PAGE && $.isNumeric(parseFloat(o.po)) ) {
+            } else  if (et == evt.GO_PAGE && $.isNumeric(parseFloat(o.po)) ) {
                 base.goPage(base.ppOffset2Page(parseFloat(o.po)));
-            } else  if (et === evt.GO_PAGE && $.isNumeric(parseFloat(o.px)) ) {
+            } else  if (et == evt.GO_PAGE && $.isNumeric(parseFloat(o.px)) ) {
                 base.goPage(base.pxOffset2Page(parseFloat(o.px + base.contentPosLeft(true))));
-            } else  if (et === evt.GO_PAGE && typeof o.id === "string" && o.id !== '') {
+            } else  if (et == evt.GO_PAGE && typeof o.id == "string" && o.id !== '') {
+                // console.info('PageManager:eventHandler(): event %s to id = %s', evt.GO_PAGE, o.id)
                 base.goPage(base.id2Page(o.id));
-            } else  if (et === evt.GO_POS && o.pos != null && $.isNumeric(parseFloat(o.pos.left)) ) {
-                base.goPage(base.pxOffset2Page(parseFloat(o.pos.left + base.contentPosLeft(true))));
+            } else  if (et == evt.GO_POS && o.pos != null && $.isNumeric(parseFloat(o.pos.left)) ) {
+                if (base._pmState === pmState.SCROLL){
+                    base.goPage(base.pxOffset2Page(o.pos.top))
+                }else {
+                    base.goPage(base.pxOffset2Page(parseFloat(o.pos.left + base.contentPosLeft(true))));
+                }
             }
         };
 
         base.scrollHandler = function(e) {
-
+            // console.info('PageManager: base.scrollHandler()')
+            //console.trace()
             e.preventDefault();
             var et = e.type;
 
-            if (base.el.scrollLeft !== 0) {
-                var id = window.location.hash
-                if (id != null && id !== '') {
-                    base.$el.unbind('scroll', base.scrollHandler)
-                    base.stopPollingContentMetrics()
-                    base.calcMetrics()
-                    base.$el.scrollLeft(0)
-                    base.goPage(base.id2Page(id))
-                    base.$el.bind('scroll', base.scrollHandler)
-                    base.startPollingContentMetrics()
+            if (base._pmState === pmState.PAGE) {
+                if (base.el.scrollLeft !== 0
+                    || base.el.scrollTop !== 0) {
+                    
+                    var id = window.location.hash
+                    
+                    if (id != null && id !== '') {
+                        base.$el.unbind('scroll', base.scrollHandler)
+                        base.stopPollingContentMetrics()
+                        
+                        if (base.el.scrollLeft !== 0) {
+                            //console.info('PageManager: base.scrollHandler(): scrollLeft(0)')
+                            base.$el.scrollLeft(0)
+                        }
+
+                        if (base.el.scrollTop !== 0) {
+                            //console.info('PageManager: base.scrollHandler(): scrollTop(0)')
+                            base.$el.scrollTop(0)
+                        }
+                        
+                        //base.calcMetrics()
+                        //base.goPage(base.id2Page(id))
+                        base.$el.on('scroll', base.scrollHandler)
+                        base.startPollingContentMetrics()
+                    }
                 }
             }
-
-            return false;
+            // hack to avoid mousewheel event at the time of clicking on href with "#target_id"
+            base.wheelScrollLastTime = new Date().getTime() 
+            // console.info('wheelScrollLastTime = %s', base.wheelScrollLastTime)
+            //
+            return false
         }
-	
-	//	
-	base.mousewheel	= function (e, d, dx, dy) { // event, delta, deltaX, deltaY
-		// detect change in direction to reset accumulator
-		if ((base.mw.delta > 0 && d < 0 ) || (base.mw.delta < 0 && d > 0 )) // reset direction 
-			base.mw.deltaAcc = 0
-		base.mw.deltaAcc -= d
 
-		while (base.mw.deltaAcc >= 1 ) {
-			base.goNextPage()	
-			base.mw.deltaAcc--
-		} 
-	
-		while (base.mw.deltaAcc <= -1) {
-			base.goPrevPage()
-			base.mw.deltaAcc++
-		}
-		// save current delta value for detection of change in direction
-		base.mw.delta = d 
-	}
+    	//	
+    	base.mousewheelHandler	= function (e, d, dx, dy) { // event, delta, deltaX, deltaY
+            var wheelSrollStarted,
+                nowTime = new Date().getTime()
+
+            
+            if('wheelScrollLastTime' in base) {
+                if(nowTime - base.wheelScrollLastTime > 200 )
+                    wheelSrollStarted = true
+            } else {
+                wheelSrollStarted = true
+            }
+            
+            if (wheelSrollStarted) {
+                //console.info('PageManager: base.mousewheelHandler() ! deltaD = %s', Math.abs(d))
+
+                if (d < 0)
+                    base.goNextPage()
+                else if (d > 0)
+                    base.goPrevPage()
+            
+                base.wheelScrollLastTime = nowTime;
+            }
+    	}
+
         // *********** Run initializer
         base.init();
     };
@@ -770,4 +956,3 @@
     };
 
 })(jQuery);
-

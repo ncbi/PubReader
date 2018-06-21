@@ -1,0 +1,38 @@
+﻿<article data-type="helper">
+  <header>
+    <img id="help-ncbi-logo-book" data-src="{$path}img/help-ncbi.png"/>
+    <div>Using PubReader™</div>
+  </header>
+  <div><table><tr><td><img data-src="{$path}img/bookshelf/help-booksnav.png"/></td>
+    <td>The navigation button offers a fast way to directly navigate to the book information page, Table of Contents, or different sections of the chapter.</td></tr>
+    </table>
+  </div>
+  <div><table><tr><td><img data-src="{$path}img/bookshelf/help-booksinfo.png"/></td>
+    <td>Use the question mark icon to switch to to classic view, send feedback, or learn about PubReader.</td></tr>
+  </table>
+  </div>
+  <div><table><tr><td><img data-src="{$path}img/bookshelf/help-booksgear.png"/></td>
+    <td>Use the gear icon to access size/layout options. You may increase/decrease the font size and select from auto-calculated, single, or two-column layouts.  You may also download the PDF if available or obtain a printable view.</td></tr>
+    </table>
+  </div>
+  <div><table><tr><td><img data-src="{$path}img/help-kbd.png"/></td>
+      <td>Arrow keys and page up/down keys turn pages via the keyboard. Home and end keys bring you to the start and end of an article.</td></tr>
+    </table>
+  </div>
+  <div><table><tr><td><img data-src="{$path}img/bookshelf/help-booksread.png"/></td>
+    <td>Swipe to turn pages on a touch device. Pages also have clickable regions on each side. The icon on the bottom right of pages (arrow) toggles the bottom area between a figure bar and a progress bar. Clickable arrows at the top take you to the next or previous chapter; clickable arrows on the bottom left turn the pages.</td></tr>
+  </table>
+  </div>
+  <div><table><tr><td><img data-src="{$path}img/bookshelf/help-booksfind.png"/></td>
+    <td>Use the magnifying glass icon to activate the search feature. Enter term(s) in the text box and click on the magnifying glass icon to start the search. Current term is highlighted in orange; use the arrows at the bottom to advance through items.</td></tr>
+  </table>
+  </div>
+  <div><table><tr><td><img data-src="{$path}img/bookshelf/help-booksfigs.png"/></td>
+    <td>Mousing over a figure strip icon (arrows) will provide a preview of the figure or table. Clicking on the icon will bring the item into a full-view page, complete with caption. On touch devices, simply click on the icon to view the full image or table.</td></tr>
+    </table>
+  </div>  
+  <div><table><tr><td><img data-src="{$path}img/bookshelf/help-bookshome.png"/></td>
+    <td>Click on NCBI Bookshelf to get to the home page and to browse all titles in Bookshelf.</td></tr>
+    </table>
+  </div>
+</article>

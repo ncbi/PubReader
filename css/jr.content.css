@@ -1,4 +1,3 @@
-/* $Id: jr.content.css 17728 2013-08-27 14:28:46Z kolotev $ */
 /*
   This work is in the public domain and may be reproduced, published or
   otherwise used without the permission of the National Library of Medicine (NLM).
@@ -12,12 +11,13 @@
   warranties, express or implied, including warranties of performance,
   merchantability or fitness for any particular purpose.
 */
+/* Commit: $Id$ */
 
 /*** Content Typography ***/
 
 /* General declarations */
 
-body{
+body {
     background-color: white;
     font: 12pt/1.75 arial,helvetica,clean,sans-serif
 }
@@ -25,6 +25,15 @@ body{
 p, pre, blockquote, dl, menu, ol, ul {
     margin-top: 0.875em;
     margin-bottom: 0.875em;
+    display: block;
+}
+
+blockquote.pullquote {
+    position: relative;
+    font-style: italic;
+    font-size: 1.125em;
+    line-height: 1.5;
+    margin: 0.875em 1em;
 }
 
 img {
@@ -38,21 +47,37 @@ img, figure, .iconblock, a {
     box-sizing: border-box;
 }
 
+/*  optional standard helpers */
+.uppercase{text-transform: uppercase;letter-spacing:.06em;}
+.caps{text-transform:capitalize;}
+.small-caps{text-transform: lowercase; font-variant:small-caps;letter-spacing:.02em;}
+.overline{text-decoration:overline;}
+.roman{font-style:normal}
+.greek{font-family:Georgia, Times,"Times New Roman", serif}
+
 /* article */
 article {
-    font: 12pt/1.75 Georgia, "Times New Roman", Times, serif; /* 16/28 */
+    /*font: 12pt/1.75 Georgia, "Times New Roman", Times, serif;*/ /* 16/28 */
+    font: 13pt/1.75 "Times New Roman", serif;
     word-wrap:break-word;
 }
 
-a{
+a {
     color:#2f4a8b;
     text-decoration: none;
 }
-a:hover, article a:active{
+
+a:hover, article a:active {
     color:#985735
 }
-a:visited{
+
+a:visited {
     color:#642a8f
+}
+
+a[disabled], a[disabled]:active, a[disabled]:visited, a[disabled]:hover {
+    color: #ddd;
+    background-color: #f8f8f8;
 }
 
 /* journal / publisher branding */
@@ -72,6 +97,7 @@ article .jrb {
     padding: 2pt 6pt;
     margin: auto;
     max-width: 6in;
+    font-family: sans-serif;
 }
 
 article .jrb.ms {
@@ -84,13 +110,13 @@ article .jrb.ms {
 
 article .jrb .t a,
 article .jrb .t {
-    color: #FFF;
+    color: #464646;
 }
 
 article .jrb .t {
     text-align: center;
-    font-size: 15.75pt;
-    line-height: 1.5em;
+    font-size: 18pt;
+    line-height: 1.5;
 }
 
 article .jrb .p {
@@ -99,22 +125,8 @@ article .jrb .p {
     font-size: 10pt;
 }
 
-article .jrb .p {
-    text-shadow: -1px -1px 3px #bbb, 1px 1px 3px #bbb;
-}
-
-
-article .jrb.ms .p {
-    text-shadow: -1px -1px 3px #FFF, 1px 1px 3px #FFF;
-}
-
-article .jrb .t,
 article .jrb.ms .ams {
-    text-shadow: 1px 1px 3px #444, 1px 1px 5px #444
-}
-
-article .jrb.ms .ams {
-    color: #fe9;
+    color: #A64;
     float: left;
     font-size: 10pt;
 }
@@ -128,19 +140,29 @@ article .jrb.ms .ams {
     border: 1px solid  hsl(21, 60%, 80%);
     padding: 6pt;
     text-align: center;
-    font-family: "Archivo Narrow", "Arial Narrow", Calibri, "Trebuchet MS", ArialMT, Arial, sans-serif;
-}
-
-.vip-notice.retraction {
+    font-family: "Archivo Narrow", "Arial Narrow", "Trebuchet MS", ArialMT, Arial, sans-serif;
     background-color: hsl(48,100%,90%);
+    margin: 0.875em 0;
+    font-size: 0.9375em;
+    line-height: 1.5;
 }
 
+.vip-notice .notice,
 .vip-notice strong {
     text-transform: uppercase;
+    display: block;
 }
 
-.vip-notice.retraction strong {
+.vip-notice.retraction .notice {
     color: red;
+}
+
+.vip-notice p:first-child {
+    margin-top: 0;
+}
+
+.vip-notice p:last-child {
+    margin-bottom: 0;
 }
 
 /* headers and front matter */
@@ -159,7 +181,7 @@ article h3,
 article h4,
 article h5,
 article h6 {
-    font-family: "Archivo Narrow", "Arial Narrow", Calibri, "Trebuchet MS", ArialMT, Arial, sans-serif;
+    font-family: "Archivo Narrow", "Arial Narrow", "Trebuchet MS", ArialMT, Arial, sans-serif;
     margin-bottom: 0;
     font-weight: normal;
 }
@@ -174,22 +196,23 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 article h1,
-article h2 {font-size: 1.5em; line-height: 1.5; margin-top: 1.1667em;} /*24/36 margin-top=28 bold black*/
-article h2 {line-height: 1.1667; color: hsl(21, 45%, 50%);} /*24/28 margin-top=28 normal copper*/
-article h3 {font-size: 1.3125em; line-height: 1.3333; margin-top: 1.3333em; color: hsl(21, 45%, 40%);} /*21/28 margin-top=28 normal copper*/
-article h4 {font-size: 1.1250em; line-height: 1.5556; margin-top: 1.5556em; color: hsl(21, 45%, 35%);} /*18/28 margin-top=28 normal copper*/
+article h2 {font-size: 1.5em;    line-height: 1.1667; margin: 1.1667em 0 .5834em 0;} /*24/36 margin-top=28 bold black*/
+article h2 {color: hsl(21, 45%, 50%)}
+article h3 {font-size: 1.3125em; line-height: 1.3333; margin: 1.3333em 0 .6667em 0; color: hsl(21, 45%, 40%);} /*21/28 margin-top=28 normal copper*/
+article h4 {font-size: 1.1250em; line-height: 1.5556; margin: 1.5556em 0 .7778em 0; color: hsl(21, 45%, 35%);} /*18/28 margin-top=28 normal copper*/
 article h5,
-article h6 {font-size: 1em; line-height: 1.75; margin-top: 1.75em; color: hsl(21, 45%, 30%)} /*16/28 margin-top=28 normal copper*/
-article h6 {color: hsl(21, 40%, 25%)} /*16/28 margin-top=28 normal copper*/
+article h6 {font-size: 1em;      line-height: 1.75;   margin: 1.7500em 0 .8750em 0;} /*16/28 margin-top=28 normal copper*/
+article h5 {color: hsl(21, 45%, 30%)}
+article h6 {color: hsl(21, 40%, 25%)} 
+
 
 article strong {
-    font-size: 0.875em;
-    line-height: 2;
+    font-size: 0.925em;
 }
 
 article header h1,
 article .fm-sec h1 {
-    font-size: 1.6em;
+    font-size: 1.7067em;
 }
 
 article header h6,
@@ -209,7 +232,6 @@ article .fm-sec .contribs {
 article header strong,
 article .fm-sec strong {
     font-size: 1em;
-    line-height: 1.75;
 }
 
 /* front matter panels */
@@ -247,12 +269,14 @@ article .inline {
 table {
     table-layout:fixed;
     max-width: 100%;
+    border-collapse: separate;
+    border-spacing:0.5em;
 }
 
 table.rendered  td,
 table.rendered  th {
     vertical-align: top;
-    padding: .2em;
+    padding: .2em .4em; /* vert horiz */
 }
 
 /* we want to clip large tables in the main content view, but not in table view.
@@ -263,8 +287,14 @@ article[data-type=main] .large_tbl {
 
 .iconblock, table, figure {
     font-size: 0.875em;
-    line-height: 1.5;
+    line-height: 1.714;
     margin: 1.1429em 0;
+}
+
+.tblwrap-foot {
+    font-size: 0.8em;
+    line-height: 1.875;
+    margin: 1.25em 0
 }
 
 .iconblock, figure {
@@ -378,6 +408,10 @@ span.MathJax_SVG svg { /* inline math */
     max-width: none !important;
 }
 
+#MathJax_MenuFrame {
+  z-index: 1000 !important
+}
+
 /* custom underlining */
 
 span.underline {
@@ -417,6 +451,7 @@ p.verse-group {
 /* tileshop related definitions */
 .ts_canvas {
     display: inline-block;
+    max-width: 100%;
 }
 
 .ts_canvas img {
@@ -457,13 +492,181 @@ ul li.a_label div.a_label {
 
 /* suppdata */
 .suppmat {
-	border: #E4E4E4 double 4pt;
-	border-radius: 4pt;
-	padding: 6pt;
-	margin: 1.1429em 0; 
-	-webkit-column-break-inside: avoid;
-	-moz-column-break-inside: avoid;
-	column-break-inside: avoid;
+  border: #E4E4E4 double 4pt;
+  border-radius: 4pt;
+  padding: 6pt;
+  margin: 1.1429em 0;
+  -webkit-column-break-inside: avoid;
+  -moz-column-break-inside: avoid;
+  column-break-inside: avoid;
+}
+/* force alignment */
+.align_center {
+    text-align: center;
+}
+
+.align_right {
+    text-align: right;
+}
+
+.left {
+    float: left;
+}
+
+/* multulingual abstracts, titles */
+
+
+article h1[lang],
+article div[lang],
+article span[lang]
+
+{
+    display: none;
+}
+
+.slang-all h1[lang],
+.slang-ar h1[lang="ar"],
+.slang-bg h1[lang="bg"],
+.slang-cs h1[lang="cs"],
+.slang-da h1[lang="da"],
+.slang-de h1[lang="de"],
+.slang-en h1[lang="en"],
+.slang-es h1[lang="es"],
+.slang-fa h1[lang="fa"],
+.slang-fi h1[lang="fi"],
+.slang-fr h1[lang="fr"],
+.slang-ga h1[lang="ga"],
+.slang-hu h1[lang="hu"],
+.slang-is h1[lang="is"],
+.slang-it h1[lang="it"],
+.slang-ja h1[lang="ja"],
+.slang-ko h1[lang="ko"],
+.slang-my h1[lang="my"],
+.slang-ms h1[lang="ms"],
+.slang-nl h1[lang="nl"],
+.slang-no h1[lang="no"],
+.slang-pl h1[lang="pl"],
+.slang-pt h1[lang="pt"],
+.slang-ro h1[lang="ro"],
+.slang-ru h1[lang="ru"],
+.slang-sk h1[lang="sk"],
+.slang-sl h1[lang="sl"],
+.slang-sv h1[lang="sv"],
+.slang-tr h1[lang="tr"],
+.slang-uk h1[lang="uk"],
+.slang-zh h1[lang="zh"],
+.slang-all div[lang],
+.slang-ar div[lang="ar"],
+.slang-bg div[lang="bg"],
+.slang-cs div[lang="cs"],
+.slang-da div[lang="da"],
+.slang-de div[lang="de"],
+.slang-en div[lang="en"],
+.slang-es div[lang="es"],
+.slang-fa div[lang="fa"],
+.slang-fi div[lang="fi"],
+.slang-fr div[lang="fr"],
+.slang-ga div[lang="ga"],
+.slang-hu div[lang="hu"],
+.slang-is div[lang="is"],
+.slang-it div[lang="it"],
+.slang-ja div[lang="ja"],
+.slang-ko div[lang="ko"],
+.slang-my div[lang="my"],
+.slang-ms div[lang="ms"],
+.slang-nl div[lang="nl"],
+.slang-no div[lang="no"],
+.slang-pl div[lang="pl"],
+.slang-pt div[lang="pt"],
+.slang-ro div[lang="ro"],
+.slang-ru div[lang="ru"],
+.slang-sk div[lang="sk"],
+.slang-sl div[lang="sl"],
+.slang-sv div[lang="sv"],
+.slang-tr div[lang="tr"],
+.slang-uk div[lang="uk"],
+.slang-zh div[lang="zh"]
+{
+    display: block !important;
+}
+
+.slang-all span[lang],
+.slang-ar span[lang="ar"],
+.slang-bg span[lang="bg"],
+.slang-cs span[lang="cs"],
+.slang-da span[lang="da"],
+.slang-de span[lang="de"],
+.slang-en span[lang="en"],
+.slang-es span[lang="es"],
+.slang-fa span[lang="fa"],
+.slang-fi span[lang="fi"],
+.slang-fr span[lang="fr"],
+.slang-ga span[lang="ga"],
+.slang-hu span[lang="hu"],
+.slang-is span[lang="is"],
+.slang-it span[lang="it"],
+.slang-ja span[lang="ja"],
+.slang-ko span[lang="ko"],
+.slang-my span[lang="my"],
+.slang-ms span[lang="ms"],
+.slang-nl span[lang="nl"],
+.slang-no span[lang="no"],
+.slang-pl span[lang="pl"],
+.slang-pt span[lang="pt"],
+.slang-ro span[lang="ro"],
+.slang-ru span[lang="ru"],
+.slang-sk span[lang="sk"],
+.slang-sl span[lang="sl"],
+.slang-sv span[lang="sv"],
+.slang-tr span[lang="tr"],
+.slang-uk span[lang="uk"],
+.slang-zh span[lang="zh"]
+{
+    display: inline !important;
+}
+
+h1[lang="ar"], 
+div[lang="ar"],
+span[lang="ar"]
+{
+    text-align: right;
+    direction: rtl;
+}
+
+a.lang-sw.selected,
+a.lang-sw.selected:visited
+{
+    color: #666;
+    text-decoration: none !important;
+}
+
+.mul-switcher {
+    text-align: right;
+    padding-left: 20%;
+}
+
+/* end of multulingual abstracts, titles */
+
+a.oemail {
+    unicode-bidi: bidi-override;
+    direction: rtl;
+    white-space: nowrap;
+}
+
+/* class for named-content see PMC-27848*/
+.dna-sequence {
+    word-break:break-all;
+    font-style: normal;
+}   
+
+/* PMC-27757 copyright and reuse links */
+.fm-reuse {
+    margin-left: 3em;
+}
+
+.fm-copyright-license {
+    margin: 0;
+    margin-bottom: 1.75em;
 }
 
 /* print media definitions */

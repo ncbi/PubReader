@@ -1,4 +1,4 @@
-/* $Id: jquery.jr.historykeeper.js 13234 2012-11-19 15:26:39Z maloneyc $
+/* $Id: jquery.jr.historykeeper.js 21813 2014-05-09 20:29:43Z kolotev $
 
     Module:
 
@@ -81,8 +81,8 @@
             // bind hash hange event
             window.addEventListener("hashchange", base.hashchangeHandler);
             //bind custom event
-            base.$el.bind(evt.MARK_HP, base.eventHandler);
-            base.$el.bind('jr:pm:pages:changed', base.eventHandler);
+            base.$el.on(evt.MARK_HP, base.eventHandler);
+            base.$el.on('jr:pm:pages:changed', base.eventHandler);
 
             // initial check of hash
             base.hashchangeHandler()

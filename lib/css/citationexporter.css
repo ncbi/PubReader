@@ -1,0 +1,28 @@
+
+.citationexporter-dialog {
+
+}
+
+.citationexporter-dialog th,
+.citationexporter-dialog td
+{
+	padding: 1em;
+}
+
+.citationexporter-dialog td {
+	background: #f2f2f2;
+}
+
+.citationexporter-header {
+	margin: 1em 0 1em 0;
+	font-style: italic;
+}
+
+.citationexporter-footer {
+	margin: 1em 0 1em 0;
+	text-align: center;
+}
+
+.citationexporter-footer a {
+	margin-left: 2em;
+}

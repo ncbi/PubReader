@@ -82,3 +82,15 @@ Currently, the test files load MathJax version 2.1, from their CDN.  See
 test/test-page.xsl.
 
 
+## citation exporter widget
+
+Files:
+* lib/js/jquery.citationexporter.js
+
+NCBI's jQuery plugin for citation exporter backend
+JIRA ticket [PMC-19553](https://jira.ncbi.nlm.nih.gov/browse/PMC-19553). 
+More documentation in [confluence](https://confluence.ncbi.nlm.nih.gov/display/PMC/Citation+exporter)
+
+source of this pluging is at the Bitbucket
+ssh://git@bitbucket.be-md.ncbi.nlm.nih.gov:9418/pmc/citation-exporter-widget.git
+                                        

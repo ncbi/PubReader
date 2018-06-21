@@ -1,4 +1,4 @@
-/* $Id: jquery.jr.panel.typo.js 13234 2012-11-19 15:26:39Z maloneyc $
+/* $Id: jquery.jr.panel.typo.js 21813 2014-05-09 20:29:43Z kolotev $
 
     Module:
 
@@ -69,7 +69,7 @@
 
         // Add a reverse reference to the DOM object
         base.$el.data("jr.PanelTypo", base);
-        base.clickEvName = $u.touch ? 'touchend' : 'click'
+        base.clickEvName = 'pointerup'
 
         //
         base.init = function(){
@@ -87,6 +87,19 @@
             base.initProp(colCountClassNameMap, 'colCountClassName')
             base.initProp(animateClassNameMap, 'animateClassName')
 
+            // verify if the local storage holds info about font size
+            if ($u.lsGet('fontSizeClassName') == null)
+                $('html').addClass(base.fontSizeClassName)
+            // verify if the local storage holds info about coulumn name config
+            if ($u.lsGet('colCountClassName') == null)
+                $('html').addClass(base.colCountClassName)
+            
+            // set jr-col-1-force in <html/> element if 
+            // <meta name="jr-col-layout" content="1"/> is present 
+            // to force rendering of content in single column
+            if (parseInt($('meta[name=jr-col-layout]').attr('content')) == 1)
+                $('html').addClass('jr-col-1-force')
+
             // read Modernizir class names
 
             // set one of the column buttons to "on" state
@@ -94,21 +107,23 @@
             base.setupButtons(colCountMap, 'colCountClassName', true)
             base.setupButtons(animateMap, 'animateClassName', true)
 
-            base.$fontSmaller.bind(base.clickEvName, base.handleFontSmaller)
-            base.$fontLarger.bind(base.clickEvName, base.handleFontLarger)
-            base.$colAuto.bind(base.clickEvName, base.handleColAuto)
-            base.$col1.bind(base.clickEvName, base.handleCol1)
-            base.$col2.bind(base.clickEvName, base.handleCol2)
-            base.$animYes.bind(base.clickEvName, base.handleAnimYes)
-            base.$animNo.bind(base.clickEvName, base.handleAnimNo)
+            base.$fontSmaller.on(base.clickEvName, base.handleFontSmaller)
+            base.$fontLarger.on(base.clickEvName, base.handleFontLarger)
+            base.$colAuto.on(base.clickEvName, base.handleColAuto)
+            base.$col1.on(base.clickEvName, base.handleCol1)
+            base.$col2.on(base.clickEvName, base.handleCol2)
+            base.$animYes.on(base.clickEvName, base.handleAnimYes)
+            base.$animNo.on(base.clickEvName, base.handleAnimNo)
+
+            
         }
 
         // get index in array based on value
         base.value2Idx = function (arr, value) {
             var i, idx = null
-            if ( typeof value === "string" && $.isArray(arr))
+            if ( typeof value == "string" && $.isArray(arr))
                 for (i = 0; i < arr.length; i++)
-                    value.localeCompare(arr[i]) === 0 ? idx = i : 0
+                    value.localeCompare(arr[i]) == 0 ? idx = i : 0
 
             return idx
         }
@@ -133,36 +148,50 @@
         //
         base.prevFontSizeClassName = function(cn) {
             var idx = base.value2Idx(fontSizeClassNameMap, cn)
-            return idx != null ? fontSizeClassNameMap[idx-1] : null
+            return idx != null && idx > 0 ? fontSizeClassNameMap[idx-1] : null
         }
 
         //
         base.nextFontSizeClassName = function(cn) {
             var idx = base.value2Idx(fontSizeClassNameMap, cn)
-            return idx != null ? fontSizeClassNameMap[idx+1] : null
+            return idx != null && idx < fontSizeClassNameMap.length - 1 ? fontSizeClassNameMap[idx+1] : null
         }
 
-        //
-        base.handleFontSmaller  = function (e) {
-            var ccn = base.fontSizeClassName,           // current font size class name
-                pcn = base.prevFontSizeClassName(ccn)   // previous font size class name
+        // resolve touchend and mouseup events properly
+        // on touch and mouse capable devices
+        // by preventing default event handling action
+        base.preventDefaultTM   = function  (e) {
+            if (e.type == "pointerup")
+                e.preventDefault()
+        }
 
-            if (pcn != null) {
-                $u.lsSet('fontSizeClassName', base.fontSizeClassName=pcn)
-                $('html').removeClass(ccn).addClass(pcn)
+        // 
+        base.switchFontSize = function  (s) {
+            var ccn = base.fontSizeClassName,           // current font size class name
+                cn
+
+            if (s == 'smaller')
+                cn = base.prevFontSizeClassName(ccn)
+            if (s == 'larger')
+                cn = base.nextFontSizeClassName(ccn)
+            if (cn != null) {
+                $u.lsSet('fontSizeClassName', base.fontSizeClassName = cn)
+                $('html').removeClass(ccn).addClass(cn)
             }
+        }
+        //
+        
+        base.handleFontSmaller  = function (e) {
+            base.preventDefaultTM(e)
+            base.switchFontSize('smaller')
         }
 
         //
         base.handleFontLarger   = function (e) {
-            var ccn = base.fontSizeClassName,           // current font size class name
-                ncn = base.nextFontSizeClassName(ccn)   // next font size class name
-
-            if (ncn != null) {
-                $u.lsSet('fontSizeClassName', base.fontSizeClassName=ncn)
-                $('html').removeClass(ccn).addClass(ncn)
-            }
+            base.preventDefaultTM(e)
+            base.switchFontSize('larger')
         }
+
         // map - map of class names and property name the script
         // cn  - className of the activated button
         // state - turn state of the button on or off with true and false values
@@ -180,7 +209,8 @@
         }
 
         //
-        base.activateButton = function (map, propName, cn) {
+        base.activateButton = function (e, map, propName, cn) {
+            base.preventDefaultTM(e)
             base.setupButtons(map, propName, false)
             base[propName] = cn
             base.setupButtons(map, propName, true)
@@ -188,23 +218,23 @@
 
         //
         base.handleColAuto      = function (e) {
-            base.activateButton(colCountMap, 'colCountClassName', 'jr-col-auto')
+            base.activateButton(e, colCountMap, 'colCountClassName', 'jr-col-auto')
         }
         //
         base.handleCol1      = function (e) {
-            base.activateButton(colCountMap, 'colCountClassName', 'jr-col-1')
+            base.activateButton(e, colCountMap, 'colCountClassName', 'jr-col-1')
         }
         //
         base.handleCol2      = function (e) {
-            base.activateButton(colCountMap, 'colCountClassName', 'jr-col-2')
+            base.activateButton(e, colCountMap, 'colCountClassName', 'jr-col-2')
         }
         //
         base.handleAnimYes    = function (e) {
-            base.activateButton(animateMap, 'animateClassName', 'animate')
+            base.activateButton(e, animateMap, 'animateClassName', 'animate')
         }
         //
         base.handleAnimNo    = function (e) {
-            base.activateButton(animateMap, 'animateClassName', 'no-animate')
+            base.activateButton(e, animateMap, 'animateClassName', 'no-animate')
         }
 
         // Run initializer
@@ -212,7 +242,7 @@
     };
 
     $.jr.PanelTypo.defaultOptions = {
-        fontSizeClassName: 'jr-fs-13',
+        fontSizeClassName: 'jr-fs-12',
         colCountClassName: 'jr-col-auto',
         animateClassName: 'no-animate'
     };

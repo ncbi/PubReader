@@ -1,4 +1,4 @@
-/* $Id: jquery.jr.pageturnsensor.js 13234 2012-11-19 15:26:39Z maloneyc $
+/* $Id: jquery.jr.pageturnsensor.js 21813 2014-05-09 20:29:43Z kolotev $
     Module:
 
         JATS Reader's Page Turn Button
@@ -13,10 +13,11 @@
 
         call it as :
             // associate with left button
-            $('#jr-pm-left').jr_PageTurnSensor({action: 'next', actionEv: 'jr:pm:go:next:page', piEv: 'jr:pm:pages:changed', poc: '#jr-content'})
+            $('#jr-pm-left').jr_PageTurnSensor({action: 'next', actionEv: 'jr:pm:go:next:page', piEv: 'jr:pm:pages:changed', poc: '#jr-content', iUnit: true})
             // associate with right button
-            $('#jr-pm-right').jr_PageTurnSensor({action: 'prev', actionEv: 'jr:pm:go:prev:page', piEv: 'jr:pm:pages:changed' poc: '#jr-content'})
+            $('#jr-pm-right').jr_PageTurnSensor({action: 'prev', actionEv: 'jr:pm:go:prev:page', piEv: 'jr:pm:pages:changed' poc: '#jr-content', iUnit: true})
 
+        @iUnit - set to true if you have meta tags for next or previuos unit (articles, chapters) in you domain
 
 */
 /*
@@ -45,6 +46,7 @@
     // Options
     //      @param action   - indicator of page turning destination [next, prev, first, last]
     //      @param poc      - Point of Communication selector
+    //      @param iUnit    - flag indicating inter unit navigation (between chapters, articles) next/previuos.
     $.jr.PageTurnSensor = function(el, options){
         // To avoid scope issues, use 'base' instead of 'this'
         // to reference this class from internal events and functions.
@@ -52,7 +54,7 @@
 
         // this plugin depends on the selector 'directionIncrement' and 'pocSelector'
         // if it was not passed, there is nothing to show
-        if ( options.poc    == null ) {console.error('PageTurnSensor: Point Of Content (poc) with Page Manager is not provided'); return}
+        if ( options.poc    == null ) {console.error('PageTurnSensor: Point Of Contact (poc) with Page Manager is not provided'); return}
         if ( options.action == null ) {console.error('PageTurnSensor: action is not provided'); return}
         if ( options.actionEv == null ) {console.error('PageTurnSensor: actionEv is not provided'); return}
         if ( options.piEv == null ) {console.error('PageTurnSensor: piEv is not provided'); return}
@@ -67,27 +69,40 @@
         // Add a reverse reference to the DOM object
         base.$el.data("jr.PageTurnSensor", base);
         //
-        base.clickEvName = $u.touch ? 'touchend' : 'click'
+        base.clickEvName = 'pointerup'
 
         //
         base.init = function(){
 
             base.options = $.extend({},$.jr.PageTurnSensor.defaultOptions, options);
 
+            //
+            base.p = {p: null, lp: null, nu: null, pu: null};   // p - current page; lp - last page; 
+                                                                // nu - next unit (values null or non null value); 
+                                                                // pu - previuos unit (values null or non null value)
+
             // initialization code here
             base.$poc       = $(base.options.poc)
-            base.$el.bind(base.clickEvName, base.clickHandler)          // attach event handler to handle page turns
-            base.$poc.bind(base.options.piEv, base.piHandler)           // monitor paging info to change own state
+            base.$el.on('click', base.clickHandler)          
+            base.$el.on(base.clickEvName, base.pointerUpHandler)      // attach event handler to handle page turns
+            base.$poc.on(base.options.piEv, base.piHandler)           // monitor paging info to change own state
         };
 
 
         // *********** Handle Events
 
-        // activate clicks and notify page manager to tunr next o previous page
+        // activate clicks and notify page manager to turn next o previous page
         base.clickHandler = function(e){
-            base.options.actionEv != null
-                ? base.$poc.trigger(base.options.actionEv)
-                : 0
+            e.preventDefault()
+            return false;
+        };
+        //
+        base.pointerUpHandler = function(e){
+            e.stopPropagation()
+
+            if (base.options.actionEv != null)
+                base.$poc.trigger(base.options.actionEv)
+
         };
 
         // handle page information
@@ -99,20 +114,22 @@
 
             if ( p.pn != null && p.lp != null) {
 
-                if ( (base.options.action === 'prev' || base.options.action === 'first') ) {
-                    if ( p.pn === 1 ) {
+                if ( (base.options.action == 'prev' || base.options.action == 'first') ) {
+                    if ( p.pn == 1 && p.pu == null) { 
                         base.$el.addClass('hidden')
                     }else {
                         base.$el.removeClass('hidden')
                     }
-                }else if ( (base.options.action === 'next' || base.options.action === 'last') ) {
+                }else if ( (base.options.action == 'next' || base.options.action == 'last') ) {
 
-                    if ( p.pn === p.lp ) {
+                    if ( p.pn == p.lp && p.nu == null) { 
                         base.$el.addClass('hidden')
                     }else {
                         base.$el.removeClass('hidden')
                     }
                 }
+                //
+                base.p = p
             }
 
             return true;
@@ -125,7 +142,8 @@
 
     $.jr.PageTurnSensor.defaultOptions = {
         action: 'next',     // possible values are 'next', 'prev', 'first', 'last'
-        poc: null
+        poc: null,
+        iUnit: false
     };
 
     $.fn.jr_PageTurnSensor = function(options){
