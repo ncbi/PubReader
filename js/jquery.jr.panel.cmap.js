@@ -1,4 +1,4 @@
-/* $Id: jquery.jr.panel.cmap.js 14983 2013-03-22 19:47:47Z kolotev $
+/* $Id: jquery.jr.panel.cmap.js 21813 2014-05-09 20:29:43Z kolotev $
 
     Module:
 
@@ -14,10 +14,6 @@
         overall picture of the content in summary like view
         it collects:
             h2 section titles
-            figures (icons or/and labels)
-            tables
-            videos
-
 
     Usage:
 
@@ -66,18 +62,53 @@
             base.mapList = $('article h2[id]')
             base.$cnt    = base.$el.find('.cnt')
 
-            base.$cnt.length == 1 ?
-                base.mapList.each( function () {
-                    var $t = $(this),
-                        _id = $t.attr('id')
-                    $('<a href="#' + _id + '"></a>')
-                        .on('click', base.handleLinks)
-                        .append($t.contents().clone())
-                        .data('rid', _id)
-                        .attr('style', $t.attr('style'))
-                        .appendTo( base.$cnt );
-                }) : 0
-            base.$poc.bind("jr:pm:pages:changed", $.throttle(1000, base.pagesChangedHandler))
+            if (base.$cnt.length == 1) {
+                // wrap existing anchors into ul list
+                var $aList      = base.$cnt.children().filter('a'),
+                    $aSelect    = $aList.has('.select').last(),
+                    $aSelected
+
+                // check for presence of anchor with class expand
+                // or treat last anchor in the list as the one
+                // which need to be selected with h2 elements.
+                $aSelect.length == 0 && $aList.length > 0 
+                    ? (base.mapList.length > 0 ? $aSelected = $aList.last() : 0) 
+                    : $aSelected = $aSelect
+
+                if ($aSelected != null && $aSelected.length > 0)
+                    $aSelected.removeClass("select").addClass("selected")
+                        .prop("onclick", null).removeProp("onclick").removeAttr("href onclick target")
+
+                // wrap all existing anchors into <ul>
+                if ($aList.length > 0) {
+                    var $ul = $('<ul>')
+                    $aList.each( function () {
+                        $(this).appendTo($('<li>').appendTo($ul))
+                    })
+                    $ul.appendTo( base.$cnt )
+                }
+                // create a new list from h2 elements and append it into expanded
+                // related <li> element
+                //
+                if (base.mapList.length > 0) {
+                    var $ulCmap = $('<ul>')
+                    base.mapList.each( function () {
+                            var $t = $(this),
+                                _id = $t.attr('id')
+                                
+                            $('<a href="#' + _id + '"></a>')
+                                .on('click', base.handleLinks)
+                                .append($t.contents().clone())
+                                .data('rid', _id)
+                                .attr('style', $t.attr('style'))
+                                .appendTo( $('<li>').appendTo( $ulCmap ) )
+                                
+                    })
+                    $ulCmap.appendTo( $aList.length == 0 ?  base.$cnt  : $aSelected.parent() )
+                }
+            }
+            base.$poc.on("jr:pm:pages:changed", $.throttle(1000, base.pagesChangedHandler))
+            base.$el.on("jr:panel:show:after", base.AfterShowHandler);
         };
 
        //
@@ -91,14 +122,16 @@
         };
         //
         base.updateMapHighliting = function() {
-            base.$cnt.children().each (function() {
+            var $a = base.$cnt.find('a')
+            $a.each (function() {
                 var $t = $(this)
                 $t.data('page', base.pm.id2Page($t.data('rid')))
             });
 
-            base.$cnt.children().each (function() {
+            $a.each (function(i) {
                 var $t = $(this),
-                    $next = $t.next();
+                    $next = $($a[i+1])
+                
                 if ( $t.data('page') <= base.pi.pn
                       &&  ($next.length === 0
                            || base.pi.pn < $next.data('page')
@@ -112,6 +145,24 @@
             });
         };
 
+        // handle abstract headers in other languages
+        // if the h2 is not visible, then we want to hide it (with hidden class)
+        // otherwise show it by removing "hidden" class.
+        base.AfterShowHandler = function() {
+            var $a = base.$cnt.find('a')
+            
+            $a.each (function(i) {
+                var $t = $(this),
+                    $p = $t.parent()
+
+                if ( typeof $t.data('rid') == "undefined"
+                        || $('#' + $t.data('rid')).is(':visible') )
+                    $p.removeClass('hidden')
+                else
+                    $p.addClass('hidden')
+            })
+        }        
+
         //
         base.closePanel          = function (e) {
             e != null ? e.preventDefault() : null;
@@ -121,8 +172,7 @@
 
         //
         base.handleLinks     = function (e) {
-	    window.location.hash = '' // PMC-15846
-            var $t = $(this)
+            window.location.hash = '' // PMC-15846
             base.closePanel();
             return true;
         }

@@ -1,4 +1,4 @@
-/* $Id: jquery.jr.panel.js 13234 2012-11-19 15:26:39Z maloneyc $
+/* $Id: jquery.jr.panel.js 21813 2014-05-09 20:29:43Z kolotev $
 
     Module:
 
@@ -16,7 +16,7 @@
 
     Usage:
         Panel
-            $('panel-selector').jr_Panel({'poc': 'switcher-selector', 'inverted': false, propogateClick: false})
+            $('panel-selector').jr_Panel({'poc': 'switcher-selector', 'inverted': false, propogateClick: false, hideOnEscape: false})
 
 */
 
@@ -43,17 +43,17 @@
 
 
     //
-    var $u  = $.jr.utils,
+    var $u   = $.jr.utils,
         $doc = $(document),
-        evt = {
-        P_SHOW:             'jr:panel:show',        // show panel event
-        P_SHOW_STATELESS:   'jr:panel:show:stateless', // show panel without saving state event
-        P_HIDE:             'jr:panel:hide',        // hide panel event
-        P_HIDE_STATELESS:   'jr:panel:hide:stateless', // hide panel without saving state event
-        P_SHOW_AFTER:       'jr:panel:show:after',
-        P_HIDE_AFTER:       'jr:panel:hide:after',
-
-    }
+        evt  = {
+            P_SHOW:             'jr:panel:show',        // show panel event
+            P_SHOW_STATELESS:   'jr:panel:show:stateless', // show panel without saving state event
+            P_HIDE:             'jr:panel:hide',        // hide panel event
+            P_HIDE_STATELESS:   'jr:panel:hide:stateless', // hide panel without saving state event
+            P_SHOW_AFTER:       'jr:panel:show:after',
+            P_HIDE_AFTER:       'jr:panel:hide:after',
+        },
+        EVT_DELAY = 150
 
 
     // ========================================================================= $.jr.Panel
@@ -81,39 +81,57 @@
             //
             base.$poc   = $(base.options.poc)
             // Initialization code here
-            base.clickEvName = $u.touch ? 'touchend' : 'click'
+            base.clickEvName = 'pointerup'
 
-            base.$el.bind(evt.P_SHOW,     base.showHandler)             // attach event handler to handle show requests
-            base.$el.bind(evt.P_SHOW_STATELESS, base.showHandler)       // attach event handler to handle show requests
-            base.$el.bind(evt.P_HIDE,     base.hideHandler)             // attach event handler to handle hide requests
-            base.$el.bind(evt.P_HIDE_STATELESS, base.hideHandler)       // attach event handler to handle hide requests
-            base.$el.bind(base.clickEvName, base.clickHandler)          // attach event handler to handle hide requests
-            base.$poc.bind("jr:switch:on:after", base.options.inverted ? base.hideHandler : base.showHandler)
-            base.$poc.bind("jr:switch:off:before", base.options.inverted ? base.showHandler : base.hideHandler)
-            base.$el.find('.jr-p-close').bind(base.clickEvName, base.hideHandler)
+            base.$el.on(evt.P_SHOW,           base.showHandler)       // attach event handler to handle show requests
+            base.$el.on(evt.P_SHOW_STATELESS, base.showHandler)       // attach event handler to handle show requests
+            base.$el.on(evt.P_HIDE,           base.hideHandler)       // attach event handler to handle hide requests
+            base.$el.on(evt.P_HIDE_STATELESS, base.hideHandler)       // attach event handler to handle hide requests
+            base.$el.on(base.clickEvName,     base.clickHandler)      // attach event handler to handle hide requests
+            base.$poc.on("jr:switch:on:after", base.options.inverted ? base.hideHandler : base.showHandler)
+            base.$poc.on("jr:switch:off:before", base.options.inverted ? base.showHandler : base.hideHandler)
+            base.$el.find('.jr-p-close').on(base.clickEvName, base.hideHandler)
+
+            base.$el.on(evt.P_SHOW_AFTER, base.showAfterHandler)
+            base.$el.on(evt.P_HIDE_AFTER, base.hideAfterHandler)
         };
 
+        base.kbdHandler = function(e) {
+            if (e.keyCode == 27 && base.options.hideOnEscape)
+                base.$el.trigger(evt.P_HIDE)
+        };
+
+        //
+        base.stopPropagation = function(e) {
+            if (! base.options.propogateClick && (e.type === "click"  || e.type === "pointerup"))
+                e.stopPropagation()
+        }
 
         //
         base.clickHandler = function(e) {
-            ! base.options.propogateClick && (e.type === "click"  || e.type === "touchend")
-                ? e.stopPropagation() : 0
+            base.stopPropagation(e)
             $doc.trigger('jr:user:active')
-        };
-
+        }
 
         //
         base.hideHandler = function(e) {
 
-            if (e.type === evt.P_HIDE || e.type === base.clickEvName) {
+            if (e.type === evt.P_HIDE || e.type === "click"  || e.type === base.clickEvName) {
                 base.$poc.trigger("jr:switch:off")
+                base.stopPropagation(e)
             } else if (e.type === evt.P_HIDE_STATELESS) {
                 base.$poc.trigger("jr:switch:off:stateless")
             } else {
-                base.$el.addClass('hidden')
-                base.$el.trigger(evt.P_HIDE_AFTER)
+                setTimeout(
+                    function() {
+                        base.$el.addClass('hidden');
+                        base.$el.trigger(evt.P_HIDE_AFTER)
+                    }, 
+                    EVT_DELAY)
             }
-        };
+
+            $doc.unbind('keydown', base.kbdHandler)
+        }
 
         //
         base.showHandler = function(e) {
@@ -122,11 +140,27 @@
             } else if (e.type === evt.P_SHOW_STATELESS) {
                 base.$poc.trigger("jr:switch:on:stateless")
             } else {
-                base.$el.removeClass('hidden')
-                base.$el.trigger(evt.P_SHOW_AFTER)
+                setTimeout(
+                    function(){
+                        base.$el.removeClass('hidden')
+                        base.$el.trigger(evt.P_SHOW_AFTER)
+                    }, 
+                    EVT_DELAY)
             }
 
-        };
+            $doc.on('keydown', base.kbdHandler)
+        }
+
+        //
+        base.showAfterHandler = function(e) {
+            base.$el.trigger("show:after")
+        }
+
+        //
+        base.hideAfterHandler = function(e) {
+            base.$el.trigger("hide:after")
+        }
+
 
         // Run initializer
         base.init();
@@ -135,6 +169,7 @@
     $.jr.Panel.defaultOptions = {
         'poc': null,
         'propogateClick': false,
+        'hideOnEscape': false,
         'inverted': false
     };
 

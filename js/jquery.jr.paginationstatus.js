@@ -1,4 +1,4 @@
-/* $Id: jquery.jr.paginationstatus.js 13234 2012-11-19 15:26:39Z maloneyc $
+/* $Id: jquery.jr.paginationstatus.js 21813 2014-05-09 20:29:43Z kolotev $
 
     Module:
         JATS Reader's Pagination Status
@@ -56,7 +56,7 @@
             base.options = $.extend({}, $.jr.PaginationStatus.defaultOptions, options);
             base.$poc   = $(base.options.poc);
             // Monitor paging events
-            base.$poc.bind('jr:pm:pages:changed', base.eventHandler);
+            base.$poc.on('jr:pm:pages:changed', base.eventHandler);
         };
 
 

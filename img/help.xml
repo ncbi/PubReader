@@ -26,7 +26,7 @@
     </table>
   </div>
   <div><table><tr><td><img data-src="{$path}img/help-links.png"/></td>
-      <td><ol><li>Go to PMC homepage</li><li>Links to journal list, issue list, etc.</li><li>Other forms of the article.</li></ol></td></tr>
+      <td><ol><li>Links to PMC homepage, journal/issue lists, etc.</li><li>Alternate forms of the article.</li><li>PDF of the article.</li></ol></td></tr>
     </table>
   </div>
   <div><table><tr><td><img data-src="{$path}img/help-find.png"/></td>

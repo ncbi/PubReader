@@ -1,4 +1,3 @@
-/* ObjectBox CSS for JATS Reader */
 /*
   This work is in the public domain and may be reproduced, published or
   otherwise used without the permission of the National Library of Medicine (NLM).
@@ -12,6 +11,8 @@
   warranties, express or implied, including warranties of performance,
   merchantability or fitness for any particular purpose.
 */
+/* Commit: $Id$ */
+/* ObjectBox CSS for JATS Reader */
 
 #jr-objectbox {
     position: absolute;
@@ -28,6 +29,10 @@
     right: 8pt;
     top: 8pt;
     z-index: 7000;
+    -webkit-user-select: initial;
+    -moz-user-select: initial;
+    -ms-user-select: initial;
+    user-select: initial;
 }
 
 #jr-objectbox.help,
@@ -122,7 +127,7 @@ aside#jr-objectbox .cnt {
     -webkit-overflow-scrolling: touch;
     position: static;
     box-sizing: border-box;
-    background-color: #FFE; 
+    background-color: #FFF; 
 }
 
 /* article's content (figures/tables) in the object box */
@@ -136,9 +141,10 @@ aside#jr-objectbox .cnt {
     margin-top: 0;
 }
 
-#jr-objectbox article[data-type=fig] .figure {
+#jr-objectbox article[data-type=fig] .figure,
+#jr-objectbox article[data-type=boxed-text] .graphic {
     text-align: center;
-    margin: 1em 0;
+    margin: 1em auto;
 }
 
 #jr-objectbox article img {
@@ -150,13 +156,9 @@ aside#jr-objectbox .cnt {
     border: none;
     padding: 1em;
 }
-
-#jr-objectbox article[data-type=fig] > div > div,
-#jr-objectbox article[data-type=fig] > div > h3,
-#jr-objectbox article[data-type=fig] > div > p,
-#jr-objectbox article[data-type=table-wrap] > div > div,
-#jr-objectbox article[data-type=table-wrap] > div > h3,
-#jr-objectbox article[data-type=table-wrap] > div > p{
+#jr-objectbox article[data-type=fig] > div > *,
+#jr-objectbox article[data-type=boxed-text] > div > *,
+#jr-objectbox article[data-type=table-wrap] > div > * {
     max-width: 6in;
     margin-left:auto;
     margin-right:auto;
@@ -170,6 +172,33 @@ aside#jr-objectbox .cnt {
 #jr-objectbox article[data-type=table-wrap] table {
     margin-left:auto;
     margin-right:auto;
+}
+
+/*********************************************************/
+/* Object boxen of class "cite"                          */
+#jr-objectbox.cite {
+    max-width: 8in;
+    max-height: 7in;
+    margin: auto;
+}
+
+#jr-objectbox.cite article[data-type=cite]{
+    font-family: "Trebuchet MS", ArialMT, Arial, sans-serif;
+}
+
+#jr-objectbox.cite h3.loading,
+#jr-objectbox.cite h3.failed {
+    text-align: center;
+    color: black;
+} 
+
+#jr-objectbox.cite h3.failed {
+    color: red;
+} 
+
+#jr-objectbox.cite td,
+#jr-objectbox.cite th {
+    padding: 0.75em 1em;
 }
 
 /*********************************************************/
@@ -196,7 +225,8 @@ aside#jr-objectbox .cnt {
     padding: 1em;
 }
 
-#jr-objectbox.note h1 {
+#jr-objectbox.note h1,
+#jr-objectbox.note h2 {
     font: 18pt/36pt "Archivo Narrow", "Arial Narrow", Calibri, "Trebuchet MS", ArialMT, Arial, sans-serif;
     color: #FFF8aa;
     margin: 3pt;
@@ -214,7 +244,8 @@ aside#jr-objectbox .cnt {
 }
 
 @media screen and (max-width: 4in) {
-	#jr-objectbox.note h1 {
+	#jr-objectbox.note h1,
+    #jr-objectbox.note h2 {
 		font-size: 14pt;
 		line-height: 24pt;
 	}
@@ -312,10 +343,15 @@ span.pseudobutton {
         bottom:3pt;
     }
 
-    #help-ncbi-logo {
+    #help-ncbi-logo,
+    #help-ncbi-logo-book {
         position: absolute;
         right:6pt;
         bottom:9pt;
+    }
+   
+    #help-ncbi-logo-book {
+	left: 6pt;
     }
 
     article[data-type=helper] header div {

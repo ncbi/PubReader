@@ -1,0 +1,12 @@
+<svg width="36ptx"  height="36pt"  
+xmlns="http://www.w3.org/2000/svg" 
+viewBox="0 0 100 100" 
+preserveAspectRatio="none"
+style="background: none;">
+    <circle cx="50" cy="50" fill="none" stroke-linecap="round" r="40" stroke-width="6" stroke="#000000" stroke-dasharray="62.831 62.831" transform="rotate(138 50 50)">
+      <animateTransform attributeName="transform" type="rotate" calcMode="linear" values="0 50 50;360 50 50" keyTimes="0;1" dur="2s" begin="0s" repeatCount="indefinite"></animateTransform>
+    </circle>
+    <circle cx="50" cy="50" fill="none" stroke-linecap="round" r="33" stroke-width="6" stroke="#b96e46" stroke-dasharray="51.836 51.836" stroke-dashoffset="51.836" transform="rotate(-138 50 50)">
+      <animateTransform attributeName="transform" type="rotate" calcMode="linear" values="0 50 50;-360 50 50" keyTimes="0;1" dur="2s" begin="0s" repeatCount="indefinite"></animateTransform>
+    </circle>
+  </svg>

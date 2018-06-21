@@ -1,4 +1,3 @@
-/* $Id: jr.ui.css 17462 2013-08-08 15:32:22Z kolotev $ */
 /*
   This work is in the public domain and may be reproduced, published or
   otherwise used without the permission of the National Library of Medicine (NLM).
@@ -12,30 +11,40 @@
   warranties, express or implied, including warranties of performance,
   merchantability or fitness for any particular purpose.
 */
+/* Commit: $Id$ */
 
 .hidden {display: none!important}
 
 /* hack for debug info of the sanity checker on dev.ncbi site */                                                                                                                    
-body > div:first-child {display: none}                                                                                                                                              
-body > div#jr{display: block}                                                                                                                                                       
+body > div:first-child {display: none}
+body > div#jr{display: block}
+body > ul.print-log, #portal-console{display: none}
 
-           
 /*** definitions necessary for User Interface elements to be positioned on the screen ***/
 
 html, body, #jr {
     height: 100%; 
-    width:100%; 
-    overflow:hidden; 
-    position:relative;
+    width:  100%; 
+    overflow: hidden; 
+    position: relative;
 }
 
+article {
+    border-top: 1px solid transparent;
+    border-bottom: 1px solid transparent;
+}
 
-#jr {
-    overflow:hidden;
-    top:0;
-    bottom:0;
-    right: 0;
-    left:0;
+@media screen and (orientation : landscape) {
+    body {
+        position: fixed;
+    }
+}
+
+/* ms viewport settings suppose to prevent zooming in IE11 */
+
+@media screen {
+    @-ms-viewport { width: "device-width" }
+    @viewport { width: "device-width" }
 }
 
 .no-jr,
@@ -46,7 +55,6 @@ html, body, #jr {
     overflow: hidden; 
     position: static;
 }
-
 
 /*** Top area of the application with branding and panel controls ***/
 
@@ -67,10 +75,8 @@ div.jr-unsupported {
     right:0;
     zoom: 1;
     background: rgb(50,50,50);
-    *background: none;
     background: rgba(0,0,0,0.75);
     -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#C0303030,endColorstr=#C0303030)";
-    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#C0303030,endColorstr=#C0303030);
     z-index: 9999;
 }
 
@@ -82,8 +88,8 @@ div.jr-unsupported span.attn {
 
 div.jr-unsupported table.modal {
     background-color: #fff;
-    -webkit-box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, .75);
-    box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, .75);
+    -webkit-box-shadow: 0 0 10px 5px rgba(0, 0, 0, .75);
+    box-shadow: 0 0 10px 5px rgba(0, 0, 0, .75);
     position: absolute;
     top: 30%;
     left: 30%;
@@ -113,34 +119,36 @@ div.jr-unsupported table.modal td {
     border-bottom: 1px solid #ccc;
 }
 
-@media screen and (max-width: 4in) {
-    #jr-head {
-        left: 6pt;
-        right: 6pt;
-    }
+#jr-tb1,
+#jr-tb2 {
+    -webkit-box-flex: 0;      /* OLD - iOS 6-, Safari 3.1-6 */
+    -moz-box-flex: 0;         /* OLD - Firefox 19- */
+    -webkit-flex: 0 0 auto;   /* Chrome, Safari 6+ */
+    -ms-flex: 0 0 auto;       /* IE 10 */
+    flex: 0 0 auto;           /* NEW, Spec - Opera 12.1, Firefox 20+ */
 }
 
-.no-flexbox #jr-head .tb,
-.no-flexbox #jr-head .tb > div {
+.no-flexbox.no-boxflex #jr-head .tb,
+.no-flexbox.no-boxflex #jr-head .tb > div {
     position: absolute;
     white-space:nowrap;
     overflow:hidden;
     text-overflow:ellipsis;
 }
 
-.no-flexbox #jr-tb1 {
+.no-flexbox.no-boxflex #jr-tb1 {
     left:0;
     width: 126pt;
     text-align: left;
 }
 
-.no-flexbox #jr-tb2 {
+.no-flexbox.no-boxflex #jr-tb2 {
     right:0;
     width: 126pt;
     text-align: right;
 }
 
-.no-flexbox .jr-rhead {
+.no-flexbox.no-boxflex .jr-rhead {
     left:126pt;
     right: 126pt;
 }
@@ -157,22 +165,19 @@ div.jr-unsupported table.modal td {
     z-index: 500;
 }
 
-#jr-dash a svg path,
-#jr-dash a svg text {
+#jr-ui a svg {
     fill: #999;
     stroke: #999;
     color: #999;
 }
 
-#jr-dash a:hover svg path,
-#jr-dash a:hover svg text {
+#jr-ui a:hover svg {
     fill: #666;
     stroke: #666;
     color: #666;
 }
 
-#jr-dash a:active path,
-#jr-dash a:active text {
+#jr-ui a:active svg {
     fill: #333;
     stroke: #333;
     color: #333;
@@ -201,21 +206,12 @@ div.jr-unsupported table.modal td {
     bottom: 0;
 }
 
-.touch #jr-progress,
-.touch #jr-istrip {
-    left: 78pt;
-}
-
 #jr-pi {
     top: 0;
     left: 30pt;
     height: 100%;
     width: 72pt;
     position: absolute;
-}
-
-.touch #jr-pi {
-    left: 6pt;
 }
 
 #jr-pi .pginfo {
@@ -271,48 +267,63 @@ aside {
 #jr-content {
     position:absolute;
     overflow: hidden;
-    left: 0px;
-    right: 0px;
+    left: 0;
+    right: 0;
     top: 48pt;
     bottom: 48pt; /* should match jr-dash height */
     border: 36pt solid transparent;
     border-top: none;
     border-bottom: none;
+    margin: 0 auto;
 }
 
-@media screen and (max-width: 4in) {
-    #jr-content {
-        top: 42pt;
-        bottom: 42pt; /* should match jr-dash height */
-        border: 12pt solid transparent;
-        border-top: none;
-        border-bottom: none;
-    }
-}
-    
 
 .jr-rhead {
-    padding: 6pt;
-    padding-top:   1.5pt;
+    padding: 1.5pt 6pt;
 }
 
-@media screen and (max-width: 4in) {
-    .jr-rhead {
-        visibility: hidden;
-    }
+.jr-rhead {
+    overflow: hidden;
+    color: #777;
+    font: 11pt/16pt "Archivo Narrow", "Arial Narrow", Calibri, "Trebuchet MS", ArialMT, Arial, sans-serif;
 }
 
 
-.jr-rhead div {
+.jr-rhead .head,
+.jr-rhead .tail {
+    -webkit-box-flex: 0;      /* OLD - iOS 6-, Safari 3.1-6 */
+    -moz-box-flex: 0;         /* OLD - Firefox 19- */
+    -webkit-flex: 1 0 auto;   /* Chrome, Safari 6+ */
+    -ms-flex: 1 0 auto;       /* IE 10 */
+    flex: 1 0 auto;           /* NEW, Spec - Opera 12.1, Firefox 20+ */
+    text-align: right;
+}
+
+.jr-rhead .body {
+    -webkit-box-flex: 1;      /* OLD - iOS 6-, Safari 3.1-6 */
+    -moz-box-flex: 1;         /* OLD - Firefox 19- */
+    -webkit-flex: 1 1 1;      /* Chrome, Safari 6+ */
+    -ms-flex: 1 1 1;          /* IE 10 */
+    flex: 1 1 1;              /* NEW, Spec - Opera 12.1, Firefox 20+ */
+}
+
+.jr-rhead .tail {
+    text-align: left;
+}
+
+.jr-rhead .head a,
+.jr-rhead .tail a {
+    display: inline-block;
+    width: 24pt;
+    height: 24pt;
+}
+
+.jr-rhead .j, 
+.jr-rhead .t {
+    color: #666;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
-    color: #777;
-    font: 10pt/16pt "Archivo Narrow", "Arial Narrow", Calibri, "Trebuchet MS", ArialMT, Arial, sans-serif;/*Calibri, helveticaneue, arial, helvetica,clean,sans-serif;*/
-}
-
-.jr-rhead .j {
-    color: #a0a0a0;
 }
 
 .jr-rhead img {
@@ -322,6 +333,29 @@ aside {
 .jr-rhead sup img { /* special case for PMC2900995 */
     max-height: 6pt;
 }
+
+/* table with next previuos chapter arrow links */
+
+.jr-rhead table {
+	margin: 0 auto;
+}
+
+.jr-rhead td,
+.jr-rhead th {
+	border: none;
+	padding: 0;
+}
+
+.jr-rhead table a {
+	display: inline-block;
+	min-width: 24pt;
+}
+
+.jr-rhead table a svg {
+	width: 24pt;
+	height: 24pt;
+}
+
 
 /*** Page Navigational Arrows for inputs mouse devices ***/
 
@@ -337,11 +371,11 @@ aside {
 }
 
 #jr-pm-left {
-    left: 0px;
+    left: 0;
 }
 
 #jr-pm-right {
-    right: 0px;
+    right: 0;
 }
 
 /*** Hiding scripts ***/
@@ -357,6 +391,7 @@ iframe::-webkit-scrollbar-track-piece,
 .jr-objectbox-drawer::-webkit-scrollbar-track-piece{
     background-color: #ccc;
     -webkit-border-radius:4px;
+    border-radius:4px;
 }
 
 iframe::-webkit-scrollbar,
@@ -374,6 +409,7 @@ iframe::-webkit-scrollbar,
     height:50px;
     background-color:#333;
     -webkit-border-radius:4px;
+	border-radius: 4px;
     border: 2px solid #ccc;
 }
 
@@ -392,13 +428,6 @@ iframe::-webkit-scrollbar-thumb:hover,
     font: 12pt/34pt "HelveticaNeue-CondensedBold", "Arial Narrow", "ArialMT", "Arial", sans-serif;
     width: 100%;
 }
-.tb > div {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow:ellipsis;
-    display: block;
-}
-
 
 .no-flexbox.no-boxflex .flexh,
 .no-flexbox.no-boxflex .flexh > div {
@@ -406,34 +435,43 @@ iframe::-webkit-scrollbar-thumb:hover,
 }
 
 .flexh, .flexv {
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: box;
+    display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+    display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+    display: -ms-flexbox;      /* IE 10 */
+    display: -webkit-flex;     /* NEW - Chrome, Safari 6+ */
+    display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
 }
 
 .flexh {
     -webkit-box-orient: horizontal;
     -moz-box-orient: horizontal;
+    -webkit-flex-direction: row;
     -ms-flex-direction: row;
-    box-orient: horizontal;
+    flex-direction: row;
 }
 
 .flexv {
     -webkit-box-orient: vertical;
     -moz-box-orient: vertical;
+    -webkit-flex-direction: column;
     -ms-flex-direction: column;
-    box-orient: vertical;
+    flex-direction: column;
 }
 
 .flexh .f1, .flexv .f1 {
-    -webkit-box-flex: 1;
-    -moz-box-flex: 1;
-    -ms-flex: 1 0 auto;
-    box-flex: 1;
+    -webkit-box-flex: 1;      /* OLD - iOS 6-, Safari 3.1-6 */
+    -moz-box-flex: 1;         /* OLD - Firefox 19- */
+    -webkit-flex: 1 1 auto;   /* Chrome, Safari 6+ */
+    -ms-flex: 1 1 auto;       /* IE 10 */
+    flex: 1 1 auto;           /* NEW, Spec - Opera 12.1, Firefox 20+ */
 }
 
-.tb a { margin:  0 4pt}
+.flexv > .f1 {
+    overflow-y: auto; 
+    -webkit-box-flex: 50;     /* iOS empirically found feature to keep enough non overlapping space for toolbar on top */
+}
+
+.tb a { margin:  0 2pt}
 
 /*** Skin  definitions ***/
 
@@ -446,6 +484,14 @@ iframe::-webkit-scrollbar-thumb:hover,
     background: -o-linear-gradient(top,  rgba(125,130,140,1) 0%,rgba(48,55,73,1) 50%,rgba(18,26,46,1) 50%,rgba(18,26,46,1) 100%);
     background: -ms-linear-gradient(top,  rgba(125,130,140,1) 0%,rgba(48,55,73,1) 50%,rgba(18,26,46,1) 50%,rgba(18,26,46,1) 100%);
     background: linear-gradient(to bottom,  rgba(125,130,140,1) 0%,rgba(48,55,73,1) 50%,rgba(18,26,46,1) 50%,rgba(18,26,46,1) 100%);
+}
+
+.flexv .tb.sk-htbar {
+    -webkit-box-flex: 1;
+    -moz-box-flex: 1;
+    -webkit-flex: 1 0 34pt;
+    -ms-flex: 1 0 34pt;
+    flex: 1 0 34pt;
 }
 
 /*** icons sparkle effect ***/
@@ -463,10 +509,6 @@ iframe::-webkit-scrollbar-thumb:hover,
     transform: scale(1.1);  
 }
 
-.wsprkl:hover:before,
-.bsprkl:hover:before,
-.wsprkl:hover:after,
-.bsprkl:hover:after,
 .wsprkl:active:after,
 .bsprkl:active:after {
     content: "";
@@ -479,8 +521,7 @@ iframe::-webkit-scrollbar-thumb:hover,
 
 /* for white sparkle */
 .wsprkl:active:after {
-    xbackground: -moz-radial-gradient(center, ellipse cover, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%); /* FF3.6+ */ /*something wrong with mozzilas behaviuor*/
-    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(255,255,255,1)), color-stop(100%,rgba(255,255,255,0))); /* Chrome,Safari4+ */
+    background: -webkit-gradient(radial, center center, 0, center center, 100%, color-stop(0%,rgba(255,255,255,1)), color-stop(100%,rgba(255,255,255,0))); /* Chrome,Safari4+ */
     background: -webkit-radial-gradient(center, ellipse cover, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%); /* Chrome10+,Safari5.1+ */
     background: -o-radial-gradient(center, ellipse cover, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%); /* Opera 12+ */
     background: -ms-radial-gradient(center, ellipse cover, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%); /* IE10+ */
@@ -489,8 +530,7 @@ iframe::-webkit-scrollbar-thumb:hover,
 
 /* for black sparkle */
 .bsprkl:active:after {
-    xbackground: -moz-radial-gradient(center, ellipse cover, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 55%); /* FF3.6+ *//*something wrong with mozzilas behaviuor*/
-    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(0,0,0,0.6)), color-stop(55%,rgba(0,0,0,0))); /* Chrome,Safari4+ */
+    background: -webkit-gradient(radial, center center, 0, center center, 100%, color-stop(0%,rgba(0,0,0,0.6)), color-stop(55%,rgba(0,0,0,0))); /* Chrome,Safari4+ */
     background: -webkit-radial-gradient(center, ellipse cover, rgba(0,0,0,0.6) 0%,rgba(0,0,0,0) 55%); /* Chrome10+,Safari5.1+ */
     background: -o-radial-gradient(center, ellipse cover, rgba(0,0,0,0.6) 0%,rgba(0,0,0,0) 55%); /* Opera 12+ */
     background: -ms-radial-gradient(center, ellipse cover, rgba(0,0,0,0.6) 0%,rgba(0,0,0,0) 55%); /* IE10+ */
@@ -499,8 +539,6 @@ iframe::-webkit-scrollbar-thumb:hover,
 
 /*** Button ***/
 a.btn svg {
-    width: 100%;
-    height: 100%;
     width: 24pt;
     height: 24pt;
 }
@@ -520,38 +558,24 @@ a.btn {
     -webkit-box-sizing: content-box;
     -moz-box-sizing: content-box;
     box-sizing: content-box;
-}
-
-a.btn svg,
-a.btn img {
-    vertical-align: bottom;
+    vertical-align: middle;
 }
 
 a.btn,
-a.btn path,
-a.btn rect,
-a.btn circle,
-a.btn line {
+a.btn svg {
     color: #999;
     fill: #999;
     stroke: #999;
 }
 
-a.btn:hover,
-a.btn:hover path,
-a.btn:hover rect,
-a.btn:hover circle,
-a.btn:hover line {
+a.btn:hover svg {
     color: #666;
     fill: #666;
     stroke: #666;
 }
 
 a.btn.on,
-a.btn.on path,
-a.btn.on rect,
-a.btn.on circle,
-a.btn.on line {
+a.btn.on svg {
     color: #333;
     fill: #333;
     stroke: #333;
@@ -594,19 +618,25 @@ a.btn.link {
     border-color: transparent;
     padding: 0;
 }
+
+/* citation exporter aka ctxp */
+a.ctxp {
+    text-decoration: underline;
+}
+
 /*** Typography settings set with typography panel  ***/
 
 /* font sizes */
 
-.jr-fs-7 article {font-size: 7pt!important}
-.jr-fs-8 article {font-size: 8pt!important}
-.jr-fs-9 article {font-size: 9pt!important}
-.jr-fs-10 article {font-size: 10pt!important}
-.jr-fs-11 article {font-size: 11pt!important}
-.jr-fs-12 article {font-size: 12pt!important}
-.jr-fs-13 article {font-size: 13pt!important}
-.jr-fs-14 article {font-size: 14pt!important}
-.jr-fs-15 article {font-size: 15pt!important}
+.jr-fs-7 article {font-size: 9pt!important}
+.jr-fs-8 article {font-size: 10pt!important}
+.jr-fs-9 article {font-size: 11pt!important}
+.jr-fs-10 article {font-size: 12pt!important}
+.jr-fs-11 article {font-size: 13pt!important}
+.jr-fs-12 article {font-size: 14pt!important}
+.jr-fs-13 article {font-size: 15pt!important}
+.jr-fs-14 article {font-size: 16pt!important}
+.jr-fs-15 article {font-size: 17pt!important}
 .jr-fs-18 article {font-size: 18pt!important}
 .jr-fs-21 article {font-size: 21pt!important}
 .jr-fs-24 article {font-size: 24pt!important}
@@ -618,16 +648,6 @@ a.btn.link {
     column-count: auto!important;
 }
 
-.jr-col-1 #jr-content article {
-    -webkit-column-count: 1!important;
-    -moz-column-count: 1!important;
-    column-count: 1!important;
-    -webkit-column-width: 0!important;
-    -moz-column-width: 0!important;
-    column-width: 0!important;
-
-}
-
 .jr-col-2 #jr-content article {
     -webkit-column-count: 2!important;
     -moz-column-count: 2!important;
@@ -636,6 +656,26 @@ a.btn.link {
     -moz-column-width: auto!important;
     column-width: auto!important;
 }
+
+.jr-col-1 #jr-content article,
+.jr-col-1-force #jr-content article {
+    -webkit-column-count: 1!important;
+    -moz-column-count: 1!important;
+    column-count: 1!important;
+    -webkit-column-width: 999in!important;
+    -moz-column-width: 999in!important;
+    column-width: 999in!important;
+
+}
+
+.jr-col-1-force #jr-content {
+    max-width: 8in;
+    width: inherit;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box; 
+    box-sizing: border-box;
+}
+
 
 /* hide portal debug info on dev */
 #portaldata, #portal-debug-console, .debug-header-table {display: none}
@@ -670,6 +710,12 @@ li:target{
   100% { background-color: transparent; }
 }
 
+.small-screen-prev,
+.small-screen-next {
+    display:none;
+}
+
+
 @media print {
     html, body, #jr, #jr-content { 
 	overflow: auto;
@@ -694,4 +740,3 @@ li:target{
     .jr-fs-21 article {font-size: 12pt!important}
     .jr-fs-24 article {font-size: 14pt!important}
 }
-

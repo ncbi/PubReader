@@ -1,4 +1,4 @@
-/* $Id: jquery.jr.panel.istrip.js 13234 2012-11-19 15:26:39Z maloneyc $
+/* $Id: jquery.jr.panel.istrip.js 21813 2014-05-09 20:29:43Z kolotev $
 
     Module:
 
@@ -88,8 +88,6 @@
                 return
             }
 
-            var t = $u.touch
-
             base.fts.each (function (idx) {
                 var $ft     = $(this),
                     $el     = $ft.parent().closest('*[id]'),
@@ -99,7 +97,10 @@
 
                 var $a = $('<a/>').css({'background-image': 'url(' + $img.attr('src') + ')'})
                                   .attr('rid', _id).attr('rid-figpopup', _id).attr('co-class', 'co-fig')
-                ! t ? $a.on('click', base.handleObjectBox) : 0
+                
+                $a.on('pointerup', base.handlePointerUp)
+                $a.on('click', base.handleClick)
+                
                 $a.attr('title',
                         $img.attr('alt') != null ? $img.attr('alt') : $img.attr('title') != null ? $img.attr('title') : "")
                   .attr('rid', _id)
@@ -114,21 +115,21 @@
             base.$el.append(base.$panevp.append(base.$pane));
             base.pi = {fp: 0, lp: 0, cp: 0, changed: false};
 
-            $(document).bind('keydown', base.kbdHandler);
-            $(window).bind("resize", base.handleResize)
-            base.$el.bind("jr:panel:show:after", base.Reflow);
+            $(document).on('keydown', base.kbdHandler);
+            $(window).on("resize", base.handleResize)
+            base.$el.on("jr:panel:show:after", base.Reflow);
 
-            base.$el.bind(evt.NEXT_PAGE,    base.handleNextPage);
-            base.$el.bind(evt.PREV_PAGE,    base.handlePrevPage);
+            base.$el.on(evt.NEXT_PAGE,    base.handleNextPage);
+            base.$el.on(evt.PREV_PAGE,    base.handlePrevPage);
             //
-            if (t)
+            if ($u.touch && $.fn.swipe != null)
                 base.$el.swipe({threshold: 25, swipeLeft: base.handleNextPage, swipeRight: base.handlePrevPage});
             //
             if ($.fn.figPopup != null) {
                 var fp_cfg = new $.fn.figPopup(),
                     a = base.$pane.find('a')
-                a.popupSensor({statIfLonger: 500, delayIn: fp_cfg.delayIn, delayOut: fp_cfg.delayOut, touchable: t})
-                if ($.fn.hoverIntent && !t)
+                a.popupSensor({statIfLonger: 500, delayIn: fp_cfg.delayIn, delayOut: fp_cfg.delayOut})
+                if ($.fn.hoverIntent)
                    a.hoverIntent(fp_cfg)
             }
 
@@ -285,17 +286,24 @@
         };
 
         //
-        base.handleObjectBox     = function (e) {
-            if (e != null) {
-                e.preventDefault();
-                // ignore click event on touch devices
-                if (! ($u.touch && e.type === 'click')) {
-                    var $t = $(this)
-                    $('#'+$t.attr('rid')).find('a').first().trigger('open')
-                }
+        base.handleClick     = function (e) {
+            e.stopPropagation()
+            e.preventDefault()
+            return false
+        }
+        //
+        base.handlePointerUp     = function (e) {
+            e.stopPropagation()
+            if (e.originalEvent != null 
+                && e.originalEvent.pointerType == "mouse" 
+                // do not add "touch" condtion here, 
+                // otherwise object box and figpopup 
+                // would appear at the same time.
+           ) {
+                $(document.getElementById($(this).attr('rid'))).find('a').first().trigger('open')
+                //$('#' + $(this).attr('rid') + ' a').first().trigger('open')
             }
         }
-
         //
         base.handleNextPage     = function (e) {
             if (e != null){

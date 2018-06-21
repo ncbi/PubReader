@@ -1,4 +1,4 @@
-/* $Id: jquery.jr.switcher.js 15003 2013-03-25 15:53:07Z kolotev $
+/* $Id: jquery.jr.switcher.js 21813 2014-05-09 20:29:43Z kolotev $
 
     Module:
 
@@ -64,7 +64,8 @@
 
 
     // ========================================================================= $.jr.Switcher
-    // switcher reacts on users clicks/touches to reveal the panel and updates it own state
+    // switcher reacts on users actions with pointer (mouse, pen, figner) to signal correlated
+    // element the change in its own state.
     // based on its type when other switchers broadcast evt.SW_ON_AFTER event if own type is radio.
     // options = {
     //      state:  'true of false - for initial state of the switcher true - ON, false - OFF'
@@ -90,7 +91,7 @@
 
         // Add a reverse reference to the DOM object
         base.$el.data("jr.Switcher", base);
-        base.clickEvName = $u.touch ? 'touchend' : 'click'
+        base.clickEvName = 'pointerup'
 
         //
         base.init = function() {
@@ -98,8 +99,9 @@
             base.$poc       = $(base.options.poc)       // point of communication
             base.type       = base.options.type         // type of the switcher radio/chkbox
             base.autoOff    = base.options.autoOff
-            base.stateless  = false
+            base.stateless  = base.options.stateless
 
+            if (! base.stateless)
             {
                 var s = $u.lsGet('state_' + base.$el.attr('id'))
                 base.options.state = (s != null ? s : base.options.state)
@@ -116,9 +118,11 @@
                 base.type = base.options.type = $.jr.Switcher.defaultOptions.type;
 
             // Initialization code here
-            base.$el.bind(base.clickEvName, base.clickHandler)             // attach event handler to handle clicking on the switch
-            base.$el.bind(evt.SW_ON, base.turnOnHandler)                   // attach event to be programmatically turned ON
-            base.$el.bind(evt.SW_ON_STATELESS, base.turnOnHandler)         // attach event to be programmatically turned ON
+            //base.$el.on("pointerdown.b pointerup.b", function(e){console.info('e.type = %s [e=%o]', e.type, e)})
+            base.$el.on('click', base.clickHandler)
+            base.$el.on(base.clickEvName, base.pointerUpHandler)         // attach event handler to handle clicking on the switch
+            base.$el.on(evt.SW_ON, base.turnOnHandler)                   // attach event to be programmatically turned ON
+            base.$el.on(evt.SW_ON_STATELESS, base.turnOnHandler)         // attach event to be programmatically turned ON
             //
             if (base.options.state)
                 base.$el.trigger(evt.SW_ON)
@@ -153,12 +157,12 @@
                 //
                 base.state = ! base.state
                 base.$el.addClass('on')
-                base.$el.bind(evt.SW_OFF, base.turnOffHandler)           // bind itself to be notified programmatically
-                base.$el.bind(evt.SW_OFF_STATELESS, base.turnOffHandler)           // bind itself to be notified programmatically
+                base.$el.on(evt.SW_OFF, base.turnOffHandler)           // bind itself to be notified programmatically
+                base.$el.on(evt.SW_OFF_STATELESS, base.turnOffHandler)           // bind itself to be notified programmatically
                 //
                 if (base.autoOff) {
-                    $(document).bind(base.clickEvName, base.turnOffHandler);
-                    $(document).bind("show.canvas", base.turnOffHandler);
+                    $(document).on(base.clickEvName, base.turnOffHandler);
+                    $(document).on("show.canvas", base.turnOffHandler);
                 }
                 //
                 base.$poc.trigger(evt.SW_ON_AFTER)
@@ -167,7 +171,7 @@
                 // if radio, then bind itself to listen other switchers evt.SW_ON_AFTER event
                 // but it has to be after 2 above triggers, to prevent loops or unexpected effects.
                 if (base.type === "radio") {
-                    base.$poc.bind(evt.SW_ON_AFTER, base.turnOffHandler) // bind itself to be notified by other other buttons
+                    base.$poc.on(evt.SW_ON_AFTER, base.turnOffHandler) // bind itself to be notified by other other buttons
                 }
             }
             // save state of the switcher
@@ -191,6 +195,11 @@
 
         //
         base.clickHandler = function(e) {
+            e.preventDefault()
+            return false;
+        };
+        //
+        base.pointerUpHandler = function(e) {
             e.stopPropagation()
             base.toggleSwitch()
         };
@@ -204,7 +213,8 @@
         state:      false,                      // false corresponds to OFF and true corresponds to ON
         type:       'radio',                    // radio or chkbox
         poc:        null,                       // toolbar selector
-        autoOff:    true                       // automatically turn off if action was taken place outside of contrable panel
+        autoOff:    true,                       // automatically turn off if action was taken place outside of contrable panel
+        stateless:  true
     };
 
     // jQuery like chainable wrapper

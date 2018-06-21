@@ -1,4 +1,4 @@
-/* $Id: jquery.jr.links.js 13467 2012-11-30 21:57:46Z kolotev $
+/* $Id: jquery.jr.links.js 21813 2014-05-09 20:29:43Z kolotev $
 
     Module:
 
@@ -25,10 +25,13 @@
 
     Usage :
 
-        $('article a').jr_Links({poc: '#jr-content'})
+        $('article a').jr_Links({poc: '#jr-content', uri_prefix: '/pmc/'})
 
         @poc paramenter is the Point Of Contact with other modules
         (History Keeper for example).
+
+        @uri_prefix is the param which helps to differentiate "local" links
+        vs outside the project links, which suppose to open in a separate window/tab
 
 */
 /*
@@ -78,36 +81,30 @@
             base.options = $.extend({},$.jr.Links.defaultOptions, options);
 
             // remove onlick handler
-            base.$el.prop("onclick", null);
+            base.$el.prop("onclick", null).removeProp("onclick");
             // and attribtue
             base.$el.removeAttr("onclick target");
+            
 
             // alternate figure and table links to point to report=objectonly version
             base.$el.attr('href', base.modHrefForRepObjOnly(base.$el.attr('href')))
 
             // add new target attribute for all non local links
-            if ( ! /^#/.test( base.$el.attr('href') ) )
+            var lre = new RegExp('^(#|javascript:|mailto:|' + base.options.uri_prefix + ')'); 
+            if ( ! lre.test( base.$el.attr('href') ) )
                 base.$el.attr('target', '_blank')
 
             // Initialization code here
             base.$poc       = $(base.options.poc)
-            base.$el.bind($u.touch ? 'touchend' : 'click', base.clickHandler)           // attach event handler to handle page turning
+            base.$el.on('pointerup', base.pointerUpHandler)           // attach event handler to handle page turning
         };
 
-        // *********** Links Event Handlers
-        base.clickHandler = function(e){
-            var h = $(this).attr('href'),
-                t = $(this).attr('target')
-
-            if (e.type === "click" || e.type === 'touchend')
-                base.$poc.trigger('jr:hk:mark:hp')
-
-            if (e.type === 'touchend' && t == null)
-                h != null ? window.location = h : 0
-
-            return true
+        // 
+        base.pointerUpHandler = function(e){
+            base.$poc.trigger('jr:hk:mark:hp')
         };
 
+        //
         base.modHrefForRepObjOnly = function (url) {
 
             function _fixReport (_url, _rep) {
@@ -137,6 +134,7 @@
     };
 
     $.jr.Links.defaultOptions = {
+        uri_prefix: '/'
     };
 
     $.fn.jr_Links = function(options){

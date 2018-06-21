@@ -1,0 +1,50 @@
+/*
+  This work is in the public domain and may be reproduced, published or
+  otherwise used without the permission of the National Library of Medicine (NLM).
+
+  We request only that the NLM is cited as the source of the work.
+
+  Although all reasonable efforts have been taken to ensure the accuracy and
+  reliability of the software and data, the NLM and the U.S. Government  do
+  not and cannot warrant the performance or results that may be obtained  by
+  using this software or data. The NLM and the U.S. Government disclaim all
+  warranties, express or implied, including warranties of performance,
+  merchantability or fitness for any particular purpose.
+*/
+/* Commit: $Id$ */
+
+/*** Panel with remot Table of Content ***/
+
+#jr-rtoc-p .cnt ul {
+	margin: 0;
+	padding: 0;
+  list-style: none;
+}
+
+#jr-rtoc-p .cnt ul ul {
+	padding-left: 0.5em;
+}
+
+#jr-rtoc-p hr {
+  margin: 9pt 12pt;
+}
+
+#jr-rtoc-p center.ajax_error {
+  margin: 6pt;
+  padding: 6pt;
+  font-family: "Archivo Narrow", "Arial Narrow", Calibri, "Trebuchet MS", ArialMT, Arial, sans-serif;
+  font-size: 12pt;
+  background-color: orange;
+  color: black;
+}
+
+#jr-rtoc-p .spinner {
+  background-color: rgba(255,255,255,0) ;
+  background-image: url('../img/spinner.svg');
+  background-repeat:no-repeat;
+  background-position:center;
+  width:36pt;
+  height:36pt;
+  display: inline-block;
+  vertical-align: middle;
+}

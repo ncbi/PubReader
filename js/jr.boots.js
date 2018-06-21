@@ -1,4 +1,4 @@
-/* $Id: jr.boots.js 13234 2012-11-19 15:26:39Z maloneyc $
+/* $Id: jr.boots.js 21813 2014-05-09 20:29:43Z kolotev $
     Module:
 
         JATS Reader's Bootstrap module
@@ -36,13 +36,17 @@
 (function ()  {
     {
         (function(){
-            var d = document, e = d.documentElement, s = d.createElement('style');
+            var w = window, d = document, e = d.documentElement, s = d.createElement('style');
             //if (e.style.MozTransform === ''){ // gecko 1.9.1 inference
                 s.textContent = 'body{visibility:hidden}';
-                var r = document.getElementsByTagName('script')[0];
+                var r = d.getElementsByTagName('script')[0];
                 r.parentNode.insertBefore(s, r);
-                function f(){ s.parentNode && s.parentNode.removeChild(s); }
-                addEventListener('load',f,false);
+                function f(){ s.parentNode && s.parentNode.removeChild(s) }
+                if (w.addEventListener) {
+                    w.addEventListener('load',f,false)
+                }else {
+                    w.attachEvent("onload", f)
+                }
                 setTimeout(f,3000);
             //}
         })();
@@ -129,5 +133,22 @@
             removeClass(e, classToBeRemoved)
             addClass(e, classToBeAdded)
         }
+    }
+    
+    {
+        String.prototype.rot13 = function (s) { 
+            return (s == null ? this : s).replace(/[a-zA-Z]/g, function(c) { return String.fromCharCode((c<="Z"?90:122)>=(c=c.charCodeAt(0)+13)?c:c-26) })
+        }
+        
+        String.prototype.reverse = function (s) { 
+            return (s == null ? this : s).split("").reverse().join("")
+        }
+
+    }
+
+    {
+        if (typeof HANDJS == "undefined")
+            HANDJS = {}
+        HANDJS.doNotProcessCSS = true
     }
 }) ()

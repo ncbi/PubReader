@@ -44,11 +44,11 @@
                 
                 fipStore.push(it)
                 
-                $t.bind("show", function (e) {
+                $t.on("show:after", function (e) {
                     it.active = true
-                }).bind("hide", function (e) {
+                }).on("hide:after", function (e) {
                     it.active = false
-                }).bind("focusin", function (e) {
+                }).on("focusin", function (e) {
                     for (var i = 0; i < fipStore.length; i++)
                         fipStore[i].active = false
                     it.active = true
@@ -71,7 +71,8 @@
     })(jQuery);
     
     (function($) {
-        var fcsStore = []
+        var fcsStore = [],
+            index = 0
         
         $.fn.trackFocus = function(options) {
             
@@ -79,20 +80,45 @@
             
             this.each(function() {
                 var $t = $(this),
-                    it = $.extend({}, settings, {'$el': $t})
+                    it = $.extend({}, settings, {'$el': $t, 'el': this})
                 
                 if (! $.isNumeric($t.attr('tabindex'))) 
                     $t.attr('tabindex', 0)
                 
                 fcsStore.push(it)
-                
-                $t.bind("focusin", function(e) {
+
+                $t.on("show:after", function(e) {
+                    //console.info('trackFocus: show:after = %s', this)
+                    e.stopPropagation()
+                    if ($(this).is(":visible"))
+                        $(this).focus()
+                }).on("hide:after", function(e) {
+                    //console.info('trackFocus: hide:after = %s', this)
+                    e.stopPropagation()
+                    if (this != document.body)
+                        $(this).blur()
+                }).on("focusin", function(e) {
+                    // console.warn('trackFocus: et = %s $t = %s this = %s focused = %s document.activeElement = %s e.target = %s', 
+                    //                 e.type, $t.get(0), this, $.trackFocus.focused().get(0), document.activeElement, e.target)
+                    e.stopPropagation()
                     for (var i = 0; i < fcsStore.length; i++)
                         fcsStore[i].focused = false
                     it.focused = true
+                }).on("focusout", function(e) {
+                    e.stopPropagation()
+                    it.focused = false
+
+                    for (var i = 0; i < fcsStore.length; i++) {
+                        if ($.contains(it.el, e.target)) {
+                            it.focused = true
+                            // console.info('e.target = %s descendant of it.el = %s', e.target, it.el)
+                        }
+                    }
+                    // console.warn('trackFocus: et = %s $t = %s this = %s focused = %s document.activeElement = %s e.target = %s', 
+                    //                e.type, $t.get(0), this, $.trackFocus.focused().get(0), document.activeElement, e.target)
+                    // if (it.focused == false)
+                    //     console.error('trackFocus: focusout: notify %s to hide', it.el)
                 })
-                
-                
             })
             
             return this;
@@ -102,16 +128,18 @@
             defaults: {
                 'default': false,
                 focused: false,
-                $el: null
+                $el: null,
+                el: null
             },
             focused: function() {
-                return getActiveItemFromStore(fcsStore, 'focused')
+                return $(getActiveItemFromStore(fcsStore, 'focused'))
             },
             refocus: function() {
                 var $f = $.trackFocus.focused()
-                $f == null ? null : $f.focus()
+                $f === null ? null : document.activeElement.blur()
             }
         }
+
     })(jQuery);
 
 }

@@ -1,5 +1,5 @@
 /*
-  $Id: jquery.jr.pageprogressbar.js 13234 2012-11-19 15:26:39Z maloneyc $
+  $Id: jquery.jr.pageprogressbar.js 21813 2014-05-09 20:29:43Z kolotev $
   JATS Reader Page Progress Bar.
   Documentation:  https://confluence.ncbi.nlm.nih.gov/x/mQCN.
 */
@@ -54,7 +54,7 @@ function debug() {
             base.options = $.extend({}, $.jr.PageProgressBar.defaultOptions, options);
             base.$poc = $(base.options.poc);
             // Monitor paging events
-            base.$poc.bind('jr:pm:pages:changed', handlePageManEvent);
+            base.$poc.on('jr:pm:pages:changed', handlePageManEvent);
 
             // Assume at the start that we're hidden
             base.visible = false;
@@ -124,8 +124,8 @@ function debug() {
             $input.change(handleRangeInputEvent);
 
             // Bind to show/hide events
-            $el.bind("jr:panel:hide:after", handlePanelHideEvent);
-            $el.bind("jr:panel:show:after", handlePanelShowEvent);
+            $el.on("jr:panel:hide:after", handlePanelHideEvent);
+            $el.on("jr:panel:show:after", handlePanelShowEvent);
         };
 
         // Handle the event when the progress bar is made visible
